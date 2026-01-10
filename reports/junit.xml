@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="1.397" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T16:58:02.706Z">
-  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="0.789">
+<testsuite name="Cucumber" time="1.739" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T17:15:15.027Z">
+  <testcase classname="Nested Frames" name="Nested Frames - loads, asserts, and exercises behavior" time="1.107">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Secure File Download" example..............................passed
-Then the "Secure File Download" page should load............................passed
-And I exercise the "Secure File Download" page..............................passed]]></system-out>
+When I open the "Nested Frames" example.....................................passed
+Then the "Nested Frames" page should load...................................passed
+And I exercise the "Nested Frames" page.....................................passed]]></system-out>
   </testcase>
 </testsuite>

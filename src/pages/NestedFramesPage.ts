@@ -1,4 +1,4 @@
-import { Page, Frame } from 'playwright';
+import { Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -10,52 +10,54 @@ export class NestedFramesPage extends BasePage {
   async assertLoaded() {
     await expect(this.page).toHaveURL(/\/nested_frames$/, { timeout: 20_000 });
 
-    // Frameset page: no reliable #content/h3. Instead assert expected frames exist.
-    await expect
-      .poll(async () => {
-        const names = this.page.frames().map((f) => f.name()).filter(Boolean);
-        return names;
-      }, { timeout: 20_000 })
-      .toEqual(expect.arrayContaining(['frame-top', 'frame-bottom']));
+    // The page is a frameset; there may not be a stable #content h3 here.
+    await expect(this.page.locator('frameset')).toBeVisible({ timeout: 20_000 });
   }
 
-  private getFrameByName(name: string): Frame {
-    const frame = this.page.frames().find((f) => f.name() === name);
-    if (!frame) throw new Error(`Frame "${name}" not found`);
+  private async waitForFrameByUrl(regex: RegExp, timeoutMs = 20_000) {
+    await expect
+      .poll(
+        async () => this.page.frames().find((f) => regex.test(f.url()))?.url() ?? '',
+        { timeout: timeoutMs }
+      )
+      .toMatch(regex);
+
+    const frame = this.page.frames().find((f) => regex.test(f.url()));
+    if (!frame) throw new Error(`Frame not found for url pattern: ${regex}`);
     return frame;
   }
 
-  private async frameBodyText(frame: Frame): Promise<string> {
-    // Some frames have plain body text
-    const body = frame.locator('body');
-    await expect(body).toBeVisible({ timeout: 20_000 });
-    return ((await body.innerText().catch(() => '')) ?? '').trim();
-  }
-
   async exercise() {
-    const top = this.getFrameByName('frame-top');
-    const bottom = this.getFrameByName('frame-bottom');
+    // Wait for top + bottom frames by URL (more reliable than names in CI)
+    const top = await this.waitForFrameByUrl(/\/frame_top$/);
+    const bottom = await this.waitForFrameByUrl(/\/frame_bottom$/);
 
-    // The top frame contains three child frames.
-    const left = top.childFrames().find((f) => f.name() === 'frame-left');
-    const middle = top.childFrames().find((f) => f.name() === 'frame-middle');
-    const right = top.childFrames().find((f) => f.name() === 'frame-right');
+    // Inside top frame, wait for its child frames by URL
+    // Note: sometimes child frames show up a beat later in CI, so poll.
+    await expect
+      .poll(
+        async () => {
+          const urls = top.childFrames().map((f) => f.url());
+          return urls.join('|');
+        },
+        { timeout: 20_000 }
+      )
+      .toMatch(/\/frame_left$|\/frame_middle$|\/frame_right$/);
+
+    const left = top.childFrames().find((f) => /\/frame_left$/.test(f.url()));
+    const middle = top.childFrames().find((f) => /\/frame_middle$/.test(f.url()));
+    const right = top.childFrames().find((f) => /\/frame_right$/.test(f.url()));
 
     if (!left || !middle || !right) {
-      throw new Error(
-        `Expected child frames not found. Found: ${top.childFrames().map((f) => f.name()).join(', ')}`
-      );
+      const found = top.childFrames().map((f) => f.url()).join(', ');
+      throw new Error(`Expected child frames not found. Found URLs: ${found}`);
     }
 
-    const leftText = await this.frameBodyText(left);
-    const middleText = await this.frameBodyText(middle);
-    const rightText = await this.frameBodyText(right);
-    const bottomText = await this.frameBodyText(bottom);
+    // Assert expected text inside each frame
+    await expect(left.locator('body')).toContainText('LEFT', { timeout: 20_000 });
+    await expect(middle.locator('body')).toContainText('MIDDLE', { timeout: 20_000 });
+    await expect(right.locator('body')).toContainText('RIGHT', { timeout: 20_000 });
 
-    // Assert the "point" of the page: you can reach and read each nested frame.
-    await expect(leftText).toContain('LEFT');
-    await expect(middleText).toContain('MIDDLE');
-    await expect(rightText).toContain('RIGHT');
-    await expect(bottomText).toContain('BOTTOM');
+    await expect(bottom.locator('body')).toContainText('BOTTOM', { timeout: 20_000 });
   }
 }
