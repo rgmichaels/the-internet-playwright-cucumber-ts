@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "shadow-dom;shadow-dom---loads,-asserts,-and-exercises-behavior",
+        "id": "secure-file-download;secure-file-download---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Shadow DOM - loads, asserts, and exercises behavior",
+        "name": "Secure File Download - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 261632624
+              "duration": 258541665
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 277978125
+              "duration": 273932166
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Shadow DOM\" example",
+            "name": "I open the \"Secure File Download\" example",
             "match": {
               "location": "src/steps/site.steps.ts:105"
             },
             "result": {
               "status": "passed",
-              "duration": 69770999
+              "duration": 82920374
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the \"Shadow DOM\" page should load",
+            "name": "the \"Secure File Download\" page should load",
             "match": {
               "location": "src/steps/site.steps.ts:110"
             },
             "result": {
               "status": "passed",
-              "duration": 17328625
+              "duration": 120110999
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the \"Shadow DOM\" page",
+            "name": "I exercise the \"Secure File Download\" page",
             "match": {
               "location": "src/steps/site.steps.ts:115"
             },
             "result": {
               "status": "passed",
-              "duration": 6081249
+              "duration": 35257666
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16442542
+              "duration": 17700083
             }
           }
         ],
@@ -88,17 +88,21 @@
             "line": 1
           },
           {
-            "name": "@feature_shadow_dom",
+            "name": "@feature_secure_file_download",
+            "line": 1
+          },
+          {
+            "name": "@auth_admin",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "shadow-dom",
+    "id": "secure-file-download",
     "line": 2,
     "keyword": "Feature",
-    "name": "Shadow DOM",
+    "name": "Secure File Download",
     "tags": [
       {
         "name": "@feature",
@@ -109,10 +113,14 @@
         "line": 1
       },
       {
-        "name": "@feature_shadow_dom",
+        "name": "@feature_secure_file_download",
+        "line": 1
+      },
+      {
+        "name": "@auth_admin",
         "line": 1
       }
     ],
-    "uri": "features/38_shadow_dom.feature"
+    "uri": "features/37_secure_file_download.feature"
   }
 ]
