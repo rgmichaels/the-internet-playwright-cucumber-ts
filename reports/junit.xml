@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="1.238" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T16:36:35.563Z">
-  <testcase classname="JavaScript onload event error" name="JavaScript onload event error - loads, asserts, and exercises behavior" time="0.637">
+<testsuite name="Cucumber" time="1.293" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T16:47:33.918Z">
+  <testcase classname="Shadow DOM" name="Shadow DOM - loads, asserts, and exercises behavior" time="0.651">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "JavaScript onload event error" example.....................passed
-Then the "JavaScript onload event error" page should load...................passed
-And I exercise the "JavaScript onload event error" page.....................passed]]></system-out>
+When I open the "Shadow DOM" example........................................passed
+Then the "Shadow DOM" page should load......................................passed
+And I exercise the "Shadow DOM" page........................................passed]]></system-out>
   </testcase>
 </testsuite>

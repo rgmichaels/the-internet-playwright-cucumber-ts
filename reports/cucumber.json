@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "javascript-onload-event-error;javascript-onload-event-error---loads,-asserts,-and-exercises-behavior",
+        "id": "shadow-dom;shadow-dom---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "JavaScript onload event error - loads, asserts, and exercises behavior",
+        "name": "Shadow DOM - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 259438999
+              "duration": 261632624
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 275009249
+              "duration": 277978125
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"JavaScript onload event error\" example",
+            "name": "I open the \"Shadow DOM\" example",
             "match": {
               "location": "src/steps/site.steps.ts:105"
             },
             "result": {
               "status": "passed",
-              "duration": 66812333
+              "duration": 69770999
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the \"JavaScript onload event error\" page should load",
+            "name": "the \"Shadow DOM\" page should load",
             "match": {
               "location": "src/steps/site.steps.ts:110"
             },
             "result": {
               "status": "passed",
-              "duration": 10802165
+              "duration": 17328625
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the \"JavaScript onload event error\" page",
+            "name": "I exercise the \"Shadow DOM\" page",
             "match": {
               "location": "src/steps/site.steps.ts:115"
             },
             "result": {
               "status": "passed",
-              "duration": 7177249
+              "duration": 6081249
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16650582
+              "duration": 16442542
             }
           }
         ],
@@ -88,17 +88,17 @@
             "line": 1
           },
           {
-            "name": "@feature_js_onload_error",
+            "name": "@feature_shadow_dom",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "javascript-onload-event-error",
+    "id": "shadow-dom",
     "line": 2,
     "keyword": "Feature",
-    "name": "JavaScript onload event error",
+    "name": "Shadow DOM",
     "tags": [
       {
         "name": "@feature",
@@ -109,10 +109,10 @@
         "line": 1
       },
       {
-        "name": "@feature_js_onload_error",
+        "name": "@feature_shadow_dom",
         "line": 1
       }
     ],
-    "uri": "features/30_js_onload_error.feature"
+    "uri": "features/38_shadow_dom.feature"
   }
 ]
