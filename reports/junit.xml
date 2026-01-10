@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.199" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T16:22:07.208Z">
-  <testcase classname="JQuery UI Menus" name="JQuery UI Menus - loads, asserts, and exercises behavior" time="1.601">
+<testsuite name="Cucumber" time="1.238" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-10T16:36:35.563Z">
+  <testcase classname="JavaScript onload event error" name="JavaScript onload event error - loads, asserts, and exercises behavior" time="0.637">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "JQuery UI Menus" example...................................passed
-Then the "JQuery UI Menus" page should load.................................passed
-And I exercise the "JQuery UI Menus" page...................................passed]]></system-out>
+When I open the "JavaScript onload event error" example.....................passed
+Then the "JavaScript onload event error" page should load...................passed
+And I exercise the "JavaScript onload event error" page.....................passed]]></system-out>
   </testcase>
 </testsuite>

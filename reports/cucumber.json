@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "jquery-ui-menus;jquery-ui-menus---loads,-asserts,-and-exercises-behavior",
+        "id": "javascript-onload-event-error;javascript-onload-event-error---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "JQuery UI Menus - loads, asserts, and exercises behavior",
+        "name": "JavaScript onload event error - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 256694583
+              "duration": 259438999
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 332028542
+              "duration": 275009249
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"JQuery UI Menus\" example",
+            "name": "I open the \"JavaScript onload event error\" example",
             "match": {
               "location": "src/steps/site.steps.ts:105"
             },
             "result": {
               "status": "passed",
-              "duration": 56030750
+              "duration": 66812333
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the \"JQuery UI Menus\" page should load",
+            "name": "the \"JavaScript onload event error\" page should load",
             "match": {
               "location": "src/steps/site.steps.ts:110"
             },
             "result": {
               "status": "passed",
-              "duration": 119958875
+              "duration": 10802165
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the \"JQuery UI Menus\" page",
+            "name": "I exercise the \"JavaScript onload event error\" page",
             "match": {
               "location": "src/steps/site.steps.ts:115"
             },
             "result": {
               "status": "passed",
-              "duration": 809882583
+              "duration": 7177249
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24925417
+              "duration": 16650582
             }
           }
         ],
@@ -88,17 +88,17 @@
             "line": 1
           },
           {
-            "name": "@feature_jquery_ui_menus",
+            "name": "@feature_js_onload_error",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "jquery-ui-menus",
+    "id": "javascript-onload-event-error",
     "line": 2,
     "keyword": "Feature",
-    "name": "JQuery UI Menus",
+    "name": "JavaScript onload event error",
     "tags": [
       {
         "name": "@feature",
@@ -109,10 +109,10 @@
         "line": 1
       },
       {
-        "name": "@feature_jquery_ui_menus",
+        "name": "@feature_js_onload_error",
         "line": 1
       }
     ],
-    "uri": "features/28_jquery_ui_menus.feature"
+    "uri": "features/30_js_onload_error.feature"
   }
 ]
