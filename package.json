@@ -1,0 +1,25 @@
+{
+  "name": "the-internet-playwright-cucumber-ts",
+  "version": "1.1.0",
+  "description": "Playwright + Cucumber + TypeScript BDD suite exercising all links on https://the-internet.herokuapp.com/",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "cucumber-js --config cucumber.js",
+    "test:smoke": "cucumber-js --config cucumber.js --tags \"@smoke\"",
+    "test:headed": "HEADLESS=false cucumber-js --config cucumber.js",
+    "report": "node scripts/generate-report.js",
+    "test:ci": "cucumber-js --config cucumber.js && node scripts/generate-report.js"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^11.1.1",
+    "dotenv": "^16.4.5",
+    "multiple-cucumber-html-reporter": "^3.8.0",
+    "playwright": "^1.49.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

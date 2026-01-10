@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="178.405" tests="44" skipped="0" failures="6" errors="0" timestamp="2026-01-10T16:00:47.545Z">
+  <testcase classname="A/B Testing" name="A/B Testing - loads, asserts, and exercises behavior" time="0.996">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "A/B Testing" example.......................................passed
+Then the "A/B Testing" page should load.....................................passed
+And I exercise the "A/B Testing" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Add/Remove Elements" name="Add/Remove Elements - loads, asserts, and exercises behavior" time="0.562">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Add/Remove Elements" example...............................passed
+Then the "Add/Remove Elements" page should load.............................passed
+And I exercise the "Add/Remove Elements" page...............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="0.613">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Basic Auth" example........................................passed
+Then the "Basic Auth" page should load......................................passed
+And I exercise the "Basic Auth" page........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Broken Images" name="Broken Images - loads, asserts, and exercises behavior" time="0.526">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Broken Images" example.....................................passed
+Then the "Broken Images" page should load...................................passed
+And I exercise the "Broken Images" page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Challenging DOM" name="Challenging DOM - loads, asserts, and exercises behavior" time="0.752">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Challenging DOM" example...................................passed
+Then the "Challenging DOM" page should load.................................passed
+And I exercise the "Challenging DOM" page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Checkboxes" name="Checkboxes - loads, asserts, and exercises behavior" time="0.534">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Checkboxes" example........................................passed
+Then the "Checkboxes" page should load......................................passed
+And I exercise the "Checkboxes" page........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Context Menu" name="Context Menu - loads, asserts, and exercises behavior" time="0.534">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Context Menu" example......................................passed
+Then the "Context Menu" page should load....................................passed
+And I exercise the "Context Menu" page......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="0.603">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Digest Authentication" example.............................passed
+Then the "Digest Authentication" page should load...........................passed
+And I exercise the "Digest Authentication" page.............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Disappearing Elements" name="Disappearing Elements - loads, asserts, and exercises behavior" time="0.499">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Disappearing Elements" example.............................passed
+Then the "Disappearing Elements" page should load...........................passed
+And I exercise the "Disappearing Elements" page.............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Drag and Drop" name="Drag and Drop - loads, asserts, and exercises behavior" time="0.551">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Drag and Drop" example.....................................passed
+Then the "Drag and Drop" page should load...................................passed
+And I exercise the "Drag and Drop" page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dropdown" name="Dropdown - loads, asserts, and exercises behavior" time="0.533">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dropdown" example..........................................passed
+Then the "Dropdown" page should load........................................passed
+And I exercise the "Dropdown" page..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Content" name="Dynamic Content - loads, asserts, and exercises behavior" time="0.57">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Content" example...................................passed
+Then the "Dynamic Content" page should load.................................passed
+And I exercise the "Dynamic Content" page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Controls" name="Dynamic Controls - loads, asserts, and exercises behavior" time="42.875">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Controls" example..................................passed
+Then the "Dynamic Controls" page should load................................passed
+And I exercise the "Dynamic Controls" page..................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Loading" name="Dynamic Loading - loads, asserts, and exercises behavior" time="12.608">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Loading" example...................................passed
+Then the "Dynamic Loading" page should load.................................passed
+And I exercise the "Dynamic Loading" page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Entry Ad" name="Entry Ad - loads, asserts, and exercises behavior" time="1.474">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Entry Ad" example..........................................passed
+Then the "Entry Ad" page should load........................................passed
+And I exercise the "Entry Ad" page..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Exit Intent" name="Exit Intent - loads, asserts, and exercises behavior" time="0.971">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Exit Intent" example.......................................passed
+Then the "Exit Intent" page should load.....................................passed
+And I exercise the "Exit Intent" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Download" name="File Download - loads, asserts, and exercises behavior" time="0.541">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "File Download" example.....................................passed
+Then the "File Download" page should load...................................passed
+And I exercise the "File Download" page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Upload" name="File Upload - loads, asserts, and exercises behavior" time="0.589">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "File Upload" example.......................................passed
+Then the "File Upload" page should load.....................................passed
+And I exercise the "File Upload" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Floating Menu" name="Floating Menu - loads, asserts, and exercises behavior" time="0.561">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Floating Menu" example.....................................passed
+Then the "Floating Menu" page should load...................................passed
+And I exercise the "Floating Menu" page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Forgot Password" name="Forgot Password - loads, asserts, and exercises behavior" time="0.717">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Forgot Password" example...................................passed
+Then the "Forgot Password" page should load.................................passed
+And I exercise the "Forgot Password" page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Form Authentication" name="Form Authentication - loads, asserts, and exercises behavior" time="0.741">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Form Authentication" example...............................passed
+Then the "Form Authentication" page should load.............................passed
+And I exercise the "Form Authentication" page...............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Frames" name="Frames - loads, asserts, and exercises behavior" time="0.921">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Frames" example............................................passed
+Then the "Frames" page should load..........................................passed
+And I exercise the "Frames" page............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Geolocation" name="Geolocation - loads, asserts, and exercises behavior" time="0.657">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Geolocation" example.......................................passed
+Then the "Geolocation" page should load.....................................passed
+And I exercise the "Geolocation" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Horizontal Slider" name="Horizontal Slider - loads, asserts, and exercises behavior" time="0.499">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Horizontal Slider" example.................................passed
+Then the "Horizontal Slider" page should load...............................passed
+And I exercise the "Horizontal Slider" page.................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Hovers" name="Hovers - loads, asserts, and exercises behavior" time="0.517">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Hovers" example............................................passed
+Then the "Hovers" page should load..........................................passed
+And I exercise the "Hovers" page............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Infinite Scroll" name="Infinite Scroll - loads, asserts, and exercises behavior" time="1.52">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Infinite Scroll" example...................................passed
+Then the "Infinite Scroll" page should load.................................passed
+And I exercise the "Infinite Scroll" page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Inputs" name="Inputs - loads, asserts, and exercises behavior" time="0.505">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Inputs" example............................................passed
+Then the "Inputs" page should load..........................................passed
+And I exercise the "Inputs" page............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JQuery UI Menus" name="JQuery UI Menus - loads, asserts, and exercises behavior" time="15.549">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator:  locator('#content h3')&#xA;Expected: [32m&quot;JQuery[7m [27mUI Menu[7ms[27m&quot;[39m&#xA;Received: [31m&quot;JQueryUI[7m -[27m Menu&quot;[39m&#xA;Timeout:  15000ms&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 15000ms[22m&#xA;[2m  - waiting for locator('#content h3')[22m&#xA;[2m    17 × locator resolved to &lt;h3>JQueryUI - Menu&lt;/h3>[22m&#xA;[2m       - unexpected value &quot;JQueryUI - Menu&quot;[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at JqueryUiMenusPage.expectH3ToBe (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/BasePage.ts:16:22)
+    at JqueryUiMenusPage.assertLoaded (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/JqueryUiMenusPage.ts:7:37)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:112:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JQuery UI Menus" example...................................passed
+Then the "JQuery UI Menus" page should load.................................failed
+And I exercise the "JQuery UI Menus" page...................................skipped]]></system-out>
+  </testcase>
+  <testcase classname="JavaScript Alerts" name="JavaScript Alerts - loads, asserts, and exercises behavior" time="0.619">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JavaScript Alerts" example.................................passed
+Then the "JavaScript Alerts" page should load...............................passed
+And I exercise the "JavaScript Alerts" page.................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JavaScript onload event error" name="JavaScript onload event error - loads, asserts, and exercises behavior" time="15.51">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator: locator('#content h3')&#xA;Expected substring: [32m&quot;JavaScript onload event error&quot;[39m&#xA;Timeout: 15000ms&#xA;Error: element(s) not found&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 15000ms[22m&#xA;[2m  - waiting for locator('#content h3')[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at JsOnloadErrorPage.expectH3ToContain (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/BasePage.ts:21:22)
+    at JsOnloadErrorPage.assertLoaded (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/JsOnloadErrorPage.ts:9:16)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:112:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JavaScript onload event error" example.....................passed
+Then the "JavaScript onload event error" page should load...................failed
+And I exercise the "JavaScript onload event error" page.....................skipped]]></system-out>
+  </testcase>
+  <testcase classname="Key Presses" name="Key Presses - loads, asserts, and exercises behavior" time="0.582">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Key Presses" example.......................................passed
+Then the "Key Presses" page should load.....................................passed
+And I exercise the "Key Presses" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Large &amp; Deep DOM" name="Large &amp; Deep DOM - loads, asserts, and exercises behavior" time="0.523">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Large & Deep DOM" example..................................passed
+Then the "Large & Deep DOM" page should load................................passed
+And I exercise the "Large & Deep DOM" page..................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Multiple Windows" name="Multiple Windows - loads, asserts, and exercises behavior" time="0.63">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Multiple Windows" example..................................passed
+Then the "Multiple Windows" page should load................................passed
+And I exercise the "Multiple Windows" page..................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Nested Frames" name="Nested Frames - loads, asserts, and exercises behavior" time="15.513">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator: locator('#content h3')&#xA;Expected: [32m&quot;Nested Frames&quot;[39m&#xA;Timeout: 15000ms&#xA;Error: element(s) not found&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 15000ms[22m&#xA;[2m  - waiting for locator('#content h3')[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at NestedFramesPage.expectH3ToBe (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/BasePage.ts:16:22)
+    at NestedFramesPage.assertLoaded (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/NestedFramesPage.ts:7:37)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:112:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Nested Frames" example.....................................passed
+Then the "Nested Frames" page should load...................................failed
+And I exercise the "Nested Frames" page.....................................skipped]]></system-out>
+  </testcase>
+  <testcase classname="Notification Messages" name="Notification Messages - loads, asserts, and exercises behavior" time="0.571">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Notification Messages" example.............................passed
+Then the "Notification Messages" page should load...........................passed
+And I exercise the "Notification Messages" page.............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Redirect Link" name="Redirect Link - loads, asserts, and exercises behavior" time="0.565">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Redirect Link" example.....................................passed
+Then the "Redirect Link" page should load...................................passed
+And I exercise the "Redirect Link" page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="5.574">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator: locator('#content')&#xA;Timeout: 5000ms&#xA;[32m- Expected substring  -   1[39m&#xA;[31m+ Received string     + 232[39m&#xA;&#xA;[32m- Congratulations[39m&#xA;[31m+[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+   Secure File Downloader[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     23001FD0-25A2-4BC0-9BBD-503BAC8C4CC3.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     phase-2.csv[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     large-test-file.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     file_upload.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _51D2A1FWKMAA002EB000163_1(1).jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _502217CQDGAA002JA906380_1.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Darshan_Resume_2026.docx[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     file_1768059221092.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Demo URL_Cypress.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpupgpp2q_.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     variables.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Mytest.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     bird1.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     bird2.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test_file.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     file_1768059223257.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     zero_bytes_file.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test-upload.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmp1brktlt8.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     file_1768059151341.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     selenium-snapshot.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test_upload.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _51D5TOFAHLAA002EB000014_1.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpik8o1j8c.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     not_empty.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     AGR.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     upload_file.xlsx[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     2025-06-26_20-47-44.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     random_data.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     search.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _51D5TOFAHLAA002EB000014_1(1).jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpwoyegf8g.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     config.xml[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _51D2A1FWKMAA002EB000163_1.jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test_drag_drop.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test-image.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     filename.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Test1.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpmdgfaruv.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     logo.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpmo62v9m9.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmparitny4k.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     books.html[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     file_1768059147743.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Sample_upload.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     testdata.csv[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     test1.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Jpeg_with_exif.jpeg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     hello.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Element Helper.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sajib.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     bb.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample_upload.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     employees.csv[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmp3tm_6bb9.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Practica_MTL5 (1).pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     tmpjqgc2s2r.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     AI.png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample3.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     example.json[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample-zip-file.zip[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Sample.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     some-file.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     arquivo.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     Screenshot (4).png[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sample.pdf[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     _502217CQDGAA002JA906380_1(1).jpg[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     upload-me.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     sampleFile.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     employees (3).csv[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     MyFile.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+     LambdaTest.txt[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+[39m&#xA;[31m+[39m&#xA;[31m+ [43m      [49m[39m&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 5000ms[22m&#xA;[2m  - waiting for locator('#content')[22m&#xA;[2m    7 × locator resolved to &lt;div id=&quot;content&quot; class=&quot;large-12 columns&quot;>…&lt;/div>[22m&#xA;[2m      - unexpected value &quot;[22m&#xA;[2m        [22m&#xA;[2m  Secure File Downloader[22m&#xA;[2m  [22m&#xA;[2m    23001FD0-25A2-4BC0-9BBD-503BAC8C4CC3.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    phase-2.csv[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    large-test-file.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    file_upload.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _51D2A1FWKMAA002EB000163_1(1).jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _502217CQDGAA002JA906380_1.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Darshan_Resume_2026.docx[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    file_1768059221092.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Demo URL_Cypress.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpupgpp2q_.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    variables.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Mytest.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    bird1.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    bird2.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test_file.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    file_1768059223257.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    zero_bytes_file.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test-upload.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmp1brktlt8.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    file_1768059151341.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    selenium-snapshot.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test_upload.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _51D5TOFAHLAA002EB000014_1.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpik8o1j8c.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    not_empty.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    AGR.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    upload_file.xlsx[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    2025-06-26_20-47-44.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    random_data.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    search.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _51D5TOFAHLAA002EB000014_1(1).jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpwoyegf8g.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    config.xml[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _51D2A1FWKMAA002EB000163_1.jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test_drag_drop.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test-image.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    filename.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Test1.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpmdgfaruv.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    logo.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpmo62v9m9.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmparitny4k.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    books.html[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    file_1768059147743.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Sample_upload.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    testdata.csv[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    test1.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Jpeg_with_exif.jpeg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    hello.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Element Helper.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sajib.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    bb.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample_upload.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    employees.csv[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmp3tm_6bb9.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Practica_MTL5 (1).pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    tmpjqgc2s2r.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    AI.png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample3.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    example.json[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample-zip-file.zip[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Sample.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    some-file.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    arquivo.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    Screenshot (4).png[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sample.pdf[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    _502217CQDGAA002JA906380_1(1).jpg[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    upload-me.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    sampleFile.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    employees (3).csv[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    MyFile.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m    LambdaTest.txt[22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m[22m&#xA;[2m[22m&#xA;[2m      &quot;[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at SecureFileDownloadPage.assertLoaded (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/SecureFileDownloadPage.ts:9:49)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:112:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Secure File Download" example..............................passed
+Then the "Secure File Download" page should load............................failed
+And I exercise the "Secure File Download" page..............................skipped]]></system-out>
+  </testcase>
+  <testcase classname="Shadow DOM" name="Shadow DOM - loads, asserts, and exercises behavior" time="15.539">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator: locator('#content h3')&#xA;Expected substring: [32m&quot;Simple template&quot;[39m&#xA;Timeout: 15000ms&#xA;Error: element(s) not found&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 15000ms[22m&#xA;[2m  - waiting for locator('#content h3')[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at ShadowDomPage.expectH3ToContain (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/BasePage.ts:21:22)
+    at ShadowDomPage.assertLoaded (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/ShadowDomPage.ts:7:37)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:112:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Shadow DOM" example........................................passed
+Then the "Shadow DOM" page should load......................................failed
+And I exercise the "Shadow DOM" page........................................skipped]]></system-out>
+  </testcase>
+  <testcase classname="Shifting Content" name="Shifting Content - loads, asserts, and exercises behavior" time="0.543">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Shifting Content" example..................................passed
+Then the "Shifting Content" page should load................................passed
+And I exercise the "Shifting Content" page..................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Slow Resources" name="Slow Resources - loads, asserts, and exercises behavior" time="0.487">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Slow Resources" example....................................passed
+Then the "Slow Resources" page should load..................................passed
+And I exercise the "Slow Resources" page....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Sortable Data Tables" name="Sortable Data Tables - loads, asserts, and exercises behavior" time="0.611">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Sortable Data Tables" example..............................passed
+Then the "Sortable Data Tables" page should load............................passed
+And I exercise the "Sortable Data Tables" page..............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Status Codes" name="Status Codes - loads, asserts, and exercises behavior" time="0.605">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Status Codes" example......................................passed
+Then the "Status Codes" page should load....................................passed
+And I exercise the "Status Codes" page......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Typos" name="Typos - loads, asserts, and exercises behavior" time="0.468">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Typos" example.............................................passed
+Then the "Typos" page should load...........................................passed
+And I exercise the "Typos" page.............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="WYSIWYG Editor" name="WYSIWYG Editor - loads, asserts, and exercises behavior" time="30.892">
+    <failure type="TimeoutError" message="locator.click: Timeout 30000ms exceeded.&#xA;Call log:&#xA;[2m  - waiting for locator('#mce_0_ifr').contentFrame().locator('body')[22m&#xA;[2m    - locator resolved to &lt;body id=&quot;tinymce&quot; data-id=&quot;mce_0&quot; spellcheck=&quot;false&quot; contenteditable=&quot;false&quot; class=&quot;mce-content-body mce-content-readonly&quot; aria-label=&quot;Rich Text Area. Press ALT-0 for help.&quot;>…&lt;/body>[22m&#xA;[2m  - attempting click action[22m&#xA;[2m    2 × waiting for element to be visible, enabled and stable[22m&#xA;[2m      - element is visible, enabled and stable[22m&#xA;[2m      - scrolling into view if needed[22m&#xA;[2m      - done scrolling[22m&#xA;[2m      - &lt;strong>Please request that the admin&lt;/strong> from &lt;div class=&quot;tox tox-silver-sink tox-tinymce-aux&quot;>…&lt;/div> subtree intercepts pointer events[22m&#xA;[2m    - retrying click action[22m&#xA;[2m    - waiting 20ms[22m&#xA;[2m    2 × waiting for element to be visible, enabled and stable[22m&#xA;[2m      - element is visible, enabled and stable[22m&#xA;[2m      - scrolling into view if needed[22m&#xA;[2m      - done scrolling[22m&#xA;[2m      - &lt;strong>Please request that the admin&lt;/strong> from &lt;div class=&quot;tox tox-silver-sink tox-tinymce-aux&quot;>…&lt;/div> subtree intercepts pointer events[22m&#xA;[2m    - retrying click action[22m&#xA;[2m      - waiting 100ms[22m&#xA;[2m    57 × waiting for element to be visible, enabled and stable[22m&#xA;[2m       - element is visible, enabled and stable[22m&#xA;[2m       - scrolling into view if needed[22m&#xA;[2m       - done scrolling[22m&#xA;[2m       - &lt;strong>Please request that the admin&lt;/strong> from &lt;div class=&quot;tox tox-silver-sink tox-tinymce-aux&quot;>…&lt;/div> subtree intercepts pointer events[22m&#xA;[2m     - retrying click action[22m&#xA;[2m       - waiting 500ms[22m&#xA;"><![CDATA[    at WysiwygEditorPage.typeInEditor (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/WysiwygEditorPage.ts:14:16)
+    at WysiwygEditorPage.exercise (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/pages/WysiwygEditorPage.ts:21:16)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/site.steps.ts:117:12)]]></failure>
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "WYSIWYG Editor" example....................................passed
+Then the "WYSIWYG Editor" page should load..................................passed
+And I exercise the "WYSIWYG Editor" page....................................failed]]></system-out>
+  </testcase>
+</testsuite>
