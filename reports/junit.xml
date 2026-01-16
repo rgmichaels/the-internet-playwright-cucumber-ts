@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="13.236" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-16T16:30:49.024Z">
-  <testcase classname="Entry Ad" name="Entry Ad - loads, asserts, and exercises behavior" time="12.645">
+<testsuite name="Cucumber" time="1.49" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-16T16:49:03.275Z">
+  <testcase classname="Nested Frames" name="Nested Frames - loads, asserts, and exercises behavior" time="0.857">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Entry Ad" example..........................................passed
-Then the "Entry Ad" page should load........................................passed
-And I exercise the "Entry Ad" page..........................................passed]]></system-out>
+When I open the "Nested Frames" example.....................................passed
+Then the "Nested Frames" page should load...................................passed
+And I exercise the "Nested Frames" page.....................................passed]]></system-out>
   </testcase>
 </testsuite>

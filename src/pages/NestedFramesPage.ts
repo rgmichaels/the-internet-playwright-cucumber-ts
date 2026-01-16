@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Page, Frame } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -14,44 +14,75 @@ export class NestedFramesPage extends BasePage {
     await expect(this.page.locator('frameset')).toBeVisible({ timeout: 20_000 });
   }
 
-  private async waitForFrameByUrl(regex: RegExp, timeoutMs = 20_000) {
+  /**
+   * Waits for a frame to exist (by name) and to have navigated off about:blank.
+   * This is more CI-stable than matching by frame URL, which can be about:blank
+   * during attach/navigation timing on slower runners.
+   */
+  private async waitForFrameByName(
+    name: string,
+    timeoutMs = 20_000,
+    notBlank = true
+  ): Promise<Frame> {
     await expect
       .poll(
-        async () => this.page.frames().find((f) => regex.test(f.url()))?.url() ?? '',
+        async () => {
+          const f = this.page.frame({ name });
+          if (!f) return '';
+          const url = f.url() ?? '';
+          if (!notBlank) return url;
+          return url && url !== 'about:blank' ? url : '';
+        },
         { timeout: timeoutMs }
       )
-      .toMatch(regex);
+      .not.toBe('');
 
-    const frame = this.page.frames().find((f) => regex.test(f.url()));
-    if (!frame) throw new Error(`Frame not found for url pattern: ${regex}`);
+    const frame = this.page.frame({ name });
+    if (!frame) throw new Error(`Frame not found by name: ${name}`);
+    return frame;
+  }
+
+  /**
+   * Waits for a child frame under a given parent frame by name, and ensures it has a real URL.
+   */
+  private async waitForChildFrameByName(
+    parent: Frame,
+    name: string,
+    timeoutMs = 20_000
+  ): Promise<Frame> {
+    await expect
+      .poll(
+        async () => {
+          const f = parent.childFrames().find((cf) => cf.name() === name);
+          if (!f) return '';
+          const url = f.url() ?? '';
+          return url && url !== 'about:blank' ? url : '';
+        },
+        { timeout: timeoutMs }
+      )
+      .not.toBe('');
+
+    const frame = parent.childFrames().find((cf) => cf.name() === name);
+    if (!frame) {
+      const found = parent.childFrames().map((f) => `${f.name()}:${f.url()}`).join(', ');
+      throw new Error(`Child frame "${name}" not found. Found: ${found}`);
+    }
     return frame;
   }
 
   async exercise() {
-    // Wait for top + bottom frames by URL (more reliable than names in CI)
-    const top = await this.waitForFrameByUrl(/\/frame_top$/);
-    const bottom = await this.waitForFrameByUrl(/\/frame_bottom$/);
+    // Ensure the frameset DOM is ready before we start chasing frames
+    await this.page.waitForLoadState('domcontentloaded');
 
-    // Inside top frame, wait for its child frames by URL
-    // Note: sometimes child frames show up a beat later in CI, so poll.
-    await expect
-      .poll(
-        async () => {
-          const urls = top.childFrames().map((f) => f.url());
-          return urls.join('|');
-        },
-        { timeout: 20_000 }
-      )
-      .toMatch(/\/frame_left$|\/frame_middle$|\/frame_right$/);
+    // The Internet nested frames have stable frame names:
+    // frame-top, frame-left, frame-middle, frame-right, frame-bottom
+    const top = await this.waitForFrameByName('frame-top');
+    const bottom = await this.waitForFrameByName('frame-bottom');
 
-    const left = top.childFrames().find((f) => /\/frame_left$/.test(f.url()));
-    const middle = top.childFrames().find((f) => /\/frame_middle$/.test(f.url()));
-    const right = top.childFrames().find((f) => /\/frame_right$/.test(f.url()));
-
-    if (!left || !middle || !right) {
-      const found = top.childFrames().map((f) => f.url()).join(', ');
-      throw new Error(`Expected child frames not found. Found URLs: ${found}`);
-    }
+    // Inside top frame, wait for the three child frames by name (CI-stable)
+    const left = await this.waitForChildFrameByName(top, 'frame-left');
+    const middle = await this.waitForChildFrameByName(top, 'frame-middle');
+    const right = await this.waitForChildFrameByName(top, 'frame-right');
 
     // Assert expected text inside each frame
     await expect(left.locator('body')).toContainText('LEFT', { timeout: 20_000 });
