@@ -29,7 +29,7 @@ export class EntryAdPage extends BasePage {
   }
 
   private restartAdLink() {
-    return this.page.locator('#restart-ad');
+    return this.page.locator('#restart-ad'); // "To re-enable it, click here."
   }
 
   private async waitForModalVisible(timeoutMs: number): Promise<boolean> {
@@ -39,60 +39,76 @@ export class EntryAdPage extends BasePage {
       .catch(() => false);
   }
 
-  private async clearStorageAndReload() {
-    await this.page.evaluate(() => {
+  /**
+   * "Hard refresh" equivalent for automation:
+   * - clears cookies (context-wide)
+   * - clears local/session storage
+   * - clears Cache Storage (service worker caches)
+   * - reloads the page
+   */
+  private async hardRefresh() {
+    await this.page.context().clearCookies();
+
+    await this.page.evaluate(async () => {
       try {
         localStorage.clear();
+      } catch {
+        // ignore
+      }
+      try {
         sessionStorage.clear();
       } catch {
         // ignore
       }
+
+      // Clear Cache Storage if present (not always available depending on browser/context)
+      try {
+        if ('caches' in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        }
+      } catch {
+        // ignore
+      }
     });
+
     await this.page.reload({ waitUntil: 'domcontentloaded' });
     await this.assertLoaded();
   }
 
   /**
-   * Best-effort: return true if modal becomes visible, false if it never does.
-   * We do NOT throw here because this demo is flaky in CI.
+   * Required behavior:
+   * If the modal isn't showing naturally, click "re-enable", then hard refresh.
+   * After this, the modal should appear. If it does not, fail with a clear error.
    */
-  private async tryToShowModal(): Promise<boolean> {
-    // Natural appearance
-    if (await this.waitForModalVisible(3_000)) return true;
+  private async ensureModalVisible(): Promise<void> {
+    // 1) Natural appearance first (fast path)
+    if (await this.waitForModalVisible(3_000)) return;
 
-    // Intended page behavior
+    // 2) Re-enable link, then hard refresh (your requested behavior)
     await this.restartAdLink().click();
-    if (await this.waitForModalVisible(6_000)) return true;
 
-    // Fresh visit simulation
-    await this.clearStorageAndReload();
-    if (await this.waitForModalVisible(8_000)) return true;
+    await this.hardRefresh();
 
-    // One more restart after reload
+    // 3) After hard refresh, modal should appear
+    if (await this.waitForModalVisible(10_000)) return;
+
+    // 4) One extra nudge: re-enable again, then a normal reload (sometimes needed)
     await this.restartAdLink().click();
-    if (await this.waitForModalVisible(8_000)) return true;
+    await this.page.reload({ waitUntil: 'domcontentloaded' });
+    await this.assertLoaded();
 
-    return false;
+    if (await this.waitForModalVisible(10_000)) return;
+
+    throw new Error(
+      '[EntryAdPage] Expected the modal to become visible after clicking re-enable and performing a hard refresh, but it remained hidden.'
+    );
   }
 
   async exercise() {
-    const shown = await this.tryToShowModal();
+    await this.ensureModalVisible();
 
-    if (!shown) {
-      // CI-safe behavior: don't fail the suite because a flaky demo modal didn't appear.
-      // Still exercise something meaningful: restart link exists & is clickable, and page stays healthy.
-      console.warn(
-        '[EntryAdPage] Modal never became visible (known flaky behavior on the-internet demo site). ' +
-          'Continuing without modal assertions.'
-      );
-
-      // Sanity: restart link clickable and page remains on /entry_ad
-      await this.restartAdLink().click();
-      await expect(this.page).toHaveURL(/\/entry_ad$/, { timeout: 20_000 });
-      return;
-    }
-
-    // If modal appeared, we fully exercise it.
+    // Modal is visible here — fully exercise it.
     await expect(this.modalTitle()).toContainText('This is a modal window', { timeout: 20_000 });
 
     await this.modalClose().click();
@@ -100,7 +116,18 @@ export class EntryAdPage extends BasePage {
 
     // Exercise restart behavior explicitly
     await this.restartAdLink().click();
-    await expect(this.modal()).toBeVisible({ timeout: 20_000 });
+
+    // Your “hard refresh” rule is only for the *missing modal* case,
+    // but we still wait robustly here because the modal can take a moment to reappear.
+    const visibleAgain = await this.waitForModalVisible(10_000);
+    if (!visibleAgain) {
+      // Apply the same deterministic behavior again if needed
+      await this.restartAdLink().click();
+      await this.hardRefresh();
+      await expect(this.modal()).toBeVisible({ timeout: 20_000 });
+    } else {
+      await expect(this.modal()).toBeVisible({ timeout: 20_000 });
+    }
 
     await this.modalClose().click();
     await expect(this.modal()).toBeHidden({ timeout: 20_000 });

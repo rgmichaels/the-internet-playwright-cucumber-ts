@@ -17,23 +17,40 @@ export class CustomWorld extends World {
   }
 
   async launch(opts?: { authAdmin?: boolean; geo?: boolean }) {
-    const headless = isHeadless();
-    const name = browserName();
-    const launcher = name === 'firefox' ? firefox : name === 'webkit' ? webkit : chromium;
+    const headed = process.env.HEADED === '1';
+    const slowMo = Number(process.env.SLOWMO ?? 0) || 0;
 
-    this.browser = await launcher.launch({ headless });
+    const headless = headed ? false : isHeadless();
+    const name = browserName();
+    const launcher =
+      name === 'firefox'
+        ? firefox
+        : name === 'webkit'
+        ? webkit
+        : chromium;
+
+    this.browser = await launcher.launch({
+      headless,
+      slowMo: headed ? slowMo : 0,
+    });
 
     const contextOptions: any = {
       viewport: { width: 1280, height: 720 },
-      acceptDownloads: true
+      acceptDownloads: true,
     };
 
     if (opts?.authAdmin) {
-      contextOptions.httpCredentials = { username: 'admin', password: 'admin' };
+      contextOptions.httpCredentials = {
+        username: 'admin',
+        password: 'admin',
+      };
     }
 
     if (opts?.geo) {
-      contextOptions.geolocation = { latitude: 40.7128, longitude: -74.0060 }; // NYC-ish
+      contextOptions.geolocation = {
+        latitude: 40.7128,
+        longitude: -74.0060,
+      };
       contextOptions.permissions = ['geolocation'];
     }
 

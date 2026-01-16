@@ -1,4 +1,3 @@
-
 import { Before, After, Status, setDefaultTimeout } from '@cucumber/cucumber';
 
 setDefaultTimeout(90 * 1000);
@@ -13,7 +12,11 @@ Before(async function (this: CustomWorld, scenario) {
   const tags = scenario.pickle.tags.map((t: any) => t.name);
   const authAdmin = tags.includes('@auth_admin');
   const geo = tags.includes('@geo');
-  await this.launch({ authAdmin, geo });
+
+  const headed = process.env.HEADED === '1';
+  const slowMo = Number(process.env.SLOWMO ?? 0) || 0;
+
+  await this.launch({ authAdmin, geo, headed, slowMo });
 });
 
 After(async function (this: CustomWorld, scenario) {
