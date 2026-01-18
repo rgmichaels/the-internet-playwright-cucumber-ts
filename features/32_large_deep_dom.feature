@@ -6,3 +6,8 @@ Feature: Large & Deep DOM
     When I open the "Large & Deep DOM" example
     Then the "Large & Deep DOM" page should load
     And I exercise the "Large & Deep DOM" page
+
+  Scenario: Large & Deep DOM - Footer shows Elemental Selenium attribution and link
+    Given I open the "Large & Deep DOM" page
+    Then the global footer should be valid
+

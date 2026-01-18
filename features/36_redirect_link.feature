@@ -6,3 +6,8 @@ Feature: Redirect Link
     When I open the "Redirect Link" example
     Then the "Redirect Link" page should load
     And I exercise the "Redirect Link" page
+
+  Scenario: Redirect Link - Footer shows Elemental Selenium attribution and link
+    Given I open the "Redirect Link" page
+    Then the global footer should be valid
+

@@ -6,3 +6,8 @@ Feature: Broken Images
     When I open the "Broken Images" example
     Then the "Broken Images" page should load
     And I exercise the "Broken Images" page
+
+  Scenario: Broken Images - Footer shows Elemental Selenium attribution and link
+    Given I open the "Broken Images" page
+    Then the global footer should be valid
+

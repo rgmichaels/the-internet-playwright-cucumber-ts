@@ -6,3 +6,8 @@ Feature: Challenging DOM
     When I open the "Challenging DOM" example
     Then the "Challenging DOM" page should load
     And I exercise the "Challenging DOM" page
+
+  Scenario: Challenging DOM - Footer shows Elemental Selenium attribution and link
+    Given I open the "Challenging DOM" page
+    Then the global footer should be valid
+

@@ -6,3 +6,8 @@ Feature: Shifting Content
     When I open the "Shifting Content" example
     Then the "Shifting Content" page should load
     And I exercise the "Shifting Content" page
+
+  Scenario: Shifting Content - Footer shows Elemental Selenium attribution and link
+    Given I open the "Shifting Content" page
+    Then the global footer should be valid
+

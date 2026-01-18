@@ -6,3 +6,5 @@ Feature: Nested Frames
     When I open the "Nested Frames" example
     Then the "Nested Frames" page should load
     And I exercise the "Nested Frames" page
+
+

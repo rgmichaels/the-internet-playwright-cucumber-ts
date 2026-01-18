@@ -6,3 +6,7 @@ Feature: Add/Remove Elements
     When I open the "Add/Remove Elements" example
     Then the "Add/Remove Elements" page should load
     And I exercise the "Add/Remove Elements" page
+
+  Scenario: Add/Remove Elements - Footer shows Elemental Selenium attribution and link
+    Given I open the "Add/Remove Elements" page
+    Then the global footer should be valid

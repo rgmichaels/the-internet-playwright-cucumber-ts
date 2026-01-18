@@ -6,3 +6,8 @@ Feature: Sortable Data Tables
     When I open the "Sortable Data Tables" example
     Then the "Sortable Data Tables" page should load
     And I exercise the "Sortable Data Tables" page
+
+  Scenario: Sortable Data Tables - Footer shows Elemental Selenium attribution and link
+    Given I open the "Sortable Data Tables" page
+    Then the global footer should be valid
+

@@ -6,3 +6,8 @@ Feature: Entry Ad
     When I open the "Entry Ad" example
     Then the "Entry Ad" page should load
     And I exercise the "Entry Ad" page
+
+  Scenario: Entry Ad - Footer shows Elemental Selenium attribution and link
+    Given I open the "Entry Ad" page
+    Then the global footer should be valid
+

@@ -6,3 +6,8 @@ Feature: Dynamic Loading
     When I open the "Dynamic Loading" example
     Then the "Dynamic Loading" page should load
     And I exercise the "Dynamic Loading" page
+
+  Scenario: Dynamic Loading - Footer shows Elemental Selenium attribution and link
+    Given I open the "Dynamic Loading" page
+    Then the global footer should be valid
+

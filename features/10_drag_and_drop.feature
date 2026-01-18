@@ -6,3 +6,8 @@ Feature: Drag and Drop
     When I open the "Drag and Drop" example
     Then the "Drag and Drop" page should load
     And I exercise the "Drag and Drop" page
+
+  Scenario: Drag and Drop - Footer shows Elemental Selenium attribution and link
+    Given I open the "Drag and Drop" page
+    Then the global footer should be valid
+

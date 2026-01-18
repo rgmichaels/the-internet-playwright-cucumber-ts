@@ -20,4 +20,23 @@ export class BasePage {
     const h3 = this.page.locator('#content h3');
     await expect(h3).toContainText(expected, { timeout: 15_000 });
   }
+
+  /**
+   * Global footer contract: attribution text and valid Elemental Selenium link.
+   * Keep this centralized so every page can reuse it.
+   */
+  async assertGlobalFooterPoweredByElementalSelenium(
+    expectedText = 'Powered by Elemental Selenium'
+  ) {
+    const footer = this.page.locator('#page-footer');
+
+    await expect(footer).toContainText(expectedText, { timeout: 15_000 });
+
+    const link = footer.locator('a', { hasText: 'Elemental Selenium' });
+    await expect(link).toBeVisible({ timeout: 15_000 });
+
+    const href = await link.getAttribute('href');
+    expect(href, 'Elemental Selenium footer link should have an href').toBeTruthy();
+    expect(href!).toMatch(/^https?:\/\/(www\.)?elementalselenium\.com\/?/i);
+  }
 }

@@ -6,3 +6,8 @@ Feature: File Download
     When I open the "File Download" example
     Then the "File Download" page should load
     And I exercise the "File Download" page
+
+  Scenario: File Download - Footer shows Elemental Selenium attribution and link
+    Given I open the "File Download" page
+    Then the global footer should be valid
+

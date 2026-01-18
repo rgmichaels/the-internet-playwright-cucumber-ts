@@ -6,3 +6,8 @@ Feature: Floating Menu
     When I open the "Floating Menu" example
     Then the "Floating Menu" page should load
     And I exercise the "Floating Menu" page
+
+  Scenario: Floating Menu - Footer shows Elemental Selenium attribution and link
+    Given I open the "Floating Menu" page
+    Then the global footer should be valid
+

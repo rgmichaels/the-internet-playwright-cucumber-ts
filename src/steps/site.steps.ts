@@ -97,6 +97,59 @@ function pageObject(this: CustomWorld, pageName: string): any {
   }
 }
 
+function routeForPage(pageName: string): string {
+  // Centralized direct-navigation map used by: Given I open the "<Page>" page
+  // Keep paths aligned with https://the-internet.herokuapp.com/ endpoints.
+  switch (pageName) {
+    case 'A/B Testing': return '/abtest';
+    case 'Add/Remove Elements': return '/add_remove_elements/';
+    case 'Basic Auth': return '/basic_auth';
+    case 'Broken Images': return '/broken_images';
+    case 'Challenging DOM': return '/challenging_dom';
+    case 'Checkboxes': return '/checkboxes';
+    case 'Context Menu': return '/context_menu';
+    case 'Digest Authentication': return '/digest_auth';
+    case 'Disappearing Elements': return '/disappearing_elements';
+    case 'Drag and Drop': return '/drag_and_drop';
+    case 'Dropdown': return '/dropdown';
+    case 'Dynamic Content': return '/dynamic_content';
+    case 'Dynamic Controls': return '/dynamic_controls';
+    case 'Dynamic Loading': return '/dynamic_loading';
+    case 'Entry Ad': return '/entry_ad';
+    case 'Exit Intent': return '/exit_intent';
+    case 'File Download': return '/download';
+    case 'File Upload': return '/upload';
+    case 'Floating Menu': return '/floating_menu';
+    case 'Forgot Password': return '/forgot_password';
+    case 'Form Authentication': return '/login';
+    case 'Frames': return '/frames';
+    case 'Geolocation': return '/geolocation';
+    case 'Horizontal Slider': return '/horizontal_slider';
+    case 'Hovers': return '/hovers';
+    case 'Infinite Scroll': return '/infinite_scroll';
+    case 'Inputs': return '/inputs';
+    case 'JQuery UI Menus': return '/jqueryui/menu';
+    case 'JavaScript Alerts': return '/javascript_alerts';
+    case 'JavaScript onload event error': return '/javascript_error';
+    case 'Key Presses': return '/key_presses';
+    case 'Large & Deep DOM': return '/large';
+    case 'Multiple Windows': return '/windows';
+    case 'Nested Frames': return '/nested_frames';
+    case 'Notification Messages': return '/notification_message';
+    case 'Redirect Link': return '/redirector';
+    case 'Secure File Download': return '/download_secure';
+    case 'Shadow DOM': return '/shadowdom';
+    case 'Shifting Content': return '/shifting_content';
+    case 'Slow Resources': return '/slow';
+    case 'Sortable Data Tables': return '/tables';
+    case 'Status Codes': return '/status_codes';
+    case 'Typos': return '/typos';
+    case 'WYSIWYG Editor': return '/tinymce';
+    default:
+      throw new Error(`No direct route registered for page: ${pageName}`);
+  }
+}
+
 Given('I am on the home page', async function (this: CustomWorld) {
   const home = new HomePage(this.page);
   await home.goto(this.baseUrl);
@@ -107,6 +160,15 @@ When('I open the {string} example', async function (this: CustomWorld, name: str
   await home.openExample(name);
 });
 
+Given('I open the {string} page', async function (this: CustomWorld, pageName: string) {
+  const path = routeForPage(pageName);
+  await this.page.goto(`${this.baseUrl}${path}`);
+
+  // Guardrail: verify the page identity after direct navigation
+  const po = pageObject.call(this, pageName);
+  await po.assertLoaded();
+});
+
 Then('the {string} page should load', async function (this: CustomWorld, pageName: string) {
   const po = pageObject.call(this, pageName);
   await po.assertLoaded();
@@ -115,4 +177,9 @@ Then('the {string} page should load', async function (this: CustomWorld, pageNam
 Then('I exercise the {string} page', async function (this: CustomWorld, pageName: string) {
   const po = pageObject.call(this, pageName);
   await po.exercise();
+});
+
+Then('the global footer should be valid', async function (this: CustomWorld) {
+  const base = new HomePage(this.page); // any BasePage-derived page object works
+  await base.assertGlobalFooterPoweredByElementalSelenium();
 });

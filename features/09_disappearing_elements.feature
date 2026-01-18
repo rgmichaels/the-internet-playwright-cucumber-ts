@@ -6,3 +6,8 @@ Feature: Disappearing Elements
     When I open the "Disappearing Elements" example
     Then the "Disappearing Elements" page should load
     And I exercise the "Disappearing Elements" page
+
+  Scenario: Disappearing Elements - Footer shows Elemental Selenium attribution and link
+    Given I open the "Disappearing Elements" page
+    Then the global footer should be valid
+

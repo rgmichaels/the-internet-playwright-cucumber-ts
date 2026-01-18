@@ -6,3 +6,8 @@ Feature: Dynamic Controls
     When I open the "Dynamic Controls" example
     Then the "Dynamic Controls" page should load
     And I exercise the "Dynamic Controls" page
+
+  Scenario: Dynamic Controls - Footer shows Elemental Selenium attribution and link
+    Given I open the "Dynamic Controls" page
+    Then the global footer should be valid
+

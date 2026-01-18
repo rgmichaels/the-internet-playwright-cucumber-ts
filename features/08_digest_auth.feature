@@ -6,3 +6,8 @@ Feature: Digest Authentication
     When I open the "Digest Authentication" example
     Then the "Digest Authentication" page should load
     And I exercise the "Digest Authentication" page
+
+  Scenario: Digest Authentication - Footer shows Elemental Selenium attribution and link
+    Given I open the "Digest Authentication" page
+    Then the global footer should be valid
+

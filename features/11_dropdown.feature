@@ -6,3 +6,8 @@ Feature: Dropdown
     When I open the "Dropdown" example
     Then the "Dropdown" page should load
     And I exercise the "Dropdown" page
+
+  Scenario: Dropdown - Footer shows Elemental Selenium attribution and link
+    Given I open the "Dropdown" page
+    Then the global footer should be valid
+

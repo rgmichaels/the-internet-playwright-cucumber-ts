@@ -6,3 +6,5 @@ Feature: JavaScript onload event error
     When I open the "JavaScript onload event error" example
     Then the "JavaScript onload event error" page should load
     And I exercise the "JavaScript onload event error" page
+
+

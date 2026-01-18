@@ -6,3 +6,8 @@ Feature: Infinite Scroll
     When I open the "Infinite Scroll" example
     Then the "Infinite Scroll" page should load
     And I exercise the "Infinite Scroll" page
+
+  Scenario: Infinite Scroll - Footer shows Elemental Selenium attribution and link
+    Given I open the "Infinite Scroll" page
+    Then the global footer should be valid
+
