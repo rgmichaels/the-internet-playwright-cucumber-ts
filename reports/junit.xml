@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="1.49" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-16T16:49:03.275Z">
-  <testcase classname="Nested Frames" name="Nested Frames - loads, asserts, and exercises behavior" time="0.857">
+<testsuite name="Cucumber" time="1.794" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-18T19:31:05.985Z">
+  <testcase classname="A/B Testing" name="A/B Testing - loads, asserts, and exercises behavior" time="0.648">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Nested Frames" example.....................................passed
-Then the "Nested Frames" page should load...................................passed
-And I exercise the "Nested Frames" page.....................................passed]]></system-out>
+When I open the "A/B Testing" example.......................................passed
+Then the "A/B Testing" page should load.....................................passed
+And I exercise the "A/B Testing" page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="A/B Testing" name="Footer shows Elemental Selenium attribution and link" time="0.526">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "A/B Testing" example.......................................passed
+Then the footer should show "Powered by Elemental Selenium" with a valid link..passed]]></system-out>
   </testcase>
 </testsuite>

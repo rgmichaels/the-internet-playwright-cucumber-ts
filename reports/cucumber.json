@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "nested-frames;nested-frames---loads,-asserts,-and-exercises-behavior",
+        "id": "a/b-testing;a/b-testing---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Nested Frames - loads, asserts, and exercises behavior",
+        "name": "A/B Testing - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 245755874
+              "duration": 273101583
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 259727959
+              "duration": 256521707
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Nested Frames\" example",
+            "name": "I open the \"A/B Testing\" example",
             "match": {
               "location": "src/steps/site.steps.ts:105"
             },
             "result": {
               "status": "passed",
-              "duration": 84442500
+              "duration": 55070541
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the \"Nested Frames\" page should load",
+            "name": "the \"A/B Testing\" page should load",
             "match": {
               "location": "src/steps/site.steps.ts:110"
             },
             "result": {
               "status": "passed",
-              "duration": 114969917
+              "duration": 41204332
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the \"Nested Frames\" page",
+            "name": "I exercise the \"A/B Testing\" page",
             "match": {
               "location": "src/steps/site.steps.ts:115"
             },
             "result": {
               "status": "passed",
-              "duration": 136786292
+              "duration": 3379208
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14969540
+              "duration": 17269375
             }
           }
         ],
@@ -84,24 +84,115 @@
             "line": 1
           },
           {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
             "name": "@regression",
             "line": 1
           },
           {
-            "name": "@feature_nested_frames",
+            "name": "@feature_ab_testing",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "a/b-testing;footer-shows-elemental-selenium-attribution-and-link",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Footer shows Elemental Selenium attribution and link",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 160220250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "I am on the home page",
+            "match": {
+              "location": "src/steps/site.steps.ts:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 250194250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "I open the \"A/B Testing\" example",
+            "match": {
+              "location": "src/steps/site.steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52589124
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the footer should show \"Powered by Elemental Selenium\" with a valid link",
+            "match": {
+              "location": "src/steps/ab_testing.steps.ts:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45193166
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16511499
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@feature",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_ab_testing",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "nested-frames",
+    "id": "a/b-testing",
     "line": 2,
     "keyword": "Feature",
-    "name": "Nested Frames",
+    "name": "A/B Testing",
     "tags": [
       {
         "name": "@feature",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
         "line": 1
       },
       {
@@ -109,10 +200,10 @@
         "line": 1
       },
       {
-        "name": "@feature_nested_frames",
+        "name": "@feature_ab_testing",
         "line": 1
       }
     ],
-    "uri": "features/34_nested_frames.feature"
+    "uri": "features/01_ab_testing.feature"
   }
 ]
