@@ -12,4 +12,6 @@ Feature: A/B Testing
     When I open the "A/B Testing" example
     Then the footer should show "Powered by Elemental Selenium" with a valid link
 
-
+  Scenario: A/B Testing - asserts text presence
+    Given I am on the A/B Testing page
+    Then I should see the A/B testing description text

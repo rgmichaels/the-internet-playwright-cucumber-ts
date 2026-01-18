@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 273101583
+              "duration": 246534916
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 256521707
+              "duration": 264757958
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 55070541
+              "duration": 54178625
             }
           },
           {
@@ -53,7 +53,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 41204332
+              "duration": 40200042
             }
           },
           {
@@ -66,7 +66,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 3379208
+              "duration": 2572541
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 17269375
+              "duration": 16615832
             }
           }
         ],
@@ -110,7 +110,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 160220250
+              "duration": 156381750
             }
           },
           {
@@ -123,7 +123,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 250194250
+              "duration": 249072791
             }
           },
           {
@@ -136,7 +136,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 52589124
+              "duration": 39921084
             }
           },
           {
@@ -145,11 +145,11 @@
             "line": 13,
             "name": "the footer should show \"Powered by Elemental Selenium\" with a valid link",
             "match": {
-              "location": "src/steps/ab_testing.steps.ts:4"
+              "location": "src/steps/ab_testing.steps.ts:11"
             },
             "result": {
               "status": "passed",
-              "duration": 45193166
+              "duration": 45380333
             }
           },
           {
@@ -157,7 +157,77 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16511499
+              "duration": 17234667
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@feature",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_ab_testing",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "a/b-testing;a/b-testing---asserts-text-presence",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "A/B Testing - asserts text presence",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 161360707
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "I am on the A/B Testing page",
+            "match": {
+              "location": "src/steps/ab_testing.steps.ts:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 251342834
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "I should see the A/B testing description text",
+            "match": {
+              "location": "src/steps/ab_testing.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2589708
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14842957
             }
           }
         ],

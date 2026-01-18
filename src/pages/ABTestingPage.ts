@@ -1,4 +1,4 @@
-import { Page, Locator } from 'playwright';
+import { Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -8,39 +8,37 @@ export class ABTestingPage extends BasePage {
   }
 
   async assertLoaded() {
-    await this.expectH3ToContain('A/B Test');
+    const h3 = this.page.locator('#content h3');
+    await expect(h3).toBeVisible({ timeout: 20_000 });
+
+    const text = (await h3.textContent())?.trim();
+    const allowed = ['A/B Test Control', 'A/B Test Variation 1'];
+
+    expect(allowed, `Unexpected A/B test variant header: "${text}"`).toContain(text);
   }
 
   async exercise() {
-    // Minimal per-page exercise: confirm main content area is visible.
     await expect(this.page.locator('#content')).toBeVisible();
   }
 
-  private footer(): Locator {
-    return this.page.locator('#page-footer');
-  }
+  async assertFooterElementalSelenium(expectedFooterText = 'Powered by Elemental Selenium') {
+    const footer = this.page.locator('#page-footer');
+    await expect(footer).toContainText(expectedFooterText, { timeout: 20_000 });
 
-  private elementalSeleniumLink(): Locator {
-    return this.page.locator('#page-footer a', {
-      hasText: 'Elemental Selenium',
-    });
-  }
-
-  async assertFooterElementalSelenium() {
-    // Assert footer text
-    await expect(this.footer()).toContainText(
-      'Powered by Elemental Selenium',
-      { timeout: 20_000 }
-    );
-
-    // Assert link exists and is visible
-    const link = this.elementalSeleniumLink();
+    const link = footer.locator('a', { hasText: 'Elemental Selenium' });
     await expect(link).toBeVisible({ timeout: 20_000 });
 
-    // Assert link is valid
     const href = await link.getAttribute('href');
     expect(href, 'Footer link should have an href').toBeTruthy();
     expect(href!).toMatch(/^https?:\/\/(www\.)?elementalselenium\.com\/?/i);
   }
-}
 
+  async assertDescriptionTextPresent() {
+    const content = this.page.locator('#content');
+
+    await expect(content).toContainText(
+      'Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page',
+      { timeout: 20_000 }
+    );
+  }
+}
