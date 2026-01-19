@@ -1,41 +1,41 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="4.902" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-19T17:15:21.765Z">
-  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="0.747">
+<testsuite name="Cucumber" time="9.368" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-19T17:50:41.526Z">
+  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="0.999">
     <system-out><![CDATA[Given I am on the home page.................................................passed
 When I open the "Basic Auth" example........................................passed
 Then the "Basic Auth" page should load......................................passed
 And I exercise the "Basic Auth" page........................................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="Basic Auth - Footer shows Elemental Selenium attribution and link" time="0.457">
+  <testcase classname="Basic Auth" name="Basic Auth - Footer shows Elemental Selenium attribution and link" time="0.901">
     <system-out><![CDATA[Given I open the "Basic Auth" page..........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="User is denied access when no credentials are provided" time="0.324">
+  <testcase classname="Basic Auth" name="User is denied access when no credentials are provided" time="0.543">
     <system-out><![CDATA[When I request the basic auth page..........................................passed
 Then access should be denied................................................passed
 And the page should indicate the user is not authorized.....................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="Congratulations message is shown when valid credentials are provided" time="0.491">
+  <testcase classname="Basic Auth" name="Congratulations message is shown when valid credentials are provided" time="1.549">
     <system-out><![CDATA[When I request the basic auth page with valid credentials...................passed
 Then the congratulations message should be displayed........................passed]]></system-out>
   </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="0.667">
+  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="1.662">
     <system-out><![CDATA[Given I am on the home page.................................................passed
 When I open the "Digest Authentication" example.............................passed
 Then the "Digest Authentication" page should load...........................passed
 And I exercise the "Digest Authentication" page.............................passed]]></system-out>
   </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - Footer shows Elemental Selenium attribution and link" time="0.475">
+  <testcase classname="Digest Authentication" name="Digest Authentication - Footer shows Elemental Selenium attribution and link" time="1.213">
     <system-out><![CDATA[Given I open the "Digest Authentication" page...............................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="0.648">
+  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="1.391">
     <system-out><![CDATA[Given I am on the home page.................................................passed
 When I open the "Secure File Download" example..............................passed
 Then the "Secure File Download" page should load............................passed
 And I exercise the "Secure File Download" page..............................passed]]></system-out>
   </testcase>
-  <testcase classname="Secure File Download" name="Secure File Download - Footer shows Elemental Selenium attribution and link" time="0.49">
+  <testcase classname="Secure File Download" name="Secure File Download - Footer shows Elemental Selenium attribution and link" time="0.459">
     <system-out><![CDATA[Given I open the "Secure File Download" page................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>

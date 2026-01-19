@@ -27,7 +27,7 @@ jobs:
 
       - name: Run full suite + generate report
         env:
-          HEADLESS: "false"
+          HEADLESS: "true"
           BROWSER: "chromium"
           BASE_URL: "https://the-internet.herokuapp.com"
           BASIC_AUTH_USER: ${{ secrets.BASIC_AUTH_USER }}
