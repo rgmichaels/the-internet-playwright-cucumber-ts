@@ -1,7 +1,34 @@
-import { When, Then } from '@cucumber/cucumber';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { CustomWorld } from '../support/world';
+import { BasicAuthPage } from '../pages/BasicAuthPage';
 import { expect } from '@playwright/test';
 
 const CONGRATS_MESSAGE = 'Congratulations! You must have the proper credentials.';
+
+// Standard page steps used by the generic per-page feature templates
+Given('I open the Basic Auth page', async function () {
+  const baseURL =
+    this.baseURL ||
+    process.env.BASE_URL ||
+    process.env.PLAYWRIGHT_BASE_URL ||
+    process.env.THE_INTERNET_BASE_URL;
+
+  if (!baseURL) throw new Error('BASE_URL must be set to open the Basic Auth page');
+
+  const url = `${baseURL.replace(/\/+$/, '')}/basic_auth`;
+  this.lastResponse = await this.page.goto(url);
+});
+
+Then('the Basic Auth page should load', async function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  await po.assertLoaded();
+});
+
+Then('I exercise the Basic Auth page', async function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  await po.exercise();
+});
+
 
 function getBaseURL(world: any): string {
   if (world?.baseURL && typeof world.baseURL === 'string') return world.baseURL;

@@ -4,10 +4,10 @@ Feature: Multiple Windows
   Scenario: Multiple Windows - loads, asserts, and exercises behavior
     Given I am on the home page
     When I open the "Multiple Windows" example
-    Then the "Multiple Windows" page should load
-    And I exercise the "Multiple Windows" page
+    Then the Multiple Windows page should load
+    And I exercise the Multiple Windows page
 
   Scenario: Multiple Windows - Footer shows Elemental Selenium attribution and link
-    Given I open the "Multiple Windows" page
+    Given I open the Multiple Windows page
     Then the global footer should be valid
 

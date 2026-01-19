@@ -1,42 +1,448 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="9.368" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-19T17:50:41.526Z">
-  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="0.999">
+<testsuite name="Cucumber" time="115.728" tests="89" skipped="0" failures="0" errors="0" timestamp="2026-01-19T19:52:45.157Z">
+  <testcase classname="A/B Testing" name="A/B Testing - loads, asserts, and exercises behavior" time="0.677">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Basic Auth" example........................................passed
-Then the "Basic Auth" page should load......................................passed
-And I exercise the "Basic Auth" page........................................passed]]></system-out>
+When I open the "A/B Testing" example.......................................passed
+Then the A/B Testing page should load.......................................passed
+And I exercise the A/B Testing page.........................................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="Basic Auth - Footer shows Elemental Selenium attribution and link" time="0.901">
-    <system-out><![CDATA[Given I open the "Basic Auth" page..........................................passed
+  <testcase classname="A/B Testing" name="A/B Testing - asserts text presence" time="0.424">
+    <system-out><![CDATA[Given I am on the A/B Testing page..........................................passed
+Then I should see the A/B testing description text..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="A/B Testing" name="Footer shows Elemental Selenium attribution and link" time="0.544">
+    <system-out><![CDATA[Given I am on the A/B Testing page..........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="User is denied access when no credentials are provided" time="0.543">
+  <testcase classname="Add/Remove Elements" name="Add/Remove Elements - loads, asserts, and exercises behavior" time="0.569">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Add/Remove Elements" example...............................passed
+Then the Add/Remove Elements page should load...............................passed
+And I exercise the Add/Remove Elements page.................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Add/Remove Elements" name="Add/Remove Elements - Footer shows Elemental Selenium attribution and link" time="0.416">
+    <system-out><![CDATA[Given I open the Add/Remove Elements page...................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="0.66">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Basic Auth" example........................................passed
+Then the Basic Auth page should load........................................passed
+And I exercise the Basic Auth page..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Basic Auth" name="Basic Auth - Footer shows Elemental Selenium attribution and link" time="0.448">
+    <system-out><![CDATA[Given I open the Basic Auth page............................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Basic Auth" name="User is denied access when no credentials are provided" time="0.33">
     <system-out><![CDATA[When I request the basic auth page..........................................passed
 Then access should be denied................................................passed
 And the page should indicate the user is not authorized.....................passed]]></system-out>
   </testcase>
-  <testcase classname="Basic Auth" name="Congratulations message is shown when valid credentials are provided" time="1.549">
+  <testcase classname="Basic Auth" name="Congratulations message is shown when valid credentials are provided" time="0.487">
     <system-out><![CDATA[When I request the basic auth page with valid credentials...................passed
 Then the congratulations message should be displayed........................passed]]></system-out>
   </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="1.662">
+  <testcase classname="Broken Images" name="Broken Images - loads, asserts, and exercises behavior" time="0.526">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Digest Authentication" example.............................passed
-Then the "Digest Authentication" page should load...........................passed
-And I exercise the "Digest Authentication" page.............................passed]]></system-out>
+When I open the "Broken Images" example.....................................passed
+Then the Broken Images page should load.....................................passed
+And I exercise the Broken Images page.......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - Footer shows Elemental Selenium attribution and link" time="1.213">
-    <system-out><![CDATA[Given I open the "Digest Authentication" page...............................passed
+  <testcase classname="Broken Images" name="Broken Images - Footer shows Elemental Selenium attribution and link" time="0.52">
+    <system-out><![CDATA[Given I open the Broken Images page.........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="1.391">
+  <testcase classname="Challenging DOM" name="Challenging DOM - loads, asserts, and exercises behavior" time="0.802">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Challenging DOM" example...................................passed
+Then the Challenging DOM page should load...................................passed
+And I exercise the Challenging DOM page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Challenging DOM" name="Challenging DOM - Footer shows Elemental Selenium attribution and link" time="0.45">
+    <system-out><![CDATA[Given I open the Challenging DOM page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Checkboxes" name="Checkboxes - loads, asserts, and exercises behavior" time="0.534">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Checkboxes" example........................................passed
+Then the Checkboxes page should load........................................passed
+And I exercise the Checkboxes page..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Checkboxes" name="Checkboxes - Footer shows Elemental Selenium attribution and link" time="0.426">
+    <system-out><![CDATA[Given I open the Checkboxes page............................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Context Menu" name="Context Menu - loads, asserts, and exercises behavior" time="0.536">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Context Menu" example......................................passed
+Then the Context Menu page should load......................................passed
+And I exercise the Context Menu page........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Context Menu" name="Context Menu - Footer shows Elemental Selenium attribution and link" time="0.412">
+    <system-out><![CDATA[Given I open the Context Menu page..........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="0.608">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Digest Authentication" example.............................passed
+Then the Digest Authentication page should load.............................passed
+And I exercise the Digest Authentication page...............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Digest Authentication" name="Digest Authentication - Footer shows Elemental Selenium attribution and link" time="0.452">
+    <system-out><![CDATA[Given I open the Digest Authentication page.................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Disappearing Elements" name="Disappearing Elements - loads, asserts, and exercises behavior" time="0.499">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Disappearing Elements" example.............................passed
+Then the Disappearing Elements page should load.............................passed
+And I exercise the Disappearing Elements page...............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Disappearing Elements" name="Disappearing Elements - Footer shows Elemental Selenium attribution and link" time="0.512">
+    <system-out><![CDATA[Given I open the Disappearing Elements page.................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Drag and Drop" name="Drag and Drop - loads, asserts, and exercises behavior" time="0.547">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Drag and Drop" example.....................................passed
+Then the Drag and Drop page should load.....................................passed
+And I exercise the Drag and Drop page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Drag and Drop" name="Drag and Drop - Footer shows Elemental Selenium attribution and link" time="0.423">
+    <system-out><![CDATA[Given I open the Drag and Drop page.........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dropdown" name="Dropdown - loads, asserts, and exercises behavior" time="0.506">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dropdown" example..........................................passed
+Then the Dropdown page should load..........................................passed
+And I exercise the Dropdown page............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dropdown" name="Dropdown - Footer shows Elemental Selenium attribution and link" time="0.416">
+    <system-out><![CDATA[Given I open the Dropdown page..............................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Content" name="Dynamic Content - loads, asserts, and exercises behavior" time="0.587">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Content" example...................................passed
+Then the Dynamic Content page should load...................................passed
+And I exercise the Dynamic Content page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Content" name="Dynamic Content - Footer shows Elemental Selenium attribution and link" time="0.422">
+    <system-out><![CDATA[Given I open the Dynamic Content page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Controls" name="Dynamic Controls - loads, asserts, and exercises behavior" time="42.873">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Controls" example..................................passed
+Then the Dynamic Controls page should load..................................passed
+And I exercise the Dynamic Controls page....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Controls" name="Dynamic Controls - Footer shows Elemental Selenium attribution and link" time="0.526">
+    <system-out><![CDATA[Given I open the Dynamic Controls page......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Loading" name="Dynamic Loading - loads, asserts, and exercises behavior" time="12.494">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Dynamic Loading" example...................................passed
+Then the Dynamic Loading page should load...................................passed
+And I exercise the Dynamic Loading page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Dynamic Loading" name="Dynamic Loading - Footer shows Elemental Selenium attribution and link" time="0.464">
+    <system-out><![CDATA[Given I open the Dynamic Loading page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Entry Ad" name="Entry Ad - loads, asserts, and exercises behavior" time="12.487">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Entry Ad" example..........................................passed
+Then the Entry Ad page should load..........................................passed
+And I exercise the Entry Ad page............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Entry Ad" name="Entry Ad - Footer shows Elemental Selenium attribution and link" time="0.419">
+    <system-out><![CDATA[Given I open the Entry Ad page..............................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Exit Intent" name="Exit Intent - loads, asserts, and exercises behavior" time="0.959">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Exit Intent" example.......................................passed
+Then the Exit Intent page should load.......................................passed
+And I exercise the Exit Intent page.........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Exit Intent" name="Exit Intent - Footer shows Elemental Selenium attribution and link" time="0.441">
+    <system-out><![CDATA[Given I open the Exit Intent page...........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Download" name="File Download - loads, asserts, and exercises behavior" time="0.617">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "File Download" example.....................................passed
+Then the File Download page should load.....................................passed
+And I exercise the File Download page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Download" name="File Download - Footer shows Elemental Selenium attribution and link" time="0.433">
+    <system-out><![CDATA[Given I open the File Download page.........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Upload" name="File Upload - loads, asserts, and exercises behavior" time="0.646">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "File Upload" example.......................................passed
+Then the File Upload page should load.......................................passed
+And I exercise the File Upload page.........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="File Upload" name="File Upload - Footer shows Elemental Selenium attribution and link" time="0.417">
+    <system-out><![CDATA[Given I open the File Upload page...........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Floating Menu" name="Floating Menu - loads, asserts, and exercises behavior" time="0.552">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Floating Menu" example.....................................passed
+Then the Floating Menu page should load.....................................passed
+And I exercise the Floating Menu page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Floating Menu" name="Floating Menu - Footer shows Elemental Selenium attribution and link" time="0.429">
+    <system-out><![CDATA[Given I open the Floating Menu page.........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Forgot Password" name="Forgot Password - loads, asserts, and exercises behavior" time="0.837">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Forgot Password" example...................................passed
+Then the Forgot Password page should load...................................passed
+And I exercise the Forgot Password page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Forgot Password" name="Forgot Password - Footer shows Elemental Selenium attribution and link" time="0.426">
+    <system-out><![CDATA[Given I open the Forgot Password page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Form Authentication" name="Form Authentication - loads, asserts, and exercises behavior" time="0.84">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Form Authentication" example...............................passed
+Then the Form Authentication page should load...............................passed
+And I exercise the Form Authentication page.................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Form Authentication" name="Form Authentication - Footer shows Elemental Selenium attribution and link" time="0.661">
+    <system-out><![CDATA[Given I open the Form Authentication page...................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Frames" name="Frames - loads, asserts, and exercises behavior" time="0.919">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Frames" example............................................passed
+Then the Frames page should load............................................passed
+And I exercise the Frames page..............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Frames" name="Frames - Footer shows Elemental Selenium attribution and link" time="0.41">
+    <system-out><![CDATA[Given I open the Frames page................................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Geolocation" name="Geolocation - loads, asserts, and exercises behavior" time="0.622">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Geolocation" example.......................................passed
+Then the Geolocation page should load.......................................passed
+And I exercise the Geolocation page.........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Geolocation" name="Geolocation - Footer shows Elemental Selenium attribution and link" time="0.431">
+    <system-out><![CDATA[Given I open the Geolocation page...........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Horizontal Slider" name="Horizontal Slider - loads, asserts, and exercises behavior" time="0.502">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Horizontal Slider" example.................................passed
+Then the Horizontal Slider page should load.................................passed
+And I exercise the Horizontal Slider page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Horizontal Slider" name="Horizontal Slider - Footer shows Elemental Selenium attribution and link" time="0.45">
+    <system-out><![CDATA[Given I open the Horizontal Slider page.....................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Hovers" name="Hovers - loads, asserts, and exercises behavior" time="0.523">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Hovers" example............................................passed
+Then the Hovers page should load............................................passed
+And I exercise the Hovers page..............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Hovers" name="Hovers - Footer shows Elemental Selenium attribution and link" time="0.413">
+    <system-out><![CDATA[Given I open the Hovers page................................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Infinite Scroll" name="Infinite Scroll - loads, asserts, and exercises behavior" time="1.502">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Infinite Scroll" example...................................passed
+Then the Infinite Scroll page should load...................................passed
+And I exercise the Infinite Scroll page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Infinite Scroll" name="Infinite Scroll - Footer shows Elemental Selenium attribution and link" time="0.435">
+    <system-out><![CDATA[Given I open the Infinite Scroll page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Inputs" name="Inputs - loads, asserts, and exercises behavior" time="0.53">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Inputs" example............................................passed
+Then the Inputs page should load............................................passed
+And I exercise the Inputs page..............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Inputs" name="Inputs - Footer shows Elemental Selenium attribution and link" time="0.423">
+    <system-out><![CDATA[Given I open the Inputs page................................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JQuery UI Menus" name="JQuery UI Menus - loads, asserts, and exercises behavior" time="1.376">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JQuery UI Menus" example...................................passed
+Then the JQuery UI Menus page should load...................................passed
+And I exercise the JQuery UI Menus page.....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JQuery UI Menus" name="JQuery UI Menus - Footer shows Elemental Selenium attribution and link" time="0.491">
+    <system-out><![CDATA[Given I open the JQuery UI Menus page.......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JavaScript Alerts" name="JavaScript Alerts - loads, asserts, and exercises behavior" time="0.545">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JavaScript Alerts" example.................................passed
+Then the JavaScript Alerts page should load.................................passed
+And I exercise the JavaScript Alerts page...................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JavaScript Alerts" name="JavaScript Alerts - Footer shows Elemental Selenium attribution and link" time="0.418">
+    <system-out><![CDATA[Given I open the JavaScript Alerts page.....................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="JavaScript onload event error" name="JavaScript onload event error - loads, asserts, and exercises behavior" time="0.545">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "JavaScript onload event error" example.....................passed
+Then the JavaScript onload event error page should load.....................passed
+And I exercise the JavaScript onload event error page.......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Key Presses" name="Key Presses - loads, asserts, and exercises behavior" time="0.507">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Key Presses" example.......................................passed
+Then the Key Presses page should load.......................................passed
+And I exercise the Key Presses page.........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Key Presses" name="Key Presses - Footer shows Elemental Selenium attribution and link" time="0.417">
+    <system-out><![CDATA[Given I open the Key Presses page...........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Large &amp; Deep DOM" name="Large &amp; Deep DOM - loads, asserts, and exercises behavior" time="0.541">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Large & Deep DOM" example..................................passed
+Then the Large & Deep DOM page should load..................................passed
+And I exercise the Large & Deep DOM page....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Large &amp; Deep DOM" name="Large &amp; Deep DOM - Footer shows Elemental Selenium attribution and link" time="0.441">
+    <system-out><![CDATA[Given I open the Large & Deep DOM page......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Multiple Windows" name="Multiple Windows - loads, asserts, and exercises behavior" time="0.57">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Multiple Windows" example..................................passed
+Then the Multiple Windows page should load..................................passed
+And I exercise the Multiple Windows page....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Multiple Windows" name="Multiple Windows - Footer shows Elemental Selenium attribution and link" time="0.429">
+    <system-out><![CDATA[Given I open the Multiple Windows page......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Nested Frames" name="Nested Frames - loads, asserts, and exercises behavior" time="0.624">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Nested Frames" example.....................................passed
+Then the Nested Frames page should load.....................................passed
+And I exercise the Nested Frames page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Notification Messages" name="Notification Messages - loads, asserts, and exercises behavior" time="0.603">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Notification Messages" example.............................passed
+Then the Notification Messages page should load.............................passed
+And I exercise the Notification Messages page...............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Notification Messages" name="Notification Messages - Footer shows Elemental Selenium attribution and link" time="0.477">
+    <system-out><![CDATA[Given I open the Notification Messages page.................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Redirect Link" name="Redirect Link - loads, asserts, and exercises behavior" time="0.58">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Redirect Link" example.....................................passed
+Then the Redirect Link page should load.....................................passed
+And I exercise the Redirect Link page.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Redirect Link" name="Redirect Link - Footer shows Elemental Selenium attribution and link" time="0.433">
+    <system-out><![CDATA[Given I open the Redirect Link page.........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="0.754">
     <system-out><![CDATA[Given I am on the home page.................................................passed
 When I open the "Secure File Download" example..............................passed
-Then the "Secure File Download" page should load............................passed
-And I exercise the "Secure File Download" page..............................passed]]></system-out>
+Then the Secure File Download page should load..............................passed
+And I exercise the Secure File Download page................................passed]]></system-out>
   </testcase>
   <testcase classname="Secure File Download" name="Secure File Download - Footer shows Elemental Selenium attribution and link" time="0.459">
-    <system-out><![CDATA[Given I open the "Secure File Download" page................................passed
+    <system-out><![CDATA[Given I open the Secure File Download page..................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Shadow DOM" name="Shadow DOM - loads, asserts, and exercises behavior" time="0.48">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Shadow DOM" example........................................passed
+Then the Shadow DOM page should load........................................passed
+And I exercise the Shadow DOM page..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Shadow DOM" name="Shadow DOM - Footer shows Elemental Selenium attribution and link" time="0.424">
+    <system-out><![CDATA[Given I open the Shadow DOM page............................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Shifting Content" name="Shifting Content - loads, asserts, and exercises behavior" time="0.542">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Shifting Content" example..................................passed
+Then the Shifting Content page should load..................................passed
+And I exercise the Shifting Content page....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Shifting Content" name="Shifting Content - Footer shows Elemental Selenium attribution and link" time="0.42">
+    <system-out><![CDATA[Given I open the Shifting Content page......................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Slow Resources" name="Slow Resources - loads, asserts, and exercises behavior" time="0.497">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Slow Resources" example....................................passed
+Then the Slow Resources page should load....................................passed
+And I exercise the Slow Resources page......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Slow Resources" name="Slow Resources - Footer shows Elemental Selenium attribution and link" time="0.415">
+    <system-out><![CDATA[Given I open the Slow Resources page........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Sortable Data Tables" name="Sortable Data Tables - loads, asserts, and exercises behavior" time="0.6">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Sortable Data Tables" example..............................passed
+Then the Sortable Data Tables page should load..............................passed
+And I exercise the Sortable Data Tables page................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Sortable Data Tables" name="Sortable Data Tables - Footer shows Elemental Selenium attribution and link" time="0.419">
+    <system-out><![CDATA[Given I open the Sortable Data Tables page..................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Status Codes" name="Status Codes - loads, asserts, and exercises behavior" time="0.735">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Status Codes" example......................................passed
+Then the Status Codes page should load......................................passed
+And I exercise the Status Codes page........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Status Codes" name="Status Codes - Footer shows Elemental Selenium attribution and link" time="0.442">
+    <system-out><![CDATA[Given I open the Status Codes page..........................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Typos" name="Typos - loads, asserts, and exercises behavior" time="0.488">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "Typos" example.............................................passed
+Then the Typos page should load.............................................passed
+And I exercise the Typos page...............................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Typos" name="Typos - Footer shows Elemental Selenium attribution and link" time="0.422">
+    <system-out><![CDATA[Given I open the Typos page.................................................passed
+Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="WYSIWYG Editor" name="WYSIWYG Editor - loads, asserts, and exercises behavior" time="0.87">
+    <system-out><![CDATA[Given I am on the home page.................................................passed
+When I open the "WYSIWYG Editor" example....................................passed
+Then the WYSIWYG Editor page should load....................................passed
+And I exercise the WYSIWYG Editor page......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="WYSIWYG Editor" name="WYSIWYG Editor - Footer shows Elemental Selenium attribution and link" time="0.569">
+    <system-out><![CDATA[Given I open the WYSIWYG Editor page........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
 </testsuite>

@@ -4,10 +4,10 @@ Feature: JQuery UI Menus
   Scenario: JQuery UI Menus - loads, asserts, and exercises behavior
     Given I am on the home page
     When I open the "JQuery UI Menus" example
-    Then the "JQuery UI Menus" page should load
-    And I exercise the "JQuery UI Menus" page
+    Then the JQuery UI Menus page should load
+    And I exercise the JQuery UI Menus page
 
   Scenario: JQuery UI Menus - Footer shows Elemental Selenium attribution and link
-    Given I open the "JQuery UI Menus" page
+    Given I open the JQuery UI Menus page
     Then the global footer should be valid
 
