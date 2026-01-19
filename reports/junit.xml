@@ -1,33 +1,9 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="10.31" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-01-19T15:55:27.813Z">
-  <testcase classname="Basic Auth" name="Basic Auth - loads, asserts, and exercises behavior" time="2.598">
-    <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Basic Auth" example........................................passed
-Then the "Basic Auth" page should load......................................passed
-And I exercise the "Basic Auth" page........................................passed]]></system-out>
-  </testcase>
-  <testcase classname="Basic Auth" name="Basic Auth - Footer shows Elemental Selenium attribution and link" time="1.3">
-    <system-out><![CDATA[Given I open the "Basic Auth" page..........................................passed
-Then the global footer should be valid......................................passed]]></system-out>
-  </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - loads, asserts, and exercises behavior" time="1.527">
-    <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Digest Authentication" example.............................passed
-Then the "Digest Authentication" page should load...........................passed
-And I exercise the "Digest Authentication" page.............................passed]]></system-out>
-  </testcase>
-  <testcase classname="Digest Authentication" name="Digest Authentication - Footer shows Elemental Selenium attribution and link" time="1.203">
-    <system-out><![CDATA[Given I open the "Digest Authentication" page...............................passed
-Then the global footer should be valid......................................passed]]></system-out>
-  </testcase>
-  <testcase classname="Secure File Download" name="Secure File Download - loads, asserts, and exercises behavior" time="1.916">
-    <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Secure File Download" example..............................passed
-Then the "Secure File Download" page should load............................passed
-And I exercise the "Secure File Download" page..............................passed]]></system-out>
-  </testcase>
-  <testcase classname="Secure File Download" name="Secure File Download - Footer shows Elemental Selenium attribution and link" time="1.16">
-    <system-out><![CDATA[Given I open the "Secure File Download" page................................passed
-Then the global footer should be valid......................................passed]]></system-out>
+<testsuite name="Cucumber" time="6.276" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-01-19T16:28:48.538Z">
+  <testcase classname="Basic Auth" name="Congratulations message is shown when valid credentials are provided" time="5.69">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed&#xA;&#xA;Locator: locator('body')&#xA;Timeout: 5000ms&#xA;[32m- Expected substring  -  1[39m&#xA;[31m+ Received string     + 33[39m&#xA;&#xA;[32m- Congratulatio[7ms[27mns! You must have the proper credentials.[39m&#xA;[31m+[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+   Basic Auth[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+ [7m    [27mCongratulations! You must have the proper credentials.[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+[39m&#xA;[31m+[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m        [49m[39m&#xA;[31m+         Powered by Elemental Selenium[39m&#xA;[31m+ [43m      [49m[39m&#xA;[31m+ [43m    [49m[39m&#xA;[31m+ [43m  [49m[39m&#xA;[31m+[39m&#xA;[31m+[39m&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.have.text&quot; with timeout 5000ms[22m&#xA;[2m  - waiting for locator('body')[22m&#xA;[2m    9 × locator resolved to &lt;body>…&lt;/body>[22m&#xA;[2m      - unexpected value &quot;[22m&#xA;[2m    [22m&#xA;[2m      [22m&#xA;[2m      [22m&#xA;[2m        [22m&#xA;[2m      [22m&#xA;[2m        [22m&#xA;[2m      [22m&#xA;[2m        [22m&#xA;[2m      [22m&#xA;[2m      [22m&#xA;[2m    [22m&#xA;[2m    [22m&#xA;[2m      [22m&#xA;[2m      [22m&#xA;[2m        [22m&#xA;[2m  Basic Auth[22m&#xA;[2m  [22m&#xA;[2m    Congratulations! You must have the proper credentials.[22m&#xA;[2m  [22m&#xA;[2m[22m&#xA;[2m[22m&#xA;[2m      [22m&#xA;[2m    [22m&#xA;[2m    [22m&#xA;[2m      [22m&#xA;[2m        [22m&#xA;[2m        Powered by Elemental Selenium[22m&#xA;[2m      [22m&#xA;[2m    [22m&#xA;[2m  [22m&#xA;[2m[22m&#xA;[2m&quot;[22m&#xA;"><![CDATA[    at Proxy.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/node_modules/playwright/lib/matchers/expect.js:224:24)
+    at CustomWorld.<anonymous> (/Users/robertmichaels/Documents/code/the-internet-playwright-cucumber-ts/src/steps/basicAuth.steps.ts:102:43)]]></failure>
+    <system-out><![CDATA[When I request the basic auth page with valid credentials...................passed
+Then the congratulations message should be displayed........................failed]]></system-out>
   </testcase>
 </testsuite>

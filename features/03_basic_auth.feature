@@ -11,3 +11,13 @@ Feature: Basic Auth
     Given I open the "Basic Auth" page
     Then the global footer should be valid
 
+  Scenario: User is denied access when no credentials are provided
+    When I request the basic auth page
+    Then access should be denied
+    And the page should indicate the user is not authorized
+
+@auth_success
+  Scenario: Congratulations message is shown when valid credentials are provided
+    When I request the basic auth page with valid credentials
+    Then the congratulations message should be displayed
+
