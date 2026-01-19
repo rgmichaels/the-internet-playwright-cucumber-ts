@@ -27,8 +27,11 @@ jobs:
 
       - name: Run full suite + generate report
         env:
-          HEADLESS: "true"
+          HEADLESS: "false"
           BROWSER: "chromium"
+          BASE_URL: "https://the-internet.herokuapp.com"
+          BASIC_AUTH_USER: ${{ secrets.BASIC_AUTH_USER }}
+          BASIC_AUTH_PASS: ${{ secrets.BASIC_AUTH_PASS }}
         run: npm run test:ci
 
       - name: Upload reports artifact
