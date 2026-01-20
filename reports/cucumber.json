@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "broken-images;broken-images---loads,-asserts,-and-exercises-behavior",
+        "id": "redirect-link;redirect-link---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Broken Images - loads, asserts, and exercises behavior",
+        "name": "Redirect Link - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 200770541
+              "duration": 240232374
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 249675959
+              "duration": 272398291
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Broken Images\" example",
+            "name": "I open the \"Redirect Link\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 52247124
+              "duration": 62159667
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Broken Images page should load",
+            "name": "the Redirect Link page should load",
             "match": {
-              "location": "src/steps/brokenImages.steps.ts:11"
+              "location": "src/steps/redirectLink.steps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 12405209
+              "duration": 13606958
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I validate the presence of broken images",
+            "name": "I make sure the page redirects properly",
             "match": {
-              "location": "src/steps/brokenImages.steps.ts:16"
+              "location": "src/steps/redirectLink.steps.ts:17"
             },
             "result": {
               "status": "passed",
-              "duration": 47832957
+              "duration": 68078957
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16294208
+              "duration": 17898208
             }
           }
         ],
@@ -88,7 +88,7 @@
             "line": 1
           },
           {
-            "name": "@feature_broken_images",
+            "name": "@feature_redirect_link",
             "line": 1
           }
         ],
@@ -96,30 +96,30 @@
       },
       {
         "description": "",
-        "id": "broken-images;broken-images---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "redirect-link;redirect-link---footer-shows-elemental-selenium-attribution-and-link",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Broken Images - Footer shows Elemental Selenium attribution and link",
+        "name": "Redirect Link - Footer shows Elemental Selenium attribution and link",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 149065082
+              "duration": 165129832
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 11,
-            "name": "I open the Broken Images page",
+            "name": "I open the Redirect Link page",
             "match": {
-              "location": "src/steps/brokenImages.steps.ts:5"
+              "location": "src/steps/redirectLink.steps.ts:6"
             },
             "result": {
               "status": "passed",
-              "duration": 256250333
+              "duration": 248976417
             }
           },
           {
@@ -132,7 +132,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 6989708
+              "duration": 9795624
             }
           },
           {
@@ -140,7 +140,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14983999
+              "duration": 15875457
             }
           }
         ],
@@ -154,17 +154,96 @@
             "line": 1
           },
           {
-            "name": "@feature_broken_images",
+            "name": "@feature_redirect_link",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "redirect-link;redirect-link---redirector-page-explains-redirect-behavior",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Redirect Link - redirector page explains redirect behavior",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 163796958
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "I open the Redirect Link page",
+            "match": {
+              "location": "src/steps/redirectLink.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 250433375
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "the Redirect Link page should load",
+            "match": {
+              "location": "src/steps/redirectLink.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1801917
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "the redirect explanation text should be displayed",
+            "match": {
+              "location": "src/steps/redirectLink.steps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1869041
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15968583
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@feature",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_redirect_link",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "broken-images",
+    "id": "redirect-link",
     "line": 2,
     "keyword": "Feature",
-    "name": "Broken Images",
+    "name": "Redirect Link",
     "tags": [
       {
         "name": "@feature",
@@ -175,10 +254,10 @@
         "line": 1
       },
       {
-        "name": "@feature_broken_images",
+        "name": "@feature_redirect_link",
         "line": 1
       }
     ],
-    "uri": "features/04_broken_images.feature"
+    "uri": "features/36_redirect_link.feature"
   }
 ]

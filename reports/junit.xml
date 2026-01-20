@@ -1,13 +1,18 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="1.751" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-20T15:13:46.048Z">
-  <testcase classname="Broken Images" name="Broken Images - loads, asserts, and exercises behavior" time="0.581">
+<testsuite name="Cucumber" time="2.29" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-20T20:42:45.314Z">
+  <testcase classname="Redirect Link" name="Redirect Link - loads, asserts, and exercises behavior" time="0.675">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Broken Images" example.....................................passed
-Then the Broken Images page should load.....................................passed
-And I validate the presence of broken images................................passed]]></system-out>
+When I open the "Redirect Link" example.....................................passed
+Then the Redirect Link page should load.....................................passed
+And I make sure the page redirects properly.................................passed]]></system-out>
   </testcase>
-  <testcase classname="Broken Images" name="Broken Images - Footer shows Elemental Selenium attribution and link" time="0.428">
-    <system-out><![CDATA[Given I open the Broken Images page.........................................passed
+  <testcase classname="Redirect Link" name="Redirect Link - Footer shows Elemental Selenium attribution and link" time="0.44">
+    <system-out><![CDATA[Given I open the Redirect Link page.........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Redirect Link" name="Redirect Link - redirector page explains redirect behavior" time="0.434">
+    <system-out><![CDATA[Given I open the Redirect Link page.........................................passed
+Then the Redirect Link page should load.....................................passed
+And the redirect explanation text should be displayed.......................passed]]></system-out>
   </testcase>
 </testsuite>
