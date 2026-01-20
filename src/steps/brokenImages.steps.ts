@@ -13,7 +13,7 @@ Then('the Broken Images page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Broken Images page', async function (this: CustomWorld) {
+Then('I validate the presence of broken images', async function (this: CustomWorld) {
   const po = new BrokenImagesPage(this.page);
   await po.exercise();
 });

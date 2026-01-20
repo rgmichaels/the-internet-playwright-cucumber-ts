@@ -13,7 +13,7 @@ Then('the Add\\/Remove Elements page should load', async function (this: CustomW
   await po.assertLoaded();
 });
 
-Then('I exercise the Add\\/Remove Elements page', async function (this: CustomWorld) {
+Then('I Add and remove elements to verify correct behavior', async function (this: CustomWorld) {
   const po = new AddRemoveElementsPage(this.page);
   await po.exercise();
 });

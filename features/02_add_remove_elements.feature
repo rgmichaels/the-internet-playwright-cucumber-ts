@@ -5,7 +5,7 @@ Feature: Add/Remove Elements
     Given I am on the home page
     When I open the "Add/Remove Elements" example
     Then the Add/Remove Elements page should load
-    And I exercise the Add/Remove Elements page
+    And I Add and remove elements to verify correct behavior
 
   Scenario: Add/Remove Elements - Footer shows Elemental Selenium attribution and link
     Given I open the Add/Remove Elements page

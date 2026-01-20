@@ -14,7 +14,7 @@ Then(/^the A\/B Testing page should load$/, async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then(/^I exercise the A\/B Testing page$/, async function (this: CustomWorld) {
+Then(/^I should see a valid A\/B test variant$/, async function (this: CustomWorld) {
   const po = new ABTestingPage(this.page);
   await po.exercise();
 });

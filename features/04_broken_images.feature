@@ -5,7 +5,7 @@ Feature: Broken Images
     Given I am on the home page
     When I open the "Broken Images" example
     Then the Broken Images page should load
-    And I exercise the Broken Images page
+    And I validate the presence of broken images
 
   Scenario: Broken Images - Footer shows Elemental Selenium attribution and link
     Given I open the Broken Images page
