@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "redirect-link;redirect-link---loads,-asserts,-and-exercises-behavior",
+        "id": "status-codes;status-codes-page-explains-each-http-status-code",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Redirect Link - loads, asserts, and exercises behavior",
+        "name": "Status Codes page explains each HTTP status code",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 240232374
+              "duration": 247858583
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 272398291
+              "duration": 261639125
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Redirect Link\" example",
+            "name": "I open the \"Status Codes\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 62159667
+              "duration": 54554833
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Redirect Link page should load",
+            "name": "the Status Codes page should load",
             "match": {
-              "location": "src/steps/redirectLink.steps.ts:12"
+              "location": "src/steps/statusCodes.steps.ts:11"
             },
             "result": {
               "status": "passed",
-              "duration": 13606958
+              "duration": 13633916
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I make sure the page redirects properly",
+            "name": "each status code link should show the correct explanation",
             "match": {
-              "location": "src/steps/redirectLink.steps.ts:17"
+              "location": "src/steps/statusCodes.steps.ts:21"
             },
             "result": {
               "status": "passed",
-              "duration": 68078957
+              "duration": 415096542
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 17898208
+              "duration": 17565790
             }
           }
         ],
@@ -88,7 +88,7 @@
             "line": 1
           },
           {
-            "name": "@feature_redirect_link",
+            "name": "@feature_status_codes",
             "line": 1
           }
         ],
@@ -96,30 +96,30 @@
       },
       {
         "description": "",
-        "id": "redirect-link;redirect-link---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "status-codes;status-codes-page-shows-elemental-selenium-attribution-in-the-footer",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Redirect Link - Footer shows Elemental Selenium attribution and link",
+        "name": "Status Codes page shows Elemental Selenium attribution in the footer",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 165129832
+              "duration": 161537000
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 11,
-            "name": "I open the Redirect Link page",
+            "name": "I open the Status Codes page",
             "match": {
-              "location": "src/steps/redirectLink.steps.ts:6"
+              "location": "src/steps/statusCodes.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 248976417
+              "duration": 283103000
             }
           },
           {
@@ -132,7 +132,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 9795624
+              "duration": 6531167
             }
           },
           {
@@ -140,7 +140,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15875457
+              "duration": 15539291
             }
           }
         ],
@@ -154,96 +154,17 @@
             "line": 1
           },
           {
-            "name": "@feature_redirect_link",
-            "line": 1
-          }
-        ],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "redirect-link;redirect-link---redirector-page-explains-redirect-behavior",
-        "keyword": "Scenario",
-        "line": 14,
-        "name": "Redirect Link - redirector page explains redirect behavior",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 163796958
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 15,
-            "name": "I open the Redirect Link page",
-            "match": {
-              "location": "src/steps/redirectLink.steps.ts:6"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 250433375
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 16,
-            "name": "the Redirect Link page should load",
-            "match": {
-              "location": "src/steps/redirectLink.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 1801917
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 17,
-            "name": "the redirect explanation text should be displayed",
-            "match": {
-              "location": "src/steps/redirectLink.steps.ts:22"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 1869041
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 15968583
-            }
-          }
-        ],
-        "tags": [
-          {
-            "name": "@feature",
-            "line": 1
-          },
-          {
-            "name": "@regression",
-            "line": 1
-          },
-          {
-            "name": "@feature_redirect_link",
+            "name": "@feature_status_codes",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "redirect-link",
+    "id": "status-codes",
     "line": 2,
     "keyword": "Feature",
-    "name": "Redirect Link",
+    "name": "Status Codes",
     "tags": [
       {
         "name": "@feature",
@@ -254,10 +175,10 @@
         "line": 1
       },
       {
-        "name": "@feature_redirect_link",
+        "name": "@feature_status_codes",
         "line": 1
       }
     ],
-    "uri": "features/36_redirect_link.feature"
+    "uri": "features/42_status_codes.feature"
   }
 ]

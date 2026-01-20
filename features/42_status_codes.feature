@@ -1,13 +1,12 @@
 @feature @regression @feature_status_codes
 Feature: Status Codes
 
-  Scenario: Status Codes - loads, asserts, and exercises behavior
+  Scenario: Status Codes page explains each HTTP status code
     Given I am on the home page
     When I open the "Status Codes" example
     Then the Status Codes page should load
-    And I exercise the Status Codes page
+    And each status code link should show the correct explanation
 
-  Scenario: Status Codes - Footer shows Elemental Selenium attribution and link
+  Scenario: Status Codes page shows Elemental Selenium attribution in the footer
     Given I open the Status Codes page
     Then the global footer should be valid
-
