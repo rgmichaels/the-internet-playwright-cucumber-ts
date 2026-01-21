@@ -12,5 +12,5 @@ Feature: A/B Testing
     Then I should see the A/B testing description text
 
   Scenario: Footer shows Elemental Selenium attribution and link
-  Given I am on the A/B Testing page
-  Then the global footer should be valid
+    Given I am on the A/B Testing page
+    Then the global footer should be valid

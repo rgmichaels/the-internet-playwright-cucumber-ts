@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.64" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:21:09.191Z">
-  <testcase classname="Geolocation" name="Geolocation - loads, asserts, and exercises behavior" time="1.046">
+<testsuite name="Cucumber" time="2.594" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:54:45.171Z">
+  <testcase classname="Challenging DOM" name="Challenging DOM - loads, asserts, and exercises behavior" time="0.93">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Geolocation" example.......................................passed
-Then the Geolocation page should load.......................................passed
-And I exercise the Geolocation page.........................................passed]]></system-out>
+When I open the "Challenging DOM" example...................................passed
+Then the Challenging DOM page should load...................................passed
+And I exercise the Challenging DOM page.....................................passed]]></system-out>
   </testcase>
-  <testcase classname="Geolocation" name="Geolocation page shows the proper header and text" time="0.43">
-    <system-out><![CDATA[Given I open the Geolocation page...........................................passed
-Then the Geolocation page should show the proper header and text............passed]]></system-out>
+  <testcase classname="Challenging DOM" name="Challenging DOM - Verifies header and text on page" time="0.446">
+    <system-out><![CDATA[Given I open the Challenging DOM page.......................................passed
+Then the Challenging DOM page should show the proper header and text........passed]]></system-out>
   </testcase>
-  <testcase classname="Geolocation" name="Geolocation - Footer shows Elemental Selenium attribution and link" time="0.426">
-    <system-out><![CDATA[Given I open the Geolocation page...........................................passed
+  <testcase classname="Challenging DOM" name="Challenging DOM - Footer shows Elemental Selenium attribution and link" time="0.449">
+    <system-out><![CDATA[Given I open the Challenging DOM page.......................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
 </testsuite>

@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "geolocation;geolocation---loads,-asserts,-and-exercises-behavior",
+        "id": "challenging-dom;challenging-dom---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Geolocation - loads, asserts, and exercises behavior",
+        "name": "Challenging DOM - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 505401167
+              "duration": 272792291
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 308111791
+              "duration": 273633291
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Geolocation\" example",
+            "name": "I open the \"Challenging DOM\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 66844458
+              "duration": 79929292
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Geolocation page should load",
+            "name": "the Challenging DOM page should load",
             "match": {
-              "location": "src/steps/geolocation.steps.ts:12"
+              "location": "src/steps/challengingDom.steps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 16705249
+              "duration": 53974584
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the Geolocation page",
+            "name": "I exercise the Challenging DOM page",
             "match": {
-              "location": "src/steps/geolocation.steps.ts:17"
+              "location": "src/steps/challengingDom.steps.ts:26"
             },
             "result": {
               "status": "passed",
-              "duration": 124851374
+              "duration": 231661125
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22464124
+              "duration": 17377500
             }
           }
         ],
@@ -88,11 +88,7 @@
             "line": 1
           },
           {
-            "name": "@feature_geolocation",
-            "line": 1
-          },
-          {
-            "name": "@geo",
+            "name": "@feature_challenging_dom",
             "line": 1
           }
         ],
@@ -100,43 +96,43 @@
       },
       {
         "description": "",
-        "id": "geolocation;geolocation-page-shows-the-proper-header-and-text",
+        "id": "challenging-dom;challenging-dom---verifies-header-and-text-on-page",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Geolocation page shows the proper header and text",
+        "name": "Challenging DOM - Verifies header and text on page",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 153732999
+              "duration": 150082249
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 11,
-            "name": "I open the Geolocation page",
+            "name": "I open the Challenging DOM page",
             "match": {
-              "location": "src/steps/geolocation.steps.ts:5"
+              "location": "src/steps/challengingDom.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 256476584
+              "duration": 276282082
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 12,
-            "name": "the Geolocation page should show the proper header and text",
+            "name": "the Challenging DOM page should show the proper header and text",
             "match": {
-              "location": "src/steps/geolocation.steps.ts:22"
+              "location": "src/steps/challengingDom.steps.ts:18"
             },
             "result": {
               "status": "passed",
-              "duration": 3520167
+              "duration": 4268750
             }
           },
           {
@@ -144,7 +140,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14965916
+              "duration": 14942500
             }
           }
         ],
@@ -158,11 +154,7 @@
             "line": 1
           },
           {
-            "name": "@feature_geolocation",
-            "line": 1
-          },
-          {
-            "name": "@geo",
+            "name": "@feature_challenging_dom",
             "line": 1
           }
         ],
@@ -170,30 +162,30 @@
       },
       {
         "description": "",
-        "id": "geolocation;geolocation---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "challenging-dom;challenging-dom---footer-shows-elemental-selenium-attribution-and-link",
         "keyword": "Scenario",
         "line": 14,
-        "name": "Geolocation - Footer shows Elemental Selenium attribution and link",
+        "name": "Challenging DOM - Footer shows Elemental Selenium attribution and link",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 157477375
+              "duration": 155312207
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 15,
-            "name": "I open the Geolocation page",
+            "name": "I open the Challenging DOM page",
             "match": {
-              "location": "src/steps/geolocation.steps.ts:5"
+              "location": "src/steps/challengingDom.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 247342415
+              "duration": 271587332
             }
           },
           {
@@ -206,7 +198,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 6069166
+              "duration": 5640041
             }
           },
           {
@@ -214,7 +206,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15019833
+              "duration": 15494541
             }
           }
         ],
@@ -228,21 +220,17 @@
             "line": 1
           },
           {
-            "name": "@feature_geolocation",
-            "line": 1
-          },
-          {
-            "name": "@geo",
+            "name": "@feature_challenging_dom",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "geolocation",
+    "id": "challenging-dom",
     "line": 2,
     "keyword": "Feature",
-    "name": "Geolocation",
+    "name": "Challenging DOM",
     "tags": [
       {
         "name": "@feature",
@@ -253,14 +241,10 @@
         "line": 1
       },
       {
-        "name": "@feature_geolocation",
-        "line": 1
-      },
-      {
-        "name": "@geo",
+        "name": "@feature_challenging_dom",
         "line": 1
       }
     ],
-    "uri": "features/23_geolocation.feature"
+    "uri": "features/05_challenging_dom.feature"
   }
 ]
