@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.989" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:02:43.958Z">
-  <testcase classname="Status Codes" name="Status Codes page explains each HTTP status code" time="1.362">
+<testsuite name="Cucumber" time="2.64" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:21:09.191Z">
+  <testcase classname="Geolocation" name="Geolocation - loads, asserts, and exercises behavior" time="1.046">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Status Codes" example......................................passed
-Then the Status Codes page should load......................................passed
-And each status code link should show the correct explanation...............passed]]></system-out>
+When I open the "Geolocation" example.......................................passed
+Then the Geolocation page should load.......................................passed
+And I exercise the Geolocation page.........................................passed]]></system-out>
   </testcase>
-  <testcase classname="Status Codes" name="Status Codes page show paragraph of text" time="0.423">
-    <system-out><![CDATA[Given I open the Status Codes page..........................................passed
-Then the Status Codes page should show a paragraph of text..................passed]]></system-out>
+  <testcase classname="Geolocation" name="Geolocation page shows the proper header and text" time="0.43">
+    <system-out><![CDATA[Given I open the Geolocation page...........................................passed
+Then the Geolocation page should show the proper header and text............passed]]></system-out>
   </testcase>
-  <testcase classname="Status Codes" name="Status Codes page shows Elemental Selenium attribution in the footer" time="0.438">
-    <system-out><![CDATA[Given I open the Status Codes page..........................................passed
+  <testcase classname="Geolocation" name="Geolocation - Footer shows Elemental Selenium attribution and link" time="0.426">
+    <system-out><![CDATA[Given I open the Geolocation page...........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
 </testsuite>

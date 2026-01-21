@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "status-codes;status-codes-page-explains-each-http-status-code",
+        "id": "geolocation;geolocation---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Status Codes page explains each HTTP status code",
+        "name": "Geolocation - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 528841584
+              "duration": 505401167
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 315096041
+              "duration": 308111791
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Status Codes\" example",
+            "name": "I open the \"Geolocation\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 67338207
+              "duration": 66844458
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Status Codes page should load",
+            "name": "the Geolocation page should load",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:12"
+              "location": "src/steps/geolocation.steps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 16994458
+              "duration": 16705249
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "each status code link should show the correct explanation",
+            "name": "I exercise the Geolocation page",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:22"
+              "location": "src/steps/geolocation.steps.ts:17"
             },
             "result": {
               "status": "passed",
-              "duration": 412461499
+              "duration": 124851374
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20556124
+              "duration": 22464124
             }
           }
         ],
@@ -88,7 +88,11 @@
             "line": 1
           },
           {
-            "name": "@feature_status_codes",
+            "name": "@feature_geolocation",
+            "line": 1
+          },
+          {
+            "name": "@geo",
             "line": 1
           }
         ],
@@ -96,43 +100,43 @@
       },
       {
         "description": "",
-        "id": "status-codes;status-codes-page-show-paragraph-of-text",
+        "id": "geolocation;geolocation-page-shows-the-proper-header-and-text",
         "keyword": "Scenario",
-        "line": 11,
-        "name": "Status Codes page show paragraph of text",
+        "line": 10,
+        "name": "Geolocation page shows the proper header and text",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 166471208
+              "duration": 153732999
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
+            "line": 11,
+            "name": "I open the Geolocation page",
+            "match": {
+              "location": "src/steps/geolocation.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 256476584
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
             "line": 12,
-            "name": "I open the Status Codes page",
+            "name": "the Geolocation page should show the proper header and text",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:6"
+              "location": "src/steps/geolocation.steps.ts:22"
             },
             "result": {
               "status": "passed",
-              "duration": 237599041
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 13,
-            "name": "the Status Codes page should show a paragraph of text",
-            "match": {
-              "location": "src/steps/statusCodes.steps.ts:29"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 4113084
+              "duration": 3520167
             }
           },
           {
@@ -140,7 +144,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14687416
+              "duration": 14965916
             }
           }
         ],
@@ -154,7 +158,11 @@
             "line": 1
           },
           {
-            "name": "@feature_status_codes",
+            "name": "@feature_geolocation",
+            "line": 1
+          },
+          {
+            "name": "@geo",
             "line": 1
           }
         ],
@@ -162,43 +170,43 @@
       },
       {
         "description": "",
-        "id": "status-codes;status-codes-page-shows-elemental-selenium-attribution-in-the-footer",
+        "id": "geolocation;geolocation---footer-shows-elemental-selenium-attribution-and-link",
         "keyword": "Scenario",
-        "line": 15,
-        "name": "Status Codes page shows Elemental Selenium attribution in the footer",
+        "line": 14,
+        "name": "Geolocation - Footer shows Elemental Selenium attribution and link",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 165564249
+              "duration": 157477375
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 16,
-            "name": "I open the Status Codes page",
+            "line": 15,
+            "name": "I open the Geolocation page",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:6"
+              "location": "src/steps/geolocation.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 250272999
+              "duration": 247342415
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 17,
+            "line": 16,
             "name": "the global footer should be valid",
             "match": {
               "location": "src/steps/site.steps.ts:18"
             },
             "result": {
               "status": "passed",
-              "duration": 6791666
+              "duration": 6069166
             }
           },
           {
@@ -206,7 +214,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14931833
+              "duration": 15019833
             }
           }
         ],
@@ -220,17 +228,21 @@
             "line": 1
           },
           {
-            "name": "@feature_status_codes",
+            "name": "@feature_geolocation",
+            "line": 1
+          },
+          {
+            "name": "@geo",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "status-codes",
+    "id": "geolocation",
     "line": 2,
     "keyword": "Feature",
-    "name": "Status Codes",
+    "name": "Geolocation",
     "tags": [
       {
         "name": "@feature",
@@ -241,10 +253,14 @@
         "line": 1
       },
       {
-        "name": "@feature_status_codes",
+        "name": "@feature_geolocation",
+        "line": 1
+      },
+      {
+        "name": "@geo",
         "line": 1
       }
     ],
-    "uri": "features/42_status_codes.feature"
+    "uri": "features/23_geolocation.feature"
   }
 ]

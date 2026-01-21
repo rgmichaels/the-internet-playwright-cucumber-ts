@@ -7,7 +7,6 @@ Feature: Status Codes
     Then the Status Codes page should load
     And each status code link should show the correct explanation
 
-
   Scenario: Status Codes page show paragraph of text
     Given I open the Status Codes page
     Then the Status Codes page should show a paragraph of text

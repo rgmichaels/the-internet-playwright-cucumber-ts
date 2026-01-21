@@ -7,6 +7,10 @@ Feature: Geolocation
     Then the Geolocation page should load
     And I exercise the Geolocation page
 
+  Scenario: Geolocation page shows the proper header and text
+    Given I open the Geolocation page
+    Then the Geolocation page should show the proper header and text
+    
   Scenario: Geolocation - Footer shows Elemental Selenium attribution and link
     Given I open the Geolocation page
     Then the global footer should be valid
