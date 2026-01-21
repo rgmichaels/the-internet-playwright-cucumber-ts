@@ -17,3 +17,8 @@ Then('I exercise the Context Menu page', async function (this: CustomWorld) {
   const po = new ContextMenuPage(this.page);
   await po.exercise();
 });
+
+Then('the page should display header and content', async function (this: CustomWorld) {
+  const po = new ContextMenuPage(this.page);
+  await po.assertLoaded();
+});

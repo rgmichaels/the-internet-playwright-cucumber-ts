@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "challenging-dom;challenging-dom---loads,-asserts,-and-exercises-behavior",
+        "id": "context-menu;context-menu---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Challenging DOM - loads, asserts, and exercises behavior",
+        "name": "Context Menu - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 272792291
+              "duration": 241782083
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 273633291
+              "duration": 274649834
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Challenging DOM\" example",
+            "name": "I open the \"Context Menu\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 79929292
+              "duration": 47340042
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Challenging DOM page should load",
+            "name": "the Context Menu page should load",
             "match": {
-              "location": "src/steps/challengingDom.steps.ts:12"
+              "location": "src/steps/contextMenu.steps.ts:11"
             },
             "result": {
               "status": "passed",
-              "duration": 53974584
+              "duration": 46512334
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the Challenging DOM page",
+            "name": "I exercise the Context Menu page",
             "match": {
-              "location": "src/steps/challengingDom.steps.ts:26"
+              "location": "src/steps/contextMenu.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 231661125
+              "duration": 26468125
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 17377500
+              "duration": 16466374
             }
           }
         ],
@@ -88,7 +88,7 @@
             "line": 1
           },
           {
-            "name": "@feature_challenging_dom",
+            "name": "@feature_context_menu",
             "line": 1
           }
         ],
@@ -96,43 +96,43 @@
       },
       {
         "description": "",
-        "id": "challenging-dom;challenging-dom---verifies-header-and-text-on-page",
+        "id": "context-menu;context-menu---page-text-appears-properly",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Challenging DOM - Verifies header and text on page",
+        "name": "Context Menu - Page text appears properly",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 150082249
+              "duration": 167981541
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 11,
-            "name": "I open the Challenging DOM page",
+            "name": "I open the Context Menu page",
             "match": {
-              "location": "src/steps/challengingDom.steps.ts:5"
+              "location": "src/steps/contextMenu.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 276282082
+              "duration": 264568666
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 12,
-            "name": "the Challenging DOM page should show the proper header and text",
+            "name": "the page should display header and content",
             "match": {
-              "location": "src/steps/challengingDom.steps.ts:18"
+              "location": "src/steps/contextMenu.steps.ts:21"
             },
             "result": {
               "status": "passed",
-              "duration": 4268750
+              "duration": 6491999
             }
           },
           {
@@ -140,7 +140,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14942500
+              "duration": 29383291
             }
           }
         ],
@@ -154,7 +154,7 @@
             "line": 1
           },
           {
-            "name": "@feature_challenging_dom",
+            "name": "@feature_context_menu",
             "line": 1
           }
         ],
@@ -162,30 +162,30 @@
       },
       {
         "description": "",
-        "id": "challenging-dom;challenging-dom---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "context-menu;context-menu---footer-shows-elemental-selenium-attribution-and-link",
         "keyword": "Scenario",
         "line": 14,
-        "name": "Challenging DOM - Footer shows Elemental Selenium attribution and link",
+        "name": "Context Menu - Footer shows Elemental Selenium attribution and link",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 155312207
+              "duration": 179137500
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 15,
-            "name": "I open the Challenging DOM page",
+            "name": "I open the Context Menu page",
             "match": {
-              "location": "src/steps/challengingDom.steps.ts:5"
+              "location": "src/steps/contextMenu.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 271587332
+              "duration": 246248749
             }
           },
           {
@@ -198,7 +198,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 5640041
+              "duration": 5603040
             }
           },
           {
@@ -206,7 +206,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15494541
+              "duration": 14549790
             }
           }
         ],
@@ -220,17 +220,17 @@
             "line": 1
           },
           {
-            "name": "@feature_challenging_dom",
+            "name": "@feature_context_menu",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "challenging-dom",
+    "id": "context-menu",
     "line": 2,
     "keyword": "Feature",
-    "name": "Challenging DOM",
+    "name": "Context Menu",
     "tags": [
       {
         "name": "@feature",
@@ -241,10 +241,10 @@
         "line": 1
       },
       {
-        "name": "@feature_challenging_dom",
+        "name": "@feature_context_menu",
         "line": 1
       }
     ],
-    "uri": "features/05_challenging_dom.feature"
+    "uri": "features/07_context_menu.feature"
   }
 ]

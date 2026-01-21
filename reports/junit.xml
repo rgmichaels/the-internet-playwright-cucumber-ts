@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.594" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:54:45.171Z">
-  <testcase classname="Challenging DOM" name="Challenging DOM - loads, asserts, and exercises behavior" time="0.93">
+<testsuite name="Cucumber" time="2.277" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T19:08:57.854Z">
+  <testcase classname="Context Menu" name="Context Menu - loads, asserts, and exercises behavior" time="0.654">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Challenging DOM" example...................................passed
-Then the Challenging DOM page should load...................................passed
-And I exercise the Challenging DOM page.....................................passed]]></system-out>
+When I open the "Context Menu" example......................................passed
+Then the Context Menu page should load......................................passed
+And I exercise the Context Menu page........................................passed]]></system-out>
   </testcase>
-  <testcase classname="Challenging DOM" name="Challenging DOM - Verifies header and text on page" time="0.446">
-    <system-out><![CDATA[Given I open the Challenging DOM page.......................................passed
-Then the Challenging DOM page should show the proper header and text........passed]]></system-out>
+  <testcase classname="Context Menu" name="Context Menu - Page text appears properly" time="0.469">
+    <system-out><![CDATA[Given I open the Context Menu page..........................................passed
+Then the page should display header and content.............................passed]]></system-out>
   </testcase>
-  <testcase classname="Challenging DOM" name="Challenging DOM - Footer shows Elemental Selenium attribution and link" time="0.449">
-    <system-out><![CDATA[Given I open the Challenging DOM page.......................................passed
+  <testcase classname="Context Menu" name="Context Menu - Footer shows Elemental Selenium attribution and link" time="0.446">
+    <system-out><![CDATA[Given I open the Context Menu page..........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>
 </testsuite>
