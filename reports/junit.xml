@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.233" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-20T21:38:38.841Z">
-  <testcase classname="Status Codes" name="Status Codes page explains each HTTP status code" time="1.012">
+<testsuite name="Cucumber" time="2.989" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-21T18:02:43.958Z">
+  <testcase classname="Status Codes" name="Status Codes page explains each HTTP status code" time="1.362">
     <system-out><![CDATA[Given I am on the home page.................................................passed
 When I open the "Status Codes" example......................................passed
 Then the Status Codes page should load......................................passed
 And each status code link should show the correct explanation...............passed]]></system-out>
   </testcase>
-  <testcase classname="Status Codes" name="Status Codes page shows Elemental Selenium attribution in the footer" time="0.467">
+  <testcase classname="Status Codes" name="Status Codes page show paragraph of text" time="0.423">
+    <system-out><![CDATA[Given I open the Status Codes page..........................................passed
+Then the Status Codes page should show a paragraph of text..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Status Codes" name="Status Codes page shows Elemental Selenium attribution in the footer" time="0.438">
     <system-out><![CDATA[Given I open the Status Codes page..........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
   </testcase>

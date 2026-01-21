@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 247858583
+              "duration": 528841584
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 261639125
+              "duration": 315096041
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 54554833
+              "duration": 67338207
             }
           },
           {
@@ -49,11 +49,11 @@
             "line": 7,
             "name": "the Status Codes page should load",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:11"
+              "location": "src/steps/statusCodes.steps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 13633916
+              "duration": 16994458
             }
           },
           {
@@ -62,11 +62,11 @@
             "line": 8,
             "name": "each status code link should show the correct explanation",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:21"
+              "location": "src/steps/statusCodes.steps.ts:22"
             },
             "result": {
               "status": "passed",
-              "duration": 415096542
+              "duration": 412461499
             }
           },
           {
@@ -74,7 +74,73 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 17565790
+              "duration": 20556124
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@feature",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_status_codes",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "status-codes;status-codes-page-show-paragraph-of-text",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Status Codes page show paragraph of text",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166471208
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "I open the Status Codes page",
+            "match": {
+              "location": "src/steps/statusCodes.steps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 237599041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the Status Codes page should show a paragraph of text",
+            "match": {
+              "location": "src/steps/statusCodes.steps.ts:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4113084
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14687416
             }
           }
         ],
@@ -98,7 +164,7 @@
         "description": "",
         "id": "status-codes;status-codes-page-shows-elemental-selenium-attribution-in-the-footer",
         "keyword": "Scenario",
-        "line": 10,
+        "line": 15,
         "name": "Status Codes page shows Elemental Selenium attribution in the footer",
         "steps": [
           {
@@ -106,33 +172,33 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 161537000
+              "duration": 165564249
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 11,
+            "line": 16,
             "name": "I open the Status Codes page",
             "match": {
-              "location": "src/steps/statusCodes.steps.ts:5"
+              "location": "src/steps/statusCodes.steps.ts:6"
             },
             "result": {
               "status": "passed",
-              "duration": 283103000
+              "duration": 250272999
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 12,
+            "line": 17,
             "name": "the global footer should be valid",
             "match": {
               "location": "src/steps/site.steps.ts:18"
             },
             "result": {
               "status": "passed",
-              "duration": 6531167
+              "duration": 6791666
             }
           },
           {
@@ -140,7 +206,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15539291
+              "duration": 14931833
             }
           }
         ],
