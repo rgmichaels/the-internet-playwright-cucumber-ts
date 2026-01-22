@@ -7,14 +7,7 @@ const CONGRATS_MESSAGE = 'Congratulations! You must have the proper credentials.
 
 // Standard page steps used by the generic per-page feature templates
 Given('I open the Basic Auth page', async function () {
-  const baseURL =
-    this.baseURL ||
-    process.env.BASE_URL ||
-    process.env.PLAYWRIGHT_BASE_URL ||
-    process.env.THE_INTERNET_BASE_URL;
-
-  if (!baseURL) throw new Error('BASE_URL must be set to open the Basic Auth page');
-
+  const baseURL = getBaseURL(this);
   const url = `${baseURL.replace(/\/+$/, '')}/basic_auth`;
   this.lastResponse = await this.page.goto(url);
 });
@@ -31,7 +24,9 @@ Then('I exercise the Basic Auth page', async function (this: CustomWorld) {
 
 
 function getBaseURL(world: any): string {
-  if (world?.baseURL && typeof world.baseURL === 'string') return world.baseURL;
+  // Prefer world-scoped base URL (set via cucumber worldParameters or hooks).
+  if (world?.baseUrl && typeof world.baseUrl === 'string') return world.baseUrl;
+  if (world?.baseURL && typeof world.baseURL === 'string') return world.baseURL; // back-compat alias
 
   const envBase =
     process.env.BASE_URL ||
@@ -48,7 +43,7 @@ function getBaseURL(world: any): string {
   throw new Error(
     [
       'Unable to determine baseURL for Basic Auth navigation.',
-      'Set one of: BASE_URL, PLAYWRIGHT_BASE_URL, THE_INTERNET_BASE_URL, or ensure world.baseURL is set in hooks.',
+      'Set one of: BASE_URL, PLAYWRIGHT_BASE_URL, THE_INTERNET_BASE_URL, or ensure world.baseUrl is set (worldParameters/hook).',
       'Example:',
       '  BASE_URL=https://the-internet.herokuapp.com npx cucumber-js --tags "@auth_admin"',
     ].join('\n')

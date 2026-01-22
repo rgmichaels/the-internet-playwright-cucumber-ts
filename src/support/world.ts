@@ -12,8 +12,20 @@ export class CustomWorld extends World {
 
   constructor(options: IWorldOptions) {
     super(options);
-    const params = (options.parameters || {}) as WorldParams;
-    this.baseUrl = params.baseUrl;
+
+    // Single source of truth for base URL.
+    // Prefer (in order): worldParameters.baseUrl, env vars, then default demo site.
+    const params = (options.parameters || {}) as Partial<WorldParams>;
+    const envBase =
+      process.env.BASE_URL ||
+      process.env.PLAYWRIGHT_BASE_URL ||
+      process.env.THE_INTERNET_BASE_URL ||
+      '';
+
+    this.baseUrl = (params.baseUrl || envBase || 'https://the-internet.herokuapp.com').replace(/\/+$/, '');
+
+    // Back-compat alias: some steps historically looked for baseURL (capital URL).
+    (this as any).baseURL = this.baseUrl;
   }
 
   async launch(opts?: { authAdmin?: boolean; geo?: boolean }) {
@@ -40,9 +52,11 @@ export class CustomWorld extends World {
     };
 
     if (opts?.authAdmin) {
+      const username = process.env.BASIC_AUTH_USER || 'admin';
+      const password = process.env.BASIC_AUTH_PASS || 'admin';
       contextOptions.httpCredentials = {
-        username: 'admin',
-        password: 'admin',
+        username,
+        password,
       };
     }
 
