@@ -11,3 +11,7 @@ Feature: Inputs
     Given I open the Inputs page
     Then the global footer should be valid
 
+  Scenario: Inputs page displays text and numeric input
+    Given I open the Inputs page
+    Then the Inputs page should display required text
+    And the Inputs page should show a numeric input field
