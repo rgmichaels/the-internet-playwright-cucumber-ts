@@ -1,18 +1,13 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="2.203" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-01-26T18:16:19.473Z">
-  <testcase classname="Inputs" name="Inputs - loads, asserts, and exercises behavior" time="0.625">
+<testsuite name="Cucumber" time="2.188" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-27T17:45:56.209Z">
+  <testcase classname="Floating Menu" name="Floating Menu - loads, asserts, and exercises behavior" time="1.015">
     <system-out><![CDATA[Given I am on the home page.................................................passed
-When I open the "Inputs" example............................................passed
-Then the Inputs page should load............................................passed
-And I exercise the Inputs page..............................................passed]]></system-out>
+When I open the "Floating Menu" example.....................................passed
+Then the Floating Menu page should load.....................................passed
+And I exercise the Floating Menu page.......................................passed]]></system-out>
   </testcase>
-  <testcase classname="Inputs" name="Inputs - Footer shows Elemental Selenium attribution and link" time="0.422">
-    <system-out><![CDATA[Given I open the Inputs page................................................passed
+  <testcase classname="Floating Menu" name="Floating Menu - Footer shows Elemental Selenium attribution and link" time="0.43">
+    <system-out><![CDATA[Given I open the Floating Menu page.........................................passed
 Then the global footer should be valid......................................passed]]></system-out>
-  </testcase>
-  <testcase classname="Inputs" name="Inputs page displays text and numeric input" time="0.431">
-    <system-out><![CDATA[Given I open the Inputs page................................................passed
-Then the Inputs page should display required text...........................passed
-And the Inputs page should show a numeric input field.......................passed]]></system-out>
   </testcase>
 </testsuite>

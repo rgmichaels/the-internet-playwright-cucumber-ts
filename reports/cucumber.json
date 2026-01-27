@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "inputs;inputs---loads,-asserts,-and-exercises-behavior",
+        "id": "floating-menu;floating-menu---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Inputs - loads, asserts, and exercises behavior",
+        "name": "Floating Menu - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 249216874
+              "duration": 530523208
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 267895166
+              "duration": 306874290
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Inputs\" example",
+            "name": "I open the \"Floating Menu\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 62961792
+              "duration": 60711666
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Inputs page should load",
+            "name": "the Floating Menu page should load",
             "match": {
-              "location": "src/steps/inputs.steps.ts:5"
+              "location": "src/steps/floatingMenu.steps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 16193833
+              "duration": 42029917
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the Inputs page",
+            "name": "I exercise the Floating Menu page",
             "match": {
-              "location": "src/steps/inputs.steps.ts:10"
+              "location": "src/steps/floatingMenu.steps.ts:25"
             },
             "result": {
               "status": "passed",
-              "duration": 8686875
+              "duration": 54954625
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 18957959
+              "duration": 18190707
             }
           }
         ],
@@ -88,7 +88,7 @@
             "line": 1
           },
           {
-            "name": "@feature_inputs",
+            "name": "@feature_floating_menu",
             "line": 1
           }
         ],
@@ -96,30 +96,30 @@
       },
       {
         "description": "",
-        "id": "inputs;inputs---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "floating-menu;floating-menu---footer-shows-elemental-selenium-attribution-and-link",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Inputs - Footer shows Elemental Selenium attribution and link",
+        "name": "Floating Menu - Footer shows Elemental Selenium attribution and link",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 152413334
+              "duration": 154085916
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 11,
-            "name": "I open the Inputs page",
+            "name": "I open the Floating Menu page",
             "match": {
-              "location": "src/steps/inputs.steps.ts:31"
+              "location": "src/steps/floatingMenu.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 232198457
+              "duration": 252629749
             }
           },
           {
@@ -132,7 +132,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 19350458
+              "duration": 6201333
             }
           },
           {
@@ -140,7 +140,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16816209
+              "duration": 16429167
             }
           }
         ],
@@ -154,96 +154,17 @@
             "line": 1
           },
           {
-            "name": "@feature_inputs",
-            "line": 1
-          }
-        ],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "inputs;inputs-page-displays-text-and-numeric-input",
-        "keyword": "Scenario",
-        "line": 14,
-        "name": "Inputs page displays text and numeric input",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 150101125
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 15,
-            "name": "I open the Inputs page",
-            "match": {
-              "location": "src/steps/inputs.steps.ts:31"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 235576207
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 16,
-            "name": "the Inputs page should display required text",
-            "match": {
-              "location": "src/steps/inputs.steps.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 15238499
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 17,
-            "name": "the Inputs page should show a numeric input field",
-            "match": {
-              "location": "src/steps/inputs.steps.ts:21"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 14727124
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 14669875
-            }
-          }
-        ],
-        "tags": [
-          {
-            "name": "@feature",
-            "line": 1
-          },
-          {
-            "name": "@regression",
-            "line": 1
-          },
-          {
-            "name": "@feature_inputs",
+            "name": "@feature_floating_menu",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "inputs",
+    "id": "floating-menu",
     "line": 2,
     "keyword": "Feature",
-    "name": "Inputs",
+    "name": "Floating Menu",
     "tags": [
       {
         "name": "@feature",
@@ -254,10 +175,10 @@
         "line": 1
       },
       {
-        "name": "@feature_inputs",
+        "name": "@feature_floating_menu",
         "line": 1
       }
     ],
-    "uri": "features/27_inputs.feature"
+    "uri": "features/19_floating_menu.feature"
   }
 ]
