@@ -69,6 +69,13 @@ export class CustomWorld extends World {
     }
 
     this.context = await this.browser.newContext(contextOptions);
+
+    // Start Playwright tracing for every scenario; we only keep the trace on failure.
+    // Disable by setting TRACE=0.
+    if ((process.env.TRACE ?? '1') !== '0') {
+      await this.context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+    }
+
     this.page = await this.context.newPage();
   }
 

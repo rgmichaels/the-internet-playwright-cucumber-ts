@@ -20,7 +20,29 @@ Before(async function (this: CustomWorld, scenario) {
 });
 
 After(async function (this: CustomWorld, scenario) {
-  if (scenario.result?.status === Status.FAILED) {
+  const failed = scenario.result?.status === Status.FAILED;
+
+  // Always stop tracing (if it was started). Only write a trace file when failed.
+  if ((process.env.TRACE ?? '1') !== '0') {
+    try {
+      fs.mkdirSync(resultsDir, { recursive: true });
+      const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
+      const tracePath = path.join(resultsDir, `${safeName}-trace.zip`);
+
+      if (failed) {
+        await this.context.tracing.stop({ path: tracePath });
+        const traceData = fs.readFileSync(tracePath);
+        await this.attach(traceData, 'application/zip');
+      } else {
+        await this.context.tracing.stop();
+      }
+    } catch (err) {
+      // Tracing should never make a scenario fail.
+      console.warn('WARN: Failed to stop/attach trace:', err);
+    }
+  }
+
+  if (failed) {
     fs.mkdirSync(resultsDir, { recursive: true });
     const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
     const screenshotPath = path.join(resultsDir, `${safeName}.png`);
@@ -28,5 +50,7 @@ After(async function (this: CustomWorld, scenario) {
     const data = fs.readFileSync(screenshotPath);
     await this.attach(data, 'image/png');
   }
+
   await this.close();
 });
+

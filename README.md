@@ -42,3 +42,12 @@ npm run test:headed
 - Auth pages (Basic Auth, Digest Auth, Secure File Download) use `admin/admin`.
 - Geolocation test grants permission and sets a sample location (NYC-ish).
 - On failure, a screenshot is saved in `test-results/` and attached to the Cucumber report.
+
+- On failure, a Playwright trace (`*-trace.zip`) is saved in `test-results/` and attached to the Cucumber report. Disable with `TRACE=0`.
+
+Run test suite with credentials:
+BASE_URL=https://the-internet.herokuapp.com \
+BASIC_AUTH_USER=admin \
+BASIC_AUTH_PASS=admin \
+npx cucumber-js
+
