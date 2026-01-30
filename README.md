@@ -51,3 +51,7 @@ BASIC_AUTH_USER=admin \
 BASIC_AUTH_PASS=admin \
 npx cucumber-js
 
+Run tag: 
+npx cucumber-js --tags "@feature_typos"
+npx cucumber-js --tags "@feature_typos" --parallel 2
+
