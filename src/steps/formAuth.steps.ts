@@ -17,3 +17,8 @@ Then('I exercise the Form Authentication page', async function (this: CustomWorl
   const po = new FormAuthPage(this.page);
   await po.exercise();
 });
+
+Then('an invalid login should show a dismissible error', async function (this: CustomWorld) {
+  const po = new FormAuthPage(this.page);
+  await po.assertInvalidLoginDismissible();
+});

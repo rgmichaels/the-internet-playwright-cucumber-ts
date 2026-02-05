@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "typos;typos---loads,-asserts,-and-exercises-behavior",
+        "id": "dynamic-loading;dynamic-loading---loads,-asserts,-and-exercises-behavior",
         "keyword": "Scenario",
         "line": 4,
-        "name": "Typos - loads, asserts, and exercises behavior",
+        "name": "Dynamic Loading - loads, asserts, and exercises behavior",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 280147208
+              "duration": 256314833
             }
           },
           {
@@ -27,46 +27,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 283691167
+              "duration": 283416750
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 6,
-            "name": "I open the \"Typos\" example",
+            "name": "I open the \"Dynamic Loading\" example",
             "match": {
               "location": "src/steps/site.steps.ts:13"
             },
             "result": {
               "status": "passed",
-              "duration": 76175582
+              "duration": 71330875
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 7,
-            "name": "the Typos page should load",
+            "name": "the Dynamic Loading page should load",
             "match": {
-              "location": "src/steps/typos.steps.ts:19"
+              "location": "src/steps/dynamicLoading.steps.ts:11"
             },
             "result": {
               "status": "passed",
-              "duration": 18187791
+              "duration": 39814542
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 8,
-            "name": "I exercise the Typos page",
+            "name": "I exercise the Dynamic Loading page",
             "match": {
-              "location": "src/steps/typos.steps.ts:24"
+              "location": "src/steps/dynamicLoading.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 3888124
+              "duration": 12073320417
             }
           },
           {
@@ -74,154 +74,139 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19272708
+              "duration": 23075249
             }
           }
         ],
         "tags": [
           {
             "name": "@feature",
-            "line": 1
-          },
-          {
-            "name": "@regression",
-            "line": 1
-          },
-          {
-            "name": "@feature_typos",
-            "line": 1
-          }
-        ],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "typos;typos---assert-most-of-the-text-on-the-page",
-        "keyword": "Scenario",
-        "line": 11,
-        "name": "Typos - Assert most of the text on the page",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 150394875
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 12,
-            "name": "I am on the typos page",
-            "match": {
-              "location": "src/steps/typos.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 253870458
-            }
-          },
-          {
-            "arguments": [
-              {
-                "rows": [
-                  {
-                    "cells": [
-                      "This example demonstrates a typo being introduced."
-                    ]
-                  },
-                  {
-                    "cells": [
-                      "Sometimes you'll see a typo, other times you"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "keyword": "Then ",
-            "line": 13,
-            "name": "I should see the following text:",
-            "match": {
-              "location": "src/steps/typos.steps.ts:29"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 3412666
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 18219958
-            }
-          }
-        ],
-        "tags": [
-          {
-            "name": "@feature",
-            "line": 1
-          },
-          {
-            "name": "@regression",
-            "line": 1
-          },
-          {
-            "name": "@feature_typos",
             "line": 1
           },
           {
             "name": "@smoke",
-            "line": 10
+            "line": 1
           },
           {
-            "name": "@about",
-            "line": 10
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_dynamic_loading",
+            "line": 1
           }
         ],
         "type": "scenario"
       },
       {
         "description": "",
-        "id": "typos;typos---footer-shows-elemental-selenium-attribution-and-link",
+        "id": "dynamic-loading;dynamic-loading---example-2-shows-loader-then-content",
         "keyword": "Scenario",
-        "line": 17,
-        "name": "Typos - Footer shows Elemental Selenium attribution and link",
+        "line": 10,
+        "name": "Dynamic Loading - Example 2 shows loader then content",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 159082791
+              "duration": 162670624
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 18,
-            "name": "I open the Typos page",
+            "line": 11,
+            "name": "I open the Dynamic Loading page",
             "match": {
-              "location": "src/steps/typos.steps.ts:6"
+              "location": "src/steps/dynamicLoading.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 255981457
+              "duration": 293707000
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 19,
+            "line": 12,
+            "name": "Dynamic Loading Example 2 should show the loader then content",
+            "match": {
+              "location": "src/steps/dynamicLoading.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6068426167
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 20608166
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@feature",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@feature_dynamic_loading",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "dynamic-loading;dynamic-loading---footer-shows-elemental-selenium-attribution-and-link",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Dynamic Loading - Footer shows Elemental Selenium attribution and link",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 162619208
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "I open the Dynamic Loading page",
+            "match": {
+              "location": "src/steps/dynamicLoading.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 263403916
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
             "name": "the global footer should be valid",
             "match": {
               "location": "src/steps/site.steps.ts:18"
             },
             "result": {
               "status": "passed",
-              "duration": 8295583
+              "duration": 8341166
             }
           },
           {
@@ -229,7 +214,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 18617333
+              "duration": 16131332
             }
           }
         ],
@@ -239,24 +224,32 @@
             "line": 1
           },
           {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
             "name": "@regression",
             "line": 1
           },
           {
-            "name": "@feature_typos",
+            "name": "@feature_dynamic_loading",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "typos",
+    "id": "dynamic-loading",
     "line": 2,
     "keyword": "Feature",
-    "name": "Typos",
+    "name": "Dynamic Loading",
     "tags": [
       {
         "name": "@feature",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
         "line": 1
       },
       {
@@ -264,10 +257,10 @@
         "line": 1
       },
       {
-        "name": "@feature_typos",
+        "name": "@feature_dynamic_loading",
         "line": 1
       }
     ],
-    "uri": "features/43_typos.feature"
+    "uri": "features/14_dynamic_loading.feature"
   }
 ]
