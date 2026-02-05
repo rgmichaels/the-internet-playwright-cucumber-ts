@@ -2,8 +2,8 @@ node_modules/
 dist/
 test-results/
 playwright-report/
+reports/
 .cucumber/
 .env
 .DS_Store
 *.log
-
