@@ -7,7 +7,10 @@ Feature: Form Authentication
     Then the Form Authentication page should load
     And I exercise the Form Authentication page
 
+  Scenario: Form Authentication - invalid login shows dismissible error
+    Given I open the Form Authentication page
+    Then an invalid login should show a dismissible error
+
   Scenario: Form Authentication - Footer shows Elemental Selenium attribution and link
     Given I open the Form Authentication page
     Then the global footer should be valid
-

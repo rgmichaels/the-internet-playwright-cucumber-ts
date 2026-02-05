@@ -48,6 +48,18 @@ export class FormAuthPage extends BasePage {
     await this.loginButton().click();
   }
 
+  async assertInvalidLoginDismissible() {
+    await this.login('baduser', 'badpass');
+    await expect(this.flash()).toBeVisible({ timeout: 20_000 });
+    await expect(this.flash()).toContainText('Your username is invalid!', { timeout: 20_000 });
+
+    const close = this.flash().locator('a.close');
+    await expect(close).toBeVisible({ timeout: 20_000 });
+    await close.click();
+
+    await expect(this.flash()).toBeHidden({ timeout: 20_000 });
+  }
+
   async exercise() {
     // 1) Invalid login -> error flash
     await this.login('baduser', 'badpass');

@@ -14,7 +14,7 @@ export class DynamicLoadingPage extends BasePage {
     await expect(this.page.locator('#content')).toContainText('Example 2', { timeout: 20_000 });
   }
 
-  private async runExample(exampleNum: 1 | 2) {
+  private async openExample(exampleNum: 1 | 2) {
     // Index page link (these are on /dynamic_loading)
     const link = this.page.locator(`a[href="/dynamic_loading/${exampleNum}"]`);
     await expect(link).toBeVisible({ timeout: 20_000 });
@@ -26,9 +26,15 @@ export class DynamicLoadingPage extends BasePage {
     const heading = this.page.locator('#content h4').first();
     await expect(heading).toContainText(`Example ${exampleNum}`, { timeout: 20_000 });
 
-    const startBtn = this.page.locator('#start button');
-    const loading = this.page.locator('#loading');
-    const finishText = this.page.locator('#finish h4');
+    return {
+      startBtn: this.page.locator('#start button'),
+      loading: this.page.locator('#loading'),
+      finishText: this.page.locator('#finish h4'),
+    };
+  }
+
+  private async runExample(exampleNum: 1 | 2) {
+    const { startBtn, loading, finishText } = await this.openExample(exampleNum);
 
     await expect(startBtn).toBeVisible({ timeout: 20_000 });
 
@@ -49,6 +55,23 @@ export class DynamicLoadingPage extends BasePage {
     }
 
     // Back to index for next example
+    await this.page.goBack();
+    await this.assertLoaded();
+  }
+
+  async assertLoaderLifecycle(exampleNum: 1 | 2) {
+    const { startBtn, loading, finishText } = await this.openExample(exampleNum);
+
+    await expect(startBtn).toBeVisible({ timeout: 20_000 });
+    await expect(finishText).toBeHidden({ timeout: 2_000 });
+
+    await startBtn.click();
+
+    await expect(loading).toBeVisible({ timeout: 10_000 });
+    await expect(loading).toBeHidden({ timeout: 20_000 });
+    await expect(finishText).toBeVisible({ timeout: 20_000 });
+    await expect(finishText).toHaveText('Hello World!', { timeout: 20_000 });
+
     await this.page.goBack();
     await this.assertLoaded();
   }
