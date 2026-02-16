@@ -1,0 +1,61 @@
+name: Daily Tests
+
+on:
+  schedule:
+    - cron: "0 6,7 * * *"
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Gate: run only at 2 AM Eastern
+        id: schedule_gate
+        run: |
+          ny_hour="$(TZ=America/New_York date +%H)"
+          if [ "$ny_hour" = "02" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping: current New York hour is $ny_hour"
+          fi
+
+      - name: Checkout
+        if: steps.schedule_gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        if: steps.schedule_gate.outputs.run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.schedule_gate.outputs.run == 'true'
+        run: npm ci
+
+      - name: Install Playwright browsers
+        if: steps.schedule_gate.outputs.run == 'true'
+        run: npx playwright install --with-deps
+
+      - name: Run full suite + generate report
+        if: steps.schedule_gate.outputs.run == 'true'
+        env:
+          HEADLESS: "true"
+          BROWSER: "chromium"
+          BASE_URL: "https://the-internet.herokuapp.com"
+          BASIC_AUTH_USER: ${{ secrets.BASIC_AUTH_USER }}
+          BASIC_AUTH_PASS: ${{ secrets.BASIC_AUTH_PASS }}
+        run: npm run test:ci
+
+      - name: Upload reports artifact
+        if: always() && steps.schedule_gate.outputs.run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports-daily
+          path: |
+            reports
+            test-results
