@@ -17,3 +17,8 @@ Then('I exercise the JavaScript Alerts page', async function (this: CustomWorld)
   const po = new JsAlertsPage(this.page);
   await po.exercise();
 });
+
+Then('I verify JavaScript Alerts cancel behavior', async function (this: CustomWorld) {
+  const po = new JsAlertsPage(this.page);
+  await po.exerciseCancelPaths();
+});

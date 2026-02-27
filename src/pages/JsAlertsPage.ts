@@ -18,15 +18,32 @@ export class JsAlertsPage extends BasePage {
     await expect(this.page.locator('#result')).toContainText('You clicked: Ok');
   }
 
+  async clickConfirmAndCancel() {
+    this.page.once('dialog', async (d) => d.dismiss());
+    await this.page.locator('button[onclick="jsConfirm()"]').click();
+    await expect(this.page.locator('#result')).toContainText('You clicked: Cancel');
+  }
+
   async clickPrompt() {
     this.page.once('dialog', async (d) => d.accept('hello'));
     await this.page.locator('button[onclick="jsPrompt()"]').click();
     await expect(this.page.locator('#result')).toContainText('You entered: hello');
   }
 
+  async clickPromptAndCancel() {
+    this.page.once('dialog', async (d) => d.dismiss());
+    await this.page.locator('button[onclick="jsPrompt()"]').click();
+    await expect(this.page.locator('#result')).toContainText('You entered: null');
+  }
+
   async exercise() {
     await this.clickAlert();
     await this.clickConfirm();
     await this.clickPrompt();
+  }
+
+  async exerciseCancelPaths() {
+    await this.clickConfirmAndCancel();
+    await this.clickPromptAndCancel();
   }
 }
