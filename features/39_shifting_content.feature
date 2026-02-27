@@ -11,3 +11,7 @@ Feature: Shifting Content
     Given I open the Shifting Content page
     Then the global footer should be valid
 
+  Scenario: Shifting Content - image example shows expected content
+    Given I open the Shifting Content page
+    When I open the Shifting Content image example
+    Then the Shifting Content image example should show the image and description

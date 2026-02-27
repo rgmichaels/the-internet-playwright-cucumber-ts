@@ -15,4 +15,16 @@ export class ShiftingContentPage extends BasePage {
   async exercise() {
     await this.openMenuExample();
   }
+
+  async openImageExample() {
+    await this.page.getByRole('link', { name: 'Example 2: An image' }).click();
+    await expect(this.page).toHaveURL(/\/shifting_content\/image$/);
+  }
+
+  async assertImageExampleContent() {
+    await expect(this.page.locator('#content')).toContainText(
+      /This example demonstrates an image shifting a few pixels in either direction on each page load\./
+    );
+    await expect(this.page.locator('#content img')).toBeVisible();
+  }
 }
