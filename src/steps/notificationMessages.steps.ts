@@ -17,3 +17,16 @@ Then('I exercise the Notification Messages page', async function (this: CustomWo
   const po = new NotificationMessagesPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'the Notification Messages flash should be one of the expected variants',
+  async function (this: CustomWorld) {
+    const po = new NotificationMessagesPage(this.page);
+    await po.assertFlashMessageIsExpected();
+  }
+);
+
+Then('the Notification Messages flash can be dismissed', async function (this: CustomWorld) {
+  const po = new NotificationMessagesPage(this.page);
+  await po.dismissFlashMessage();
+});
