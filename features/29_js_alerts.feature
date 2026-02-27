@@ -11,3 +11,7 @@ Feature: JavaScript Alerts
     Given I open the JavaScript Alerts page
     Then the global footer should be valid
 
+  Scenario: JavaScript Alerts - cancel paths update result text correctly
+    Given I open the JavaScript Alerts page
+    Then the JavaScript Alerts page should load
+    And I verify JavaScript Alerts cancel behavior
