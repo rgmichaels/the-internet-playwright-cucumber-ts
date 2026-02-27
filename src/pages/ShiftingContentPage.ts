@@ -22,7 +22,9 @@ export class ShiftingContentPage extends BasePage {
   }
 
   async assertImageExampleContent() {
-    await expect(this.page.locator('#content p')).toContainText('This image randomly shifts around on the page');
+    await expect(this.page.locator('#content')).toContainText(
+      /This example demonstrates an image shifting a few pixels in either direction on each page load\./
+    );
     await expect(this.page.locator('#content img')).toBeVisible();
   }
 }
