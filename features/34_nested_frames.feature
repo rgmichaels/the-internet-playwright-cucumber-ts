@@ -7,4 +7,6 @@ Feature: Nested Frames
     Then the Nested Frames page should load
     And I exercise the Nested Frames page
 
-
+  Scenario: Nested Frames direct URL load shows frameset
+    Given I open the Nested Frames page
+    Then the Nested Frames page should load
