@@ -17,4 +17,23 @@ export class HoversPage extends BasePage {
   async exercise() {
     await this.hoverFirstAndVerify();
   }
+
+  async verifyAllHoverCards() {
+    const figures = this.page.locator('.figure');
+    await expect(figures).toHaveCount(3);
+
+    for (let index = 0; index < 3; index += 1) {
+      const figure = figures.nth(index);
+      const userNumber = index + 1;
+      const caption = figure.locator('.figcaption');
+      const userHeading = caption.locator('h5');
+      const profileLink = caption.getByRole('link', { name: 'View profile' });
+
+      await expect(caption).toBeHidden();
+      await figure.hover();
+      await expect(caption).toBeVisible();
+      await expect(userHeading).toContainText(`name: user${userNumber}`);
+      await expect(profileLink).toHaveAttribute('href', `/users/${userNumber}`);
+    }
+  }
 }

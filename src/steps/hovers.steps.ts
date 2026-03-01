@@ -17,3 +17,8 @@ Then('I exercise the Hovers page', async function (this: CustomWorld) {
   const po = new HoversPage(this.page);
   await po.exercise();
 });
+
+Then('each hover avatar should reveal the correct user profile link', async function (this: CustomWorld) {
+  const po = new HoversPage(this.page);
+  await po.verifyAllHoverCards();
+});

@@ -7,7 +7,10 @@ Feature: Hovers
     Then the Hovers page should load
     And I exercise the Hovers page
 
+  Scenario: Hovers - each avatar reveals the matching user link on hover
+    Given I open the Hovers page
+    Then each hover avatar should reveal the correct user profile link
+
   Scenario: Hovers - Footer shows Elemental Selenium attribution and link
     Given I open the Hovers page
     Then the global footer should be valid
-
