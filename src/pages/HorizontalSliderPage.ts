@@ -19,4 +19,25 @@ export class HorizontalSliderPage extends BasePage {
   async exercise() {
     await this.moveRight(3);
   }
+
+  async moveToMaximum() {
+    const slider = this.page.locator('input[type="range"]');
+    const value = this.page.locator('#range');
+    await expect(slider).toBeVisible();
+    await slider.focus();
+
+    for (let i = 0; i < 20; i++) {
+      const current = ((await value.textContent()) ?? '').trim();
+      if (current === '5') {
+        return;
+      }
+      await this.page.keyboard.press('ArrowRight');
+    }
+
+    await expect(value).toHaveText('5');
+  }
+
+  async assertDisplayedValue(expected: string) {
+    await expect(this.page.locator('#range')).toHaveText(expected);
+  }
 }
