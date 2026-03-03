@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 25
 
     steps:
-      - name: Gate: run only at 2 AM Eastern
+      - name: "Gate: run only at 2 AM Eastern"
         id: schedule_gate
         run: |
           ny_hour="$(TZ=America/New_York date +%H)"
