@@ -17,3 +17,8 @@ Then('I exercise the Dropdown page', async function (this: CustomWorld) {
   const po = new DropdownPage(this.page);
   await po.exercise();
 });
+
+Then('I can switch between all Dropdown options', async function (this: CustomWorld) {
+  const po = new DropdownPage(this.page);
+  await po.switchAcrossAllOptions();
+});

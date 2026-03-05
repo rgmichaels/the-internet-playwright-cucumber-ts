@@ -7,7 +7,10 @@ Feature: Dropdown
     Then the Dropdown page should load
     And I exercise the Dropdown page
 
+  Scenario: Dropdown - can switch between both options and reset to default
+    Given I open the Dropdown page
+    Then I can switch between all Dropdown options
+
   Scenario: Dropdown - Footer shows Elemental Selenium attribution and link
     Given I open the Dropdown page
     Then the global footer should be valid
-
