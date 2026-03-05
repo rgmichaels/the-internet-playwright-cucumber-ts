@@ -18,8 +18,10 @@ export class DropdownPage extends BasePage {
   }
 
   async switchAcrossAllOptions() {
+    const select = this.page.locator('#dropdown');
     await this.selectOption('1');
     await this.selectOption('2');
-    await this.selectOption('');
+    await this.page.reload();
+    await expect(select).toHaveValue('');
   }
 }
