@@ -16,4 +16,10 @@ export class DropdownPage extends BasePage {
   async exercise() {
     await this.selectOption('1');
   }
+
+  async switchAcrossAllOptions() {
+    await this.selectOption('1');
+    await this.selectOption('2');
+    await this.selectOption('');
+  }
 }
