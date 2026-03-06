@@ -17,3 +17,11 @@ Then('I exercise the Sortable Data Tables page', async function (this: CustomWor
   const po = new SortableDataTablesPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'the Last Name column in table 1 should sort ascending then descending',
+  async function (this: CustomWorld) {
+    const po = new SortableDataTablesPage(this.page);
+    await po.sortTable1LastNameAscendingThenDescending();
+  }
+);

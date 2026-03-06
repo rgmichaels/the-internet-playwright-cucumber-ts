@@ -11,3 +11,6 @@ Feature: Sortable Data Tables
     Given I open the Sortable Data Tables page
     Then the global footer should be valid
 
+  Scenario: Sortable Data Tables - Last Name column sorts ascending then descending
+    Given I open the Sortable Data Tables page
+    Then the Last Name column in table 1 should sort ascending then descending

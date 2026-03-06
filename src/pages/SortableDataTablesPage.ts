@@ -17,4 +17,26 @@ export class SortableDataTablesPage extends BasePage {
   async exercise() {
     await this.sortLastNameAndVerify();
   }
+
+  private async getTable1LastNames(): Promise<string[]> {
+    const cells = this.page.locator('#table1 tbody tr td:nth-child(1)');
+    await expect(cells.first()).toBeVisible();
+    const values = await cells.allTextContents();
+    return values.map((value) => value.trim());
+  }
+
+  async sortTable1LastNameAscendingThenDescending() {
+    const lastNameHeader = this.page.locator('#table1 th').filter({ hasText: 'Last Name' });
+    await expect(lastNameHeader).toBeVisible();
+
+    await lastNameHeader.click();
+    const ascending = await this.getTable1LastNames();
+    const ascendingExpected = [...ascending].sort((a, b) => a.localeCompare(b));
+    expect(ascending).toEqual(ascendingExpected);
+
+    await lastNameHeader.click();
+    const descending = await this.getTable1LastNames();
+    const descendingExpected = [...descending].sort((a, b) => b.localeCompare(a));
+    expect(descending).toEqual(descendingExpected);
+  }
 }
