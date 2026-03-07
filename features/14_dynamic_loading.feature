@@ -11,6 +11,10 @@ Feature: Dynamic Loading
     Given I open the Dynamic Loading page
     Then Dynamic Loading Example 2 should show the loader then content
 
+  Scenario: Dynamic Loading - Example 1 shows loader then content
+    Given I open the Dynamic Loading page
+    Then Dynamic Loading Example 1 should show the loader then content
+
   Scenario: Dynamic Loading - Footer shows Elemental Selenium attribution and link
     Given I open the Dynamic Loading page
     Then the global footer should be valid
