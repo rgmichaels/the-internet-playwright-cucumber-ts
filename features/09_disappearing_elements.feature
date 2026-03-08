@@ -11,3 +11,6 @@ Feature: Disappearing Elements
     Given I open the Disappearing Elements page
     Then the global footer should be valid
 
+  Scenario: Disappearing Elements - required menu links are stable and Gallery is optional
+    Given I open the Disappearing Elements page
+    Then the Disappearing Elements page should include required menu links
