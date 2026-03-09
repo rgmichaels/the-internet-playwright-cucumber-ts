@@ -57,19 +57,8 @@ function buildUrl(world: any, path: string): string {
 }
 
 function getCreds(): { user: string; pass: string } {
-  const user = process.env.BASIC_AUTH_USER;
-  const pass = process.env.BASIC_AUTH_PASS;
-
-  if (!user || !pass) {
-    throw new Error(
-      [
-        'Missing BASIC_AUTH_USER / BASIC_AUTH_PASS env vars.',
-        'Example:',
-        '  BASIC_AUTH_USER=admin BASIC_AUTH_PASS=admin BASE_URL=https://the-internet.herokuapp.com npx cucumber-js --tags "@auth_success"',
-      ].join('\n')
-    );
-  }
-
+  const user = process.env.BASIC_AUTH_USER || 'admin';
+  const pass = process.env.BASIC_AUTH_PASS || 'admin';
   return { user, pass };
 }
 
