@@ -17,3 +17,11 @@ Then('I exercise the Disappearing Elements page', async function (this: CustomWo
   const po = new DisappearingElementsPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'the Disappearing Elements page should include required menu links',
+  async function (this: CustomWorld) {
+    const po = new DisappearingElementsPage(this.page);
+    await po.assertRequiredMenuLinks();
+  }
+);

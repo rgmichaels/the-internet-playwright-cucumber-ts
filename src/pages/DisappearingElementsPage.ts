@@ -12,4 +12,15 @@ export class DisappearingElementsPage extends BasePage {
     const count = await items.count();
     expect(count).toBeGreaterThanOrEqual(4);
   }
+
+  async assertRequiredMenuLinks() {
+    const requiredLinks = ['Home', 'About', 'Contact Us', 'Portfolio'];
+    for (const linkText of requiredLinks) {
+      await expect(this.page.getByRole('link', { name: linkText })).toBeVisible();
+    }
+
+    const galleryLinks = this.page.getByRole('link', { name: 'Gallery' });
+    const galleryCount = await galleryLinks.count();
+    expect(galleryCount).toBeLessThanOrEqual(1);
+  }
 }
