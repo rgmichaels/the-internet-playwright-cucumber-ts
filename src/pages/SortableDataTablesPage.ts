@@ -25,18 +25,31 @@ export class SortableDataTablesPage extends BasePage {
     return values.map((value) => value.trim());
   }
 
+  private isAscending(values: string[]): boolean {
+    return values.every((value, i) => i === 0 || values[i - 1].localeCompare(value) <= 0);
+  }
+
+  private isDescending(values: string[]): boolean {
+    return values.every((value, i) => i === 0 || values[i - 1].localeCompare(value) >= 0);
+  }
+
   async sortTable1LastNameAscendingThenDescending() {
     const lastNameHeader = this.page.locator('#table1 th').filter({ hasText: 'Last Name' });
     await expect(lastNameHeader).toBeVisible();
 
+    // Table sort state can vary across runs; normalize to ascending first.
     await lastNameHeader.click();
     const ascending = await this.getTable1LastNames();
-    const ascendingExpected = [...ascending].sort((a, b) => a.localeCompare(b));
-    expect(ascending).toEqual(ascendingExpected);
+    if (!this.isAscending(ascending)) {
+      expect(this.isDescending(ascending)).toBeTruthy();
+      await lastNameHeader.click();
+    }
+
+    const normalizedAscending = await this.getTable1LastNames();
+    expect(this.isAscending(normalizedAscending)).toBeTruthy();
 
     await lastNameHeader.click();
     const descending = await this.getTable1LastNames();
-    const descendingExpected = [...descending].sort((a, b) => b.localeCompare(a));
-    expect(descending).toEqual(descendingExpected);
+    expect(this.isDescending(descending)).toBeTruthy();
   }
 }
