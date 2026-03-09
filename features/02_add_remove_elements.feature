@@ -10,3 +10,7 @@ Feature: Add/Remove Elements
   Scenario: Add/Remove Elements - Footer shows Elemental Selenium attribution and link
     Given I open the Add/Remove Elements page
     Then the global footer should be valid
+
+  Scenario: Add/Remove Elements - multiple adds and deletes keep button count in sync
+    Given I open the Add/Remove Elements page
+    Then Add/Remove Elements should keep delete button count in sync across multiple actions
