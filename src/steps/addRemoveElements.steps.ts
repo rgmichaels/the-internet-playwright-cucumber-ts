@@ -17,3 +17,8 @@ Then('I Add and remove elements to verify correct behavior', async function (thi
   const po = new AddRemoveElementsPage(this.page);
   await po.exercise();
 });
+
+Then('Add\\/Remove Elements should keep delete button count in sync across multiple actions', async function (this: CustomWorld) {
+  const po = new AddRemoveElementsPage(this.page);
+  await po.exerciseMultipleCountSync();
+});

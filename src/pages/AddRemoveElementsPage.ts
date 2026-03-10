@@ -34,10 +34,30 @@ export class AddRemoveElementsPage extends BasePage {
     await this.deleteButtons.first().click();
   }
 
+  async expectDeleteCount(expectedCount: number) {
+    await expect(this.deleteButtons).toHaveCount(expectedCount);
+  }
+
   async exercise() {
     await this.addElement();
     await this.expectDeleteVisible(true);
     await this.deleteFirst();
     await this.expectDeleteVisible(false);
+  }
+
+  async exerciseMultipleCountSync() {
+    await this.expectDeleteCount(0);
+
+    await this.addElement();
+    await this.expectDeleteCount(1);
+
+    await this.addElement();
+    await this.expectDeleteCount(2);
+
+    await this.deleteFirst();
+    await this.expectDeleteCount(1);
+
+    await this.deleteFirst();
+    await this.expectDeleteCount(0);
   }
 }
