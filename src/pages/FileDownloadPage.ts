@@ -22,4 +22,23 @@ export class FileDownloadPage extends BasePage {
   async exercise() {
     await this.downloadFirst();
   }
+
+  async assertFirstLinkTextMatchesDownloadedFilename() {
+    const first = this.page.locator('#content a').first();
+    await expect(first).toBeVisible();
+
+    const linkText = ((await first.textContent()) ?? '').trim();
+    expect(linkText.length).toBeGreaterThan(0);
+
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download'),
+      first.click(),
+    ]);
+
+    const suggested = download.suggestedFilename().trim();
+    expect(suggested.length).toBeGreaterThan(0);
+    expect(suggested).toBe(linkText);
+
+    await download.cancel().catch(() => {});
+  }
 }

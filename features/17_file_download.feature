@@ -11,3 +11,6 @@ Feature: File Download
     Given I open the File Download page
     Then the global footer should be valid
 
+  Scenario: File Download - First link text matches downloaded filename
+    Given I open the File Download page
+    Then the first file link should download with the same filename
