@@ -11,3 +11,6 @@ Feature: File Upload
     Given I open the File Upload page
     Then the global footer should be valid
 
+  Scenario: File Upload - supports uploading a JSON fixture
+    Given I open the File Upload page
+    Then I upload the "hello.json" fixture on the File Upload page
