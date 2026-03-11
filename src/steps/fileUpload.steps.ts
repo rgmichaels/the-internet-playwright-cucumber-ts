@@ -17,3 +17,11 @@ Then('I exercise the File Upload page', async function (this: CustomWorld) {
   const po = new FileUploadPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'I upload the {string} fixture on the File Upload page',
+  async function (this: CustomWorld, fileName: string) {
+    const po = new FileUploadPage(this.page);
+    await po.uploadFixture(fileName);
+  }
+);
