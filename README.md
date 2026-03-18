@@ -5,10 +5,11 @@ This repo is a complete, runnable BDD suite exercising **every link** on:
 
 ## What you get
 
-- 44 feature files (**one per page**)
-- 44 page objects (**one per page**)
-- Each page includes: **loads + asserts + a page-specific exercise**
-- Tags like `@smoke`, `@regression`, `@feature`, plus per-page tags like `@feature_ab_testing`
+- 44 Cucumber feature files covering every page on `https://the-internet.herokuapp.com/`
+- 44 page-specific page objects, plus shared `BasePage` and `HomePage` helpers
+- 45 step definition files wired through shared Cucumber `hooks` and `world` support
+- Scenarios that cover page loads, assertions, and page-specific interactions
+- Tags for common test slices like `@smoke`, `@regression`, `@feature`, plus per-page tags like `@feature_ab_testing`
 
 ## Prereqs
 - Node.js 18+ (Node 20 recommended)
@@ -45,13 +46,16 @@ npm run test:headed
 
 - On failure, a Playwright trace (`*-trace.zip`) is saved in `test-results/` and attached to the Cucumber report. Disable with `TRACE=0`.
 
-Run test suite with credentials:
+## Run with credentials
+```bash
 BASE_URL=https://the-internet.herokuapp.com \
 BASIC_AUTH_USER=admin \
 BASIC_AUTH_PASS=admin \
 npx cucumber-js
+```
 
-Run tag: 
+## Run by tag
+```bash
 npx cucumber-js --tags "@feature_typos"
 npx cucumber-js --tags "@feature_typos" --parallel 2
-
+```
