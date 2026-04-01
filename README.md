@@ -12,8 +12,8 @@ This project currently includes:
 
 - Application Under Test (AUT): [https://the-internet.herokuapp.com](https://the-internet.herokuapp.com)
 - GitHub Repository: [https://github.com/rgmichaels/the-internet-playwright-cucumber-ts](https://github.com/rgmichaels/the-internet-playwright-cucumber-ts)
-- Jira Project (replace placeholder): [https://YOUR-COMPANY.atlassian.net/jira/software/projects/PROJECTKEY](https://YOUR-COMPANY.atlassian.net/jira/software/projects/PROJECTKEY)
-- Jira Board (replace placeholder): [https://YOUR-COMPANY.atlassian.net/jira/software/projects/PROJECTKEY/boards/1](https://YOUR-COMPANY.atlassian.net/jira/software/projects/PROJECTKEY/boards/1)
+
+- Jira Board (replace placeholder): https://rob-michaels.atlassian.net/jira/software/projects/IPCT/boards/35
 
 ## Tech Stack
 
