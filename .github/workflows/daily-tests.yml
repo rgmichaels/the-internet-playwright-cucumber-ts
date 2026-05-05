@@ -2,7 +2,7 @@ name: Daily Tests
 
 on:
   schedule:
-    - cron: "0 6,7 * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
