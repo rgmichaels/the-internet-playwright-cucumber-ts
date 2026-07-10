@@ -11,6 +11,10 @@ Feature: Form Authentication
     Given I open the Form Authentication page
     Then an invalid login should show a dismissible error
 
+  Scenario: Form Authentication - unauthenticated secure-area access is rejected
+    Given I open the secure area without signing in
+    Then access should be rejected with an authentication-required error
+
   Scenario: Form Authentication - Footer shows Elemental Selenium attribution and link
     Given I open the Form Authentication page
     Then the global footer should be valid

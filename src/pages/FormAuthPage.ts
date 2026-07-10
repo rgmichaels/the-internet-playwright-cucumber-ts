@@ -48,6 +48,19 @@ export class FormAuthPage extends BasePage {
     await this.loginButton().click();
   }
 
+  async openSecureAreaDirectly(baseUrl: string) {
+    await this.page.goto(`${baseUrl}/secure`);
+  }
+
+  async assertUnauthenticatedAccessRejected() {
+    await this.assertLoaded();
+    await expect(this.flash()).toBeVisible({ timeout: 20_000 });
+    await expect(this.flash()).toContainText(
+      'You must login to view the secure area!',
+      { timeout: 20_000 }
+    );
+  }
+
   async assertInvalidLoginDismissible() {
     await this.login('baduser', 'badpass');
     await expect(this.flash()).toBeVisible({ timeout: 20_000 });
