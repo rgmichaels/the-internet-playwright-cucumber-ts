@@ -17,3 +17,11 @@ Then('I exercise the Notification Messages page', async function (this: CustomWo
   const po = new NotificationMessagesPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'Notification Messages should show all expected outcome variants within {int} tries',
+  async function (this: CustomWorld, maxTries: number) {
+    const po = new NotificationMessagesPage(this.page);
+    await po.assertAllExpectedOutcomeVariants(maxTries);
+  }
+);

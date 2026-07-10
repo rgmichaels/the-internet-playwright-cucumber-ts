@@ -11,3 +11,6 @@ Feature: Notification Messages
     Given I open the Notification Messages page
     Then the global footer should be valid
 
+  Scenario: Notification Messages - all expected outcomes can appear
+    Given I open the Notification Messages page
+    Then Notification Messages should show all expected outcome variants within 12 tries
