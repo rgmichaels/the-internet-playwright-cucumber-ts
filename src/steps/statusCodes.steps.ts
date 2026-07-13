@@ -9,9 +9,9 @@ Given('I open the Status Codes page', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('the Status Codes page should load', async function () {
-  this.statusCodesPage = new StatusCodesPage(this.page);
-  await this.statusCodesPage.assertLoaded();
+Then('the Status Codes page should load', async function (this: CustomWorld) {
+  const po = new StatusCodesPage(this.page);
+  await po.assertLoaded();
 });
 
 Then('I exercise the Status Codes page', async function (this: CustomWorld) {
@@ -20,9 +20,10 @@ Then('I exercise the Status Codes page', async function (this: CustomWorld) {
 });
 
 Then(
-  'each status code link should show the correct explanation',
-  async function () {
-    await this.statusCodesPage.exercise();
+  'each status code link should return the documented HTTP response and explanation',
+  async function (this: CustomWorld) {
+    const po = new StatusCodesPage(this.page);
+    await po.exercise();
   }
 );
 

@@ -1,11 +1,11 @@
 @feature @regression @feature_status_codes
 Feature: Status Codes
 
-  Scenario: Status Codes page explains each HTTP status code
+  Scenario: Status Codes links return the documented HTTP responses
     Given I am on the home page
     When I open the "Status Codes" example
     Then the Status Codes page should load
-    And each status code link should show the correct explanation
+    And each status code link should return the documented HTTP response and explanation
 
   Scenario: Status Codes page show paragraph of text
     Given I open the Status Codes page
