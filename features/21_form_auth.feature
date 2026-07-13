@@ -15,6 +15,10 @@ Feature: Form Authentication
     Given I open the secure area without signing in
     Then access should be rejected with an authentication-required error
 
+  Scenario: Form Authentication - logout revokes secure-area access
+    Given I open the Form Authentication page
+    Then logging out should revoke secure-area access
+
   Scenario: Form Authentication - Footer shows Elemental Selenium attribution and link
     Given I open the Form Authentication page
     Then the global footer should be valid

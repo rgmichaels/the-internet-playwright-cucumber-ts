@@ -28,6 +28,11 @@ Then('an invalid login should show a dismissible error', async function (this: C
   await po.assertInvalidLoginDismissible();
 });
 
+Then('logging out should revoke secure-area access', async function (this: CustomWorld) {
+  const po = new FormAuthPage(this.page);
+  await po.assertLogoutRevokesAccess(this.baseUrl);
+});
+
 Then(
   'access should be rejected with an authentication-required error',
   async function (this: CustomWorld) {

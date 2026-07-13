@@ -73,6 +73,20 @@ export class FormAuthPage extends BasePage {
     await expect(this.flash()).toBeHidden({ timeout: 20_000 });
   }
 
+  async assertLogoutRevokesAccess(baseUrl: string) {
+    await this.login('tomsmith', 'SuperSecretPassword!');
+    await expect(this.page).toHaveURL(/\/secure$/, { timeout: 20_000 });
+    await expect(this.page.locator('#content h2')).toContainText('Secure Area', { timeout: 20_000 });
+    await expect(this.logoutButton()).toBeVisible({ timeout: 20_000 });
+
+    await this.logoutButton().click();
+    await this.assertLoaded();
+    await expect(this.flash()).toContainText('You logged out of the secure area!', { timeout: 20_000 });
+
+    await this.openSecureAreaDirectly(baseUrl);
+    await this.assertUnauthenticatedAccessRejected();
+  }
+
   async exercise() {
     // 1) Invalid login -> error flash
     await this.login('baduser', 'badpass');
