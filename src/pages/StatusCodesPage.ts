@@ -14,21 +14,24 @@ export class StatusCodesPage extends BasePage {
   }
 
   async openCode(code: string) {
-    // Click the status code link from the list
-    await this.page.getByRole('link', { name: code }).click();
+    const [response] = await Promise.all([
+      this.page.waitForResponse(
+        (candidate) =>
+          candidate.request().isNavigationRequest() &&
+          candidate.url().endsWith(`/status_codes/${code}`)
+      ),
+      this.page.getByRole('link', { name: code }).click(),
+    ]);
 
-    // Validate the destination page explains the correct status code
+    expect(response.status()).toBe(Number(code));
+
     await expect(this.content).toContainText(`This page returned a ${code} status code`);
 
-    // Go back to the list (the app uses a "here" link in the paragraph)
     await this.page.getByRole('link', { name: 'here' }).click();
-
-    // Confirm we're back on the Status Codes list page
     await this.assertLoaded();
   }
 
   async exercise() {
-    // Exercise EACH status code link
     const codes = ['200', '301', '404', '500'];
     for (const code of codes) {
       await this.openCode(code);
