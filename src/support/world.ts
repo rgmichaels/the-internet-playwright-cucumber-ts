@@ -1,5 +1,5 @@
 import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
-import { Browser, BrowserContext, Page, chromium, firefox, webkit } from 'playwright';
+import { Browser, BrowserContext, Page, Response, chromium, firefox, webkit } from 'playwright';
 import { browserName, isHeadless } from './env';
 
 export type WorldParams = { baseUrl: string };
@@ -8,6 +8,7 @@ export class CustomWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
+  lastResponse?: Response | null;
   baseUrl: string;
 
   constructor(options: IWorldOptions) {

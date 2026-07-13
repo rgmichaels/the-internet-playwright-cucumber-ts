@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -38,5 +38,18 @@ export class SecureFileDownloadPage extends BasePage {
     expect(suggested.length).toBeGreaterThan(0);
 
     console.log(`DEBUG: secure download link="${fileName}" suggestedFilename="${suggested}"`);
+  }
+
+  async openWithoutCredentials(url: string) {
+    return this.page.goto(url);
+  }
+
+  async assertAccessDenied(response: Response | null) {
+    expect(response, 'Expected a response from secure download navigation').not.toBeNull();
+    expect(response!.status()).toBe(401);
+  }
+
+  async assertNotAuthorizedMessage() {
+    await expect(this.page.locator('body')).toContainText('Not authorized');
   }
 }
