@@ -25,3 +25,11 @@ Then(
     await po.uploadFixture(fileName);
   }
 );
+
+Then(
+  'I can upload the {string} fixture by drag and drop',
+  async function (this: CustomWorld, fileName: string) {
+    const po = new FileUploadPage(this.page);
+    await po.uploadFixtureByDragAndDrop(fileName);
+  }
+);
