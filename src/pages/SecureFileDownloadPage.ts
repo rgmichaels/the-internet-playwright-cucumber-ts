@@ -1,6 +1,11 @@
-import { Page } from 'playwright';
+import { Locator, Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
+
+type DownloadableLink = {
+  fileName: string;
+  locator: Locator;
+};
 
 export class SecureFileDownloadPage extends BasePage {
   constructor(page: Page) {
@@ -22,21 +27,53 @@ export class SecureFileDownloadPage extends BasePage {
       .toBeGreaterThan(0);
   }
 
-  async exercise() {
-    const firstLink = this.page.locator('#content a').first();
-    await expect(firstLink).toBeVisible({ timeout: 20_000 });
+  private async findDownloadableLink(): Promise<DownloadableLink> {
+    const links = this.page.locator('#content a');
+    const count = await links.count();
+    expect(count, 'Secure File Downloader should list at least one file').toBeGreaterThan(0);
 
-    const fileName = ((await firstLink.textContent()) ?? '').trim();
-    expect(fileName.length).toBeGreaterThan(0);
+    const rejected: string[] = [];
+
+    for (let index = 0; index < count; index += 1) {
+      const locator = links.nth(index);
+      const fileName = ((await locator.textContent()) ?? '').trim();
+      const href = await locator.getAttribute('href');
+
+      if (!fileName || !href) {
+        continue;
+      }
+
+      const response = await this.page.context().request.head(new URL(href, this.page.url()).toString(), {
+        failOnStatusCode: false,
+      });
+      const contentDisposition = response.headers()['content-disposition'] ?? '';
+      const isDownload = response.ok() && /\battachment\b/i.test(contentDisposition);
+
+      if (isDownload) {
+        await response.dispose();
+        await expect(locator).toBeVisible({ timeout: 20_000 });
+        return { fileName, locator };
+      }
+
+      rejected.push(`${fileName} (${response.status()})`);
+      await response.dispose();
+    }
+
+    throw new Error(`No downloadable secure file link was available. Rejected: ${rejected.join(', ')}`);
+  }
+
+  async exercise() {
+    const { fileName, locator } = await this.findDownloadableLink();
 
     const [download] = await Promise.all([
       this.page.waitForEvent('download', { timeout: 20_000 }),
-      firstLink.click(),
+      locator.click(),
     ]);
 
-    const suggested = download.suggestedFilename();
+    const suggested = download.suggestedFilename().trim();
     expect(suggested.length).toBeGreaterThan(0);
+    expect(suggested).toBe(fileName);
 
-    console.log(`DEBUG: secure download link="${fileName}" suggestedFilename="${suggested}"`);
+    await download.cancel().catch(() => {});
   }
 }
