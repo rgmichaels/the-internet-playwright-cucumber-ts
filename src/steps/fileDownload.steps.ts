@@ -18,7 +18,7 @@ Then('I exercise the File Download page', async function (this: CustomWorld) {
   await po.exercise();
 });
 
-Then('the first file link should download with the same filename', async function (this: CustomWorld) {
+Then('an available file link should download with the same filename', async function (this: CustomWorld) {
   const po = new FileDownloadPage(this.page);
-  await po.assertFirstLinkTextMatchesDownloadedFilename();
+  await po.assertDownloadableLinkTextMatchesDownloadedFilename();
 });

@@ -20,7 +20,7 @@ export class FramesPage extends BasePage {
     });
   }
 
-  async openIFrameAndType() {
+  async exerciseIFrameEditor() {
     await this.openIFrameEditor();
 
     const frame = this.page.frameLocator('#mce_0_ifr');
@@ -28,30 +28,20 @@ export class FramesPage extends BasePage {
 
     await expect(body).toBeVisible({ timeout: 20_000 });
 
-    const text = `Hello from Playwright @ ${new Date().toISOString()}`;
+    const isEditable = await body.evaluate((element) => element.isContentEditable);
 
-    // TinyMCE on this demo can be readonly and/or covered by overlays.
-    // Don't click/type. Set content directly inside the iframe DOM.
-    await frame.locator('body').evaluate((el, value) => {
-      // Prefer TinyMCE API if present, otherwise fall back to direct DOM manipulation.
-      // @ts-ignore
-      const win = el.ownerDocument?.defaultView;
-      // @ts-ignore
-      const editor = win?.tinymce?.activeEditor;
-      if (editor) {
-        editor.setContent(`<p>${value}</p>`);
-        return;
-      }
+    if (isEditable) {
+      const text = `Hello from Playwright @ ${new Date().toISOString()}`;
+      await body.fill(text);
+      await expect(body).toContainText(text, { timeout: 20_000 });
+      return;
+    }
 
-      // Fallback: write into the editor body
-      el.innerHTML = `<p>${value}</p>`;
-    }, text);
-
-    // Assert the content is now present
-    await expect(body).toContainText(text, { timeout: 20_000 });
+    expect(isEditable).toBe(false);
+    await expect(body).toContainText(/\S/, { timeout: 20_000 });
   }
 
   async exercise() {
-    await this.openIFrameAndType();
+    await this.exerciseIFrameEditor();
   }
 }
