@@ -19,3 +19,8 @@ Then('the global footer should be valid', async function (this: CustomWorld) {
   const base = new HomePage(this.page);
   await base.assertGlobalFooterPoweredByElementalSelenium();
 });
+
+Then('the home page should have a populated title tag', async function (this: CustomWorld) {
+  const home = new HomePage(this.page);
+  await home.assertTitleTagHasText();
+});
