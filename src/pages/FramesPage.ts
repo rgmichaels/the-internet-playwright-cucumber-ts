@@ -28,7 +28,9 @@ export class FramesPage extends BasePage {
 
     await expect(body).toBeVisible({ timeout: 20_000 });
 
-    const isEditable = await body.evaluate((element) => element.isContentEditable);
+    const isEditable = await body.evaluate(
+      (element) => element instanceof HTMLElement && element.isContentEditable
+    );
 
     if (isEditable) {
       const text = `Hello from Playwright @ ${new Date().toISOString()}`;

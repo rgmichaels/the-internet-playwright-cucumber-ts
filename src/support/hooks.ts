@@ -13,10 +13,7 @@ Before(async function (this: CustomWorld, scenario) {
   const authAdmin = tags.includes('@auth_admin');
   const geo = tags.includes('@geo');
 
-  const headed = process.env.HEADED === '1';
-  const slowMo = Number(process.env.SLOWMO ?? 0) || 0;
-
-  await this.launch({ authAdmin, geo, headed, slowMo });
+  await this.launch({ authAdmin, geo });
 });
 
 After(async function (this: CustomWorld, scenario) {
@@ -53,4 +50,3 @@ After(async function (this: CustomWorld, scenario) {
 
   await this.close();
 });
-
