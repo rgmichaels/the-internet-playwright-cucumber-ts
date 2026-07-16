@@ -13,6 +13,11 @@ Then('the Broken Images page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
+Then('the Broken Images page text {string} should appear', async function (this: CustomWorld, expectedText: string) {
+  const po = new BrokenImagesPage(this.page);
+  await po.assertLoaded(expectedText);
+});
+
 Then('I validate the presence of broken images', async function (this: CustomWorld) {
   const po = new BrokenImagesPage(this.page);
   await po.exercise();

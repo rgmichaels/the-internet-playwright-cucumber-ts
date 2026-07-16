@@ -4,7 +4,7 @@ import { BasePage } from './BasePage';
 
 export class BrokenImagesPage extends BasePage {
   constructor(page: Page) { super(page); }
-  async assertLoaded() { await this.expectH3ToBe('Broken Images'); }
+  async assertLoaded(expectedText = 'Broken Images') { await this.expectH3ToBe(expectedText); }
 
   async countBrokenImages() {
     const imgs = this.page.locator('#content img');
