@@ -14,10 +14,13 @@ Then('the Redirect Link page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I make sure the page redirects properly', async function (this: CustomWorld) {
-  const po = new RedirectLinkPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the redirect should return HTTP 302 and land on the Status Codes page',
+  async function (this: CustomWorld) {
+    const po = new RedirectLinkPage(this.page);
+    await po.exercise();
+  }
+);
 
 Then(
   'the redirect explanation text should be displayed',
