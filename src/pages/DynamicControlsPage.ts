@@ -76,7 +76,7 @@ export class DynamicControlsPage extends BasePage {
     const message = this.page.locator('#message');
 
     for (let i = 0; i < attempts; i++) {
-      const before = (await message.textContent().catch(() => '')) ?? '';
+      const before = (await message.count()) === 0 ? '' : ((await message.textContent()) ?? '');
 
       await this.checkboxButton().click();
       await this.waitCheckboxCycle();
