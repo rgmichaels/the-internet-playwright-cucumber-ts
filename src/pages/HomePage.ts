@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -15,7 +15,25 @@ export class HomePage extends BasePage {
   async openExample(name: string) {
     const link = this.page.getByRole('link', { name, exact: true });
     await expect(link).toBeVisible();
-    await link.click();
+
+    const [response] = await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+      link.click(),
+    ]);
+
+    if (!this.isServerError(response)) return;
+
+    const retryResponse = await this.page.reload({ waitUntil: 'domcontentloaded' });
+    if (this.isServerError(retryResponse)) {
+      throw new Error(
+        `Example "${name}" returned HTTP ${response.status()} and retry returned HTTP ${retryResponse!.status()}`
+      );
+    }
+  }
+
+  private isServerError(response: Response | null): response is Response {
+    const status = response?.status();
+    return status !== undefined && status >= 500 && status < 600;
   }
 
   async assertTitleTagHasText() {
