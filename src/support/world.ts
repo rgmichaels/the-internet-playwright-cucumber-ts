@@ -9,6 +9,7 @@ export class CustomWorld extends World {
   context!: BrowserContext;
   page!: Page;
   lastResponse: Response | null = null;
+  exampleNavigationAttempts = 0;
   baseUrl: string;
 
   constructor(options: IWorldOptions) {
