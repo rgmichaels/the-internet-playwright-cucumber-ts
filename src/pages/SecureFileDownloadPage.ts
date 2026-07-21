@@ -1,4 +1,4 @@
-import { Locator, Page } from 'playwright';
+import { Locator, Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -75,5 +75,23 @@ export class SecureFileDownloadPage extends BasePage {
     expect(suggested).toBe(fileName);
 
     await download.cancel().catch(() => {});
+  }
+
+  async openWithoutCredentials(baseUrl: string): Promise<Response | null> {
+    return this.page.goto(`${baseUrl}/download_secure`);
+  }
+
+  assertAccessDenied(response: Response | null) {
+    expect(response, 'Expected a response from secure download navigation').not.toBeNull();
+
+    if (!response) {
+      throw new Error('Secure download navigation did not return an HTTP response');
+    }
+
+    expect(response.status()).toBe(401);
+  }
+
+  async assertNotAuthorizedMessage() {
+    await expect(this.page.locator('body')).toContainText('Not authorized');
   }
 }
