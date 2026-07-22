@@ -13,7 +13,10 @@ Then('the Multiple Windows page should load', async function (this: CustomWorld)
   await po.assertLoaded();
 });
 
-Then('I exercise the Multiple Windows page', async function (this: CustomWorld) {
-  const po = new MultipleWindowsPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the popup should close without replacing the original Multiple Windows page',
+  async function (this: CustomWorld) {
+    const po = new MultipleWindowsPage(this.page);
+    await po.assertPopupLifecycle();
+  }
+);
