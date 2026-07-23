@@ -8,9 +8,19 @@ export class ForgotPasswordPage extends BasePage {
   }
 
   async assertLoaded() {
+    const content = this.page.locator('#content');
+    const recoveryForm = this.page.locator('form#forgot_password');
+    const email = this.page.getByLabel('E-mail', { exact: true });
+    const submit = this.page.getByRole('button', { name: 'Retrieve password', exact: true });
+
     await expect(this.page).toHaveURL(/\/forgot_password$/, { timeout: 20_000 });
-    await expect(this.page.locator('#content')).toBeVisible({ timeout: 20_000 });
-    await expect(this.page.locator('#content h2')).toHaveText('Forgot Password', { timeout: 20_000 });
+    await expect(content).toBeVisible({ timeout: 20_000 });
+    await expect(content.locator('h2')).toHaveText('Forgot Password', { timeout: 20_000 });
+    await expect(recoveryForm).toBeVisible({ timeout: 20_000 });
+    await expect(email).toBeVisible({ timeout: 20_000 });
+    await expect(email).toBeEditable();
+    await expect(submit).toBeVisible({ timeout: 20_000 });
+    await expect(submit).toBeEnabled();
   }
 
   async exercise() {
