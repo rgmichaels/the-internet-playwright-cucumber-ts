@@ -1,4 +1,4 @@
-import { Given, Then } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 import { CustomWorld } from '../support/world';
 import { FormAuthPage } from '../pages/FormAuthPage';
 
@@ -9,6 +9,16 @@ Given('I open the Form Authentication page', async function (this: CustomWorld) 
 });
 
 Given('I open the secure area without signing in', async function (this: CustomWorld) {
+  const po = new FormAuthPage(this.page);
+  await po.openSecureAreaDirectly(this.baseUrl);
+});
+
+When('I sign in and log out of the secure area', async function (this: CustomWorld) {
+  const po = new FormAuthPage(this.page);
+  await po.loginSuccessfullyAndLogOut();
+});
+
+When('I revisit the secure area after logging out', async function (this: CustomWorld) {
   const po = new FormAuthPage(this.page);
   await po.openSecureAreaDirectly(this.baseUrl);
 });
