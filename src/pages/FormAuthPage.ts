@@ -73,13 +73,7 @@ export class FormAuthPage extends BasePage {
     await expect(this.flash()).toBeHidden({ timeout: 20_000 });
   }
 
-  async exercise() {
-    // 1) Invalid login -> error flash
-    await this.login('baduser', 'badpass');
-    await expect(this.flash()).toBeVisible({ timeout: 20_000 });
-    await expect(this.flash()).toContainText('Your username is invalid!', { timeout: 20_000 });
-
-    // 2) Valid login -> secure area + logout
+  async loginSuccessfullyAndLogOut() {
     await this.login('tomsmith', 'SuperSecretPassword!');
     await expect(this.page).toHaveURL(/\/secure$/, { timeout: 20_000 });
 
@@ -92,5 +86,15 @@ export class FormAuthPage extends BasePage {
     await expect(this.page).toHaveURL(/\/login$/, { timeout: 20_000 });
     await expect(this.flash()).toContainText('You logged out of the secure area!', { timeout: 20_000 });
     await expect(this.heading()).toHaveText('Login Page', { timeout: 20_000 });
+  }
+
+  async exercise() {
+    // 1) Invalid login -> error flash
+    await this.login('baduser', 'badpass');
+    await expect(this.flash()).toBeVisible({ timeout: 20_000 });
+    await expect(this.flash()).toContainText('Your username is invalid!', { timeout: 20_000 });
+
+    // 2) Valid login -> secure area + logout
+    await this.loginSuccessfullyAndLogOut();
   }
 }
