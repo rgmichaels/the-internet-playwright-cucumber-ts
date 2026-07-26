@@ -13,12 +13,12 @@ Then('the JavaScript Alerts page should load', async function (this: CustomWorld
   await po.assertLoaded();
 });
 
-Then('I exercise the JavaScript Alerts page', async function (this: CustomWorld) {
+Then('I verify the accepted JavaScript Alerts dialog contracts', async function (this: CustomWorld) {
   const po = new JsAlertsPage(this.page);
-  await po.exercise();
+  await po.exerciseAcceptedDialogContracts();
 });
 
-Then('I verify JavaScript Alerts cancel behavior', async function (this: CustomWorld) {
+Then('I verify the cancelled JavaScript Alerts dialog contracts', async function (this: CustomWorld) {
   const po = new JsAlertsPage(this.page);
-  await po.exerciseCancelPaths();
+  await po.exerciseCancelledDialogContracts();
 });
