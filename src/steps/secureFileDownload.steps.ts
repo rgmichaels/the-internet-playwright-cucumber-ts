@@ -18,6 +18,14 @@ Then('I exercise the Secure File Download page', async function (this: CustomWor
   await po.exercise();
 });
 
+Then(
+  'an available secure download should match its authenticated response',
+  async function (this: CustomWorld) {
+    const po = new SecureFileDownloadPage(this.page);
+    await po.assertDownloadedPayloadMatchesAuthenticatedResponse();
+  }
+);
+
 When(
   'I request the Secure File Download page without credentials',
   async function (this: CustomWorld) {

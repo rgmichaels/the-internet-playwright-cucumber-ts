@@ -13,6 +13,11 @@ Feature: Secure File Download
     Given I open the Secure File Download page
     Then the global footer should be valid
 
+  @auth_admin
+  Scenario: Secure File Download - authenticated file payload is complete
+    Given I open the Secure File Download page
+    Then an available secure download should match its authenticated response
+
   Scenario: Secure File Download - unauthenticated access is denied
     When I request the Secure File Download page without credentials
     Then Secure File Download access should be denied
