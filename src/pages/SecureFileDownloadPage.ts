@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { Locator, Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
@@ -5,6 +6,7 @@ import { BasePage } from './BasePage';
 type DownloadableLink = {
   fileName: string;
   locator: Locator;
+  url: string;
 };
 
 export class SecureFileDownloadPage extends BasePage {
@@ -43,7 +45,8 @@ export class SecureFileDownloadPage extends BasePage {
         continue;
       }
 
-      const response = await this.page.context().request.head(new URL(href, this.page.url()).toString(), {
+      const url = new URL(href, this.page.url()).toString();
+      const response = await this.page.context().request.head(url, {
         failOnStatusCode: false,
       });
       const contentDisposition = response.headers()['content-disposition'] ?? '';
@@ -52,7 +55,7 @@ export class SecureFileDownloadPage extends BasePage {
       if (isDownload) {
         await response.dispose();
         await expect(locator).toBeVisible({ timeout: 20_000 });
-        return { fileName, locator };
+        return { fileName, locator, url };
       }
 
       rejected.push(`${fileName} (${response.status()})`);
@@ -75,6 +78,44 @@ export class SecureFileDownloadPage extends BasePage {
     expect(suggested).toBe(fileName);
 
     await download.cancel().catch(() => {});
+  }
+
+  async assertDownloadedPayloadMatchesAuthenticatedResponse() {
+    const { fileName, locator, url } = await this.findDownloadableLink();
+    const expectedResponse = await this.page.context().request.get(url, {
+      failOnStatusCode: false,
+    });
+
+    try {
+      expect(expectedResponse.ok(), `Expected authenticated GET ${url} to succeed`).toBe(true);
+      expect(expectedResponse.headers()['content-disposition'] ?? '').toMatch(/\battachment\b/i);
+
+      const expectedPayload = await expectedResponse.body();
+      expect(expectedPayload.length, 'Protected download response should not be empty').toBeGreaterThan(0);
+
+      const [download] = await Promise.all([
+        this.page.waitForEvent('download', { timeout: 20_000 }),
+        locator.click(),
+      ]);
+
+      const stream = await download.createReadStream();
+      const chunks: Buffer[] = [];
+      for await (const chunk of stream) {
+        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+      }
+      const downloadedPayload = Buffer.concat(chunks);
+      const failure = await download.failure();
+
+      expect(failure, 'Browser download should complete successfully').toBeNull();
+      expect(download.suggestedFilename().trim()).toBe(fileName);
+      expect(downloadedPayload.length, 'Browser download should not be empty').toBeGreaterThan(0);
+      expect(downloadedPayload.length).toBe(expectedPayload.length);
+
+      const sha256 = (payload: Buffer) => createHash('sha256').update(payload).digest('hex');
+      expect(sha256(downloadedPayload)).toBe(sha256(expectedPayload));
+    } finally {
+      await expectedResponse.dispose();
+    }
   }
 
   async openWithoutCredentials(baseUrl: string): Promise<Response | null> {
