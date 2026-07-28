@@ -50,7 +50,10 @@ export class SecureFileDownloadPage extends BasePage {
         failOnStatusCode: false,
       });
       const contentDisposition = response.headers()['content-disposition'] ?? '';
-      const isDownload = response.ok() && /\battachment\b/i.test(contentDisposition);
+      const contentLength = response.headers()['content-length'];
+      const isKnownEmpty = contentLength !== undefined && Number(contentLength) === 0;
+      const isDownload =
+        response.ok() && /\battachment\b/i.test(contentDisposition) && !isKnownEmpty;
 
       if (isDownload) {
         await response.dispose();
@@ -58,7 +61,9 @@ export class SecureFileDownloadPage extends BasePage {
         return { fileName, locator, url };
       }
 
-      rejected.push(`${fileName} (${response.status()})`);
+      rejected.push(
+        `${fileName} (${response.status()}, ${contentLength ?? 'unknown'} bytes)`
+      );
       await response.dispose();
     }
 
