@@ -1,4 +1,4 @@
-import { Locator, Page } from 'playwright';
+import { Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -25,45 +25,18 @@ export class SortableDataTablesPage extends BasePage {
     return values.map((value) => value.trim());
   }
 
-  private isAscending(values: string[]): boolean {
-    return values.every((value, i) => i === 0 || values[i - 1].localeCompare(value) <= 0);
-  }
-
-  private isDescending(values: string[]): boolean {
-    return values.every((value, i) => i === 0 || values[i - 1].localeCompare(value) >= 0);
-  }
-
-  private async ensureTable1LastNameOrder(
-    lastNameHeader: Locator,
-    target: 'ascending' | 'descending',
-    maxClicks = 4
-  ): Promise<string[]> {
-    let values = await this.getTable1LastNames();
-    const matchesTarget = () =>
-      target === 'ascending' ? this.isAscending(values) : this.isDescending(values);
-
-    if (matchesTarget()) return values;
-
-    for (let i = 0; i < maxClicks; i++) {
-      await lastNameHeader.click();
-      values = await this.getTable1LastNames();
-      if (matchesTarget()) return values;
-    }
-
-    throw new Error(
-      `Unable to reach ${target} sort order for table 1 Last Name column. Last observed order: ${values.join(', ')}`
-    );
-  }
-
   async sortTable1LastNameAscendingThenDescending() {
     const lastNameHeader = this.page.locator('#table1 th').filter({ hasText: 'Last Name' });
     await expect(lastNameHeader).toBeVisible();
 
-    const ascending = await this.ensureTable1LastNameOrder(lastNameHeader, 'ascending');
-    expect(this.isAscending(ascending)).toBeTruthy();
+    const initial = await this.getTable1LastNames();
+    const ascending = [...initial].sort((a, b) => a.localeCompare(b));
+    const descending = [...ascending].reverse();
 
     await lastNameHeader.click();
-    const descending = await this.ensureTable1LastNameOrder(lastNameHeader, 'descending');
-    expect(this.isDescending(descending)).toBeTruthy();
+    await expect.poll(() => this.getTable1LastNames()).toEqual(ascending);
+
+    await lastNameHeader.click();
+    await expect.poll(() => this.getTable1LastNames()).toEqual(descending);
   }
 }
