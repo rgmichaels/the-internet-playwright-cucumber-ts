@@ -2,6 +2,7 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { CustomWorld } from '../support/world';
 import { BasicAuthPage } from '../pages/BasicAuthPage';
 import { expect } from '@playwright/test';
+import type { BrowserContextOptions } from 'playwright';
 
 const CONGRATS_MESSAGE = 'Congratulations! You must have the proper credentials.';
 
@@ -62,6 +63,31 @@ function getCreds(): { user: string; pass: string } {
   return { user, pass };
 }
 
+async function replaceContext(
+  world: CustomWorld,
+  httpCredentials?: { username: string; password: string }
+) {
+  await world.context.close().catch(() => {});
+
+  const contextOptions: BrowserContextOptions = {
+    baseURL: world.baseUrl,
+    viewport: { width: 1280, height: 720 },
+    acceptDownloads: true,
+  };
+
+  if (httpCredentials) {
+    contextOptions.httpCredentials = httpCredentials;
+  }
+
+  world.context = await world.browser.newContext(contextOptions);
+
+  if ((process.env.TRACE ?? '1') !== '0') {
+    await world.context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+  }
+
+  world.page = await world.context.newPage();
+}
+
 /**
  * Negative path (explicit wording)
  */
@@ -82,19 +108,15 @@ Then('I should see a not authorized message', async function () {
 /**
  * Negative path (feature wording): force a clean context so auth can't leak
  */
-When('I request the basic auth page', async function () {
-  const baseURL = getBaseURL(this);
-
-  const context = await this.browser.newContext({ baseURL }); // no httpCredentials
-  this.page = await context.newPage();
-
-  // absolute URL so no baseURL dependency
-  this.lastResponse = await this.page.goto(buildUrl(this, '/basic_auth'));
+When('I request the basic auth page', async function (this: CustomWorld) {
+  await replaceContext(this);
+  const po = new BasicAuthPage(this.page);
+  this.lastResponse = await po.open(getBaseURL(this));
 });
 
-Then('access should be denied', async function () {
-  expect(this.lastResponse, 'Expected a response from page.goto').toBeTruthy();
-  expect(this.lastResponse!.status()).toBe(401);
+Then('access should be denied', async function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  po.assertUnauthorizedResponse(this.lastResponse);
 });
 
 Then('the page should indicate the user is not authorized', async function () {
@@ -102,19 +124,45 @@ Then('the page should indicate the user is not authorized', async function () {
 });
 
 /**
- * Happy path: valid credentials
+ * Negative path: invalid credentials must not inherit the feature-level valid credentials.
  */
-When('I request the basic auth page with valid credentials', async function () {
+When('I request the basic auth page with invalid credentials', async function (this: CustomWorld) {
   const { user, pass } = getCreds();
-  const baseURL = getBaseURL(this);
-
-  const context = await this.browser.newContext({
-    baseURL,
-    httpCredentials: { username: user, password: pass },
+  await replaceContext(this, {
+    username: user,
+    password: `${pass}__invalid__`,
   });
 
-  this.page = await context.newPage();
-  this.lastResponse = await this.page.goto(buildUrl(this, '/basic_auth'));
+  const po = new BasicAuthPage(this.page);
+  this.lastResponse = await po.open(getBaseURL(this));
+});
+
+Then('the basic auth request should be unauthorized', function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  po.assertUnauthorizedResponse(this.lastResponse);
+});
+
+Then('the response should include a Basic authentication challenge', function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  po.assertBasicAuthenticationChallenge(this.lastResponse);
+});
+
+Then('protected basic auth content should not be displayed', async function (this: CustomWorld) {
+  const po = new BasicAuthPage(this.page);
+  await po.assertProtectedContentNotDisplayed();
+});
+
+/**
+ * Happy path: valid credentials
+ */
+When('I request the basic auth page with valid credentials', async function (this: CustomWorld) {
+  const { user, pass } = getCreds();
+  await replaceContext(this, {
+    username: user,
+    password: pass,
+  });
+  const po = new BasicAuthPage(this.page);
+  this.lastResponse = await po.open(getBaseURL(this));
 });
 
 Then('the request should be successful', async function () {
