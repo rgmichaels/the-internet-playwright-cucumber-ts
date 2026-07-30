@@ -16,8 +16,13 @@ Feature: Basic Auth
     Then access should be denied
     And the page should indicate the user is not authorized
 
+  Scenario: Invalid credentials are rejected with a Basic authentication challenge
+    When I request the basic auth page with invalid credentials
+    Then the basic auth request should be unauthorized
+    And the response should include a Basic authentication challenge
+    And protected basic auth content should not be displayed
+
 @auth_success
   Scenario: Congratulations message is shown when valid credentials are provided
     When I request the basic auth page with valid credentials
     Then the congratulations message should be displayed
-
