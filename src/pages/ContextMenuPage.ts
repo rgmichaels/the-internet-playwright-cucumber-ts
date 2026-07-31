@@ -24,12 +24,19 @@ export class ContextMenuPage extends BasePage {
     const box = this.page.locator('#hot-spot');
     await expect(box).toBeVisible();
 
-    this.page.once('dialog', async (d) => {
-      expect(d.message()).toContain('You selected a context menu');
-      await d.accept();
-    });
+    const dialogPromise = this.page.waitForEvent('dialog', { timeout: 20_000 });
+    const clickPromise = box.click({ button: 'right' });
+    const dialog = await dialogPromise;
 
-    await box.click({ button: 'right' });
+    try {
+      expect(dialog.type()).toBe('alert');
+      expect(dialog.message()).toBe('You selected a context menu');
+    } finally {
+      await dialog.accept();
+      await clickPromise;
+    }
+
+    await expect(box).toBeVisible();
   }
 
   async exercise() {
