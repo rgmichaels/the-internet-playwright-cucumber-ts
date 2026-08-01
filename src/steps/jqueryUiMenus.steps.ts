@@ -13,7 +13,10 @@ Then('the JQuery UI Menus page should load', async function (this: CustomWorld) 
   await po.assertLoaded();
 });
 
-Then('I exercise the JQuery UI Menus page', async function (this: CustomWorld) {
-  const po = new JqueryUiMenusPage(this.page);
-  await po.exercise();
-});
+Then(
+  'downloading CSV from the JQuery UI Menus page returns the expected artifact',
+  async function (this: CustomWorld) {
+    const po = new JqueryUiMenusPage(this.page);
+    await po.assertCsvDownloadContract();
+  }
+);

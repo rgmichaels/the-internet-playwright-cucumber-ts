@@ -19,30 +19,39 @@ export class JqueryUiMenusPage extends BasePage {
     await expect(this.page.locator('#menu')).toBeVisible({ timeout: 20_000 });
   }
 
-  async exercise() {
-  // Root menu should be visible
-  const menu = this.page.locator('#menu');
-  await expect(menu).toBeVisible({ timeout: 20_000 });
+  async assertCsvDownloadContract() {
+    const menu = this.page.locator('#menu');
+    await expect(menu).toBeVisible({ timeout: 20_000 });
 
-  // Top-level items: "Enabled" is typically visible; "Disabled" may be present too.
-  // Use text-based locators inside the menu to avoid id assumptions.
-  const enabled = menu.getByRole('menuitem', { name: /^Enabled$/ });
-  await expect(enabled).toBeVisible({ timeout: 20_000 });
-  await enabled.hover();
+    const enabled = menu.getByRole('menuitem', { name: /^Enabled$/ });
+    await expect(enabled).toBeVisible({ timeout: 20_000 });
+    await enabled.hover();
 
-  // Now submenu items become visible
-  const downloads = menu.getByRole('menuitem', { name: /^Downloads$/ });
-  await expect(downloads).toBeVisible({ timeout: 20_000 });
-  await downloads.hover();
+    const downloads = menu.getByRole('menuitem', { name: /^Downloads$/ });
+    await expect(downloads).toBeVisible({ timeout: 20_000 });
+    await downloads.hover();
 
-  const csv = menu.getByRole('menuitem', { name: /^CSV$/ });
-  await expect(csv).toBeVisible({ timeout: 20_000 });
+    const csv = menu.getByRole('menuitem', { name: /^CSV$/ });
+    await expect(csv).toBeVisible({ timeout: 20_000 });
 
-  // Click "CSV"
-  await csv.click({ force: true });
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download', { timeout: 20_000 }),
+      csv.click(),
+    ]);
 
-  // This demo doesn't reliably navigate/download. Assert the UI is still alive.
-  await expect(menu).toBeVisible({ timeout: 20_000 });
-}
+    const stream = await download.createReadStream();
+    const chunks: Buffer[] = [];
+    for await (const chunk of stream) {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    }
 
+    const failure = await download.failure();
+    const payload = Buffer.concat(chunks).toString('utf8');
+    const rows = payload.trim().split(/\r?\n/);
+
+    expect(failure, 'CSV download should complete successfully').toBeNull();
+    expect(download.suggestedFilename()).toBe('menu.csv');
+    expect(rows[0]).toBe('number of items,subtotal,tax,total');
+    expect(rows).toContain('4,4.00,0.13,4.52');
+  }
 }
