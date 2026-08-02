@@ -13,7 +13,7 @@ Then('the Drag and Drop page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Drag and Drop page', async function (this: CustomWorld) {
+Then('dragging the tiles twice should restore their original order', async function (this: CustomWorld) {
   const po = new DragAndDropPage(this.page);
-  await po.exercise();
+  await po.assertReversibleOrder();
 });

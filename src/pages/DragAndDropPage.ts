@@ -23,6 +23,18 @@ export class DragAndDropPage extends BasePage {
     return this.page.locator('#column-b header');
   }
 
+  private async expectOrder(expected: readonly [string, string]) {
+    await expect
+      .poll(
+        async () => [
+          ((await this.headerA().textContent()) ?? '').trim(),
+          ((await this.headerB().textContent()) ?? '').trim()
+        ],
+        { timeout: 20_000 }
+      )
+      .toEqual(expected);
+  }
+
   async assertLoaded() {
     await expect(this.page).toHaveURL(/\/drag_and_drop$/, { timeout: 20_000 });
 
@@ -68,29 +80,21 @@ export class DragAndDropPage extends BasePage {
     );
   }
 
-  async dragAToB() {
+  private async dragFirstTileOntoSecond() {
     // Wait for the draggable tiles to be rendered + in view.
     await this.columnA().scrollIntoViewIfNeeded();
     await this.columnB().scrollIntoViewIfNeeded();
 
-    // Record start state
-    const beforeA = ((await this.headerA().textContent()) ?? '').trim();
-    const beforeB = ((await this.headerB().textContent()) ?? '').trim();
-
-    // Drag A onto B
     await this.html5DragAndDrop('#column-a', '#column-b');
-
-    // Verify something actually changed (the page swaps headers on success)
-    await expect
-      .poll(async () => {
-        const afterA = ((await this.headerA().textContent()) ?? '').trim();
-        const afterB = ((await this.headerB().textContent()) ?? '').trim();
-        return `${beforeA}->${afterA} | ${beforeB}->${afterB}`;
-      }, { timeout: 20_000 })
-      .not.toContain(`${beforeA}->${beforeA} | ${beforeB}->${beforeB}`);
   }
 
-  async exercise() {
-    await this.dragAToB();
+  async assertReversibleOrder() {
+    await this.expectOrder(['A', 'B']);
+
+    await this.dragFirstTileOntoSecond();
+    await this.expectOrder(['B', 'A']);
+
+    await this.dragFirstTileOntoSecond();
+    await this.expectOrder(['A', 'B']);
   }
 }
