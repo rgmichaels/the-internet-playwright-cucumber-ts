@@ -13,7 +13,10 @@ Then('the Slow Resources page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Slow Resources page', async function (this: CustomWorld) {
-  const po = new SlowResourcesPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the Slow Resources page should remain usable while its external request is pending',
+  async function (this: CustomWorld) {
+    const po = new SlowResourcesPage(this.page);
+    await po.assertUsableWhileExternalRequestPending();
+  }
+);
