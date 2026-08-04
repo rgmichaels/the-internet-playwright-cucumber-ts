@@ -8,15 +8,30 @@ export class DynamicContentPage extends BasePage {
 
   async refreshAndExpectChange() {
     const firstRow = this.page.locator('#content .row').first();
+    const firstRowImage = this.page.locator('#content .row img').first();
+
     await expect(firstRow).toBeVisible();
-    const before = await firstRow.textContent();
+    await expect(firstRowImage).toBeVisible();
+
+    const beforeText = await firstRow.textContent();
+    const beforeImageSrc = await firstRowImage.getAttribute('src');
+
     await this.page.getByRole('link', { name: 'click here' }).click();
     await expect(firstRow).toBeVisible();
-    const after = await firstRow.textContent();
-    // It's "dynamic" but can occasionally match; accept either changed text or different image src.
-    const beforeImg = await this.page.locator('#content .row img').first().getAttribute('src');
-    const afterImg = await this.page.locator('#content .row img').first().getAttribute('src');
-    expect((before ?? '') !== (after ?? '') || (beforeImg ?? '') !== (afterImg ?? '')).toBeTruthy();
+
+    await expect
+      .poll(
+        async () => {
+          const afterText = await firstRow.textContent();
+          const afterImageSrc = await firstRowImage.getAttribute('src');
+          return afterText !== beforeText || afterImageSrc !== beforeImageSrc;
+        },
+        {
+          message: 'Expected the refreshed first row text or image to change',
+          timeout: 20_000,
+        }
+      )
+      .toBe(true);
   }
 
   async exercise() {
