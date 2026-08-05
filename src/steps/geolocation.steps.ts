@@ -1,6 +1,7 @@
-import { Given, Then } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 import { CustomWorld } from '../support/world';
 import { GeolocationPage } from '../pages/GeolocationPage';
+import { TEST_GEOLOCATION } from '../support/geolocation';
 
 Given('I open the Geolocation page', async function (this: CustomWorld) {
   const po = new GeolocationPage(this.page);
@@ -14,10 +15,18 @@ Then('the Geolocation page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Geolocation page', async function (this: CustomWorld) {
+When('I request my location on the Geolocation page', async function (this: CustomWorld) {
   const po = new GeolocationPage(this.page);
-  await po.exercise();
+  await po.requestLocation();
 });
+
+Then(
+  'the Geolocation page should report the configured coordinates',
+  async function (this: CustomWorld) {
+    const po = new GeolocationPage(this.page);
+    await po.assertCoordinates(TEST_GEOLOCATION);
+  }
+);
 
 Then(
   'the Geolocation page should show the proper header and text',
