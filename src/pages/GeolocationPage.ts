@@ -2,6 +2,11 @@ import { Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
+type Coordinates = {
+  latitude: number;
+  longitude: number;
+};
+
 export class GeolocationPage extends BasePage {
   constructor(page: Page) {
     super(page);
@@ -22,14 +27,12 @@ export class GeolocationPage extends BasePage {
     );
   }
 
-  async clickWhereAmI() {
-    await this.whereAmIButton.click({ timeout: 10000 });
-
-    await expect(this.latValue).not.toHaveText('');
-    await expect(this.longValue).not.toHaveText('');
+  async requestLocation() {
+    await this.whereAmIButton.click({ timeout: 10_000 });
   }
 
-  async exercise() {
-    await this.clickWhereAmI();
+  async assertCoordinates({ latitude, longitude }: Coordinates) {
+    await expect(this.latValue).toHaveText(String(latitude), { timeout: 20_000 });
+    await expect(this.longValue).toHaveText(String(longitude), { timeout: 20_000 });
   }
 }

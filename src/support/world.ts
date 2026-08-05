@@ -1,6 +1,7 @@
 import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
 import { Browser, BrowserContext, Page, Response, chromium, firefox, webkit } from 'playwright';
 import { browserName, isHeadless } from './env';
+import { TEST_GEOLOCATION } from './geolocation';
 
 export type WorldParams = { baseUrl: string };
 
@@ -63,10 +64,7 @@ export class CustomWorld extends World {
     }
 
     if (opts?.geo) {
-      contextOptions.geolocation = {
-        latitude: 40.7128,
-        longitude: -74.0060,
-      };
+      contextOptions.geolocation = { ...TEST_GEOLOCATION };
       contextOptions.permissions = ['geolocation'];
     }
 
