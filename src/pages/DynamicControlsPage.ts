@@ -146,6 +146,30 @@ export class DynamicControlsPage extends BasePage {
     await expect(message).toContainText("It's disabled!", { timeout: 20_000 });
   }
 
+  async enableInputAndEnter(value: string) {
+    const input = this.input();
+
+    await expect(input).toBeDisabled({ timeout: 20_000 });
+    await this.inputButton().click();
+    await this.waitInputCycle("It's enabled!");
+
+    await input.fill(value);
+    await expect(input).toHaveValue(value);
+  }
+
+  async disableInputAndAssertValue(value: string) {
+    const input = this.input();
+
+    await expect(input).toBeEnabled({ timeout: 20_000 });
+    await expect(input).toHaveValue(value);
+
+    await this.inputButton().click();
+    await this.waitInputCycle("It's disabled!");
+
+    await expect(input).toBeDisabled({ timeout: 20_000 });
+    await expect(input).toHaveValue(value);
+  }
+
   async exercise() {
     await this.removeAndAddCheckbox();
     await this.enableAndDisableInput();
