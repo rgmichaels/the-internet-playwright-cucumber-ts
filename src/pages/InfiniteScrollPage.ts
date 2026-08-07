@@ -10,22 +10,22 @@ export class InfiniteScrollPage extends BasePage {
     const paragraphs = this.page.locator('#content .jscroll-added');
     const before = await paragraphs.count();
 
-    for (let attempt = 0; attempt < 6; attempt += 1) {
-      await this.page.mouse.wheel(0, 2500);
-      await this.page.waitForTimeout(400);
-      const after = await paragraphs.count();
-      if (after > before) {
-        return;
-      }
-    }
+    await expect
+      .poll(
+        async () => {
+          await this.page.mouse.wheel(0, 2500);
+          return paragraphs.count();
+        },
+        {
+          message: 'Infinite Scroll should append content after scrolling',
+          timeout: 20_000,
+        }
+      )
+      .toBeGreaterThan(before);
   }
 
   async scrollAndExpectMore() {
-    const paragraphs = this.page.locator('#content .jscroll-added');
-    const before = await paragraphs.count();
     await this.scrollDownToLoadMore();
-    const after = await paragraphs.count();
-    expect(after).toBeGreaterThan(before);
   }
 
   async exercise() {
