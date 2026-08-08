@@ -22,3 +22,8 @@ Then('an available file link should download with the same filename', async func
   const po = new FileDownloadPage(this.page);
   await po.assertDownloadableLinkTextMatchesDownloadedFilename();
 });
+
+Then('an available public download should match its server response', async function (this: CustomWorld) {
+  const po = new FileDownloadPage(this.page);
+  await po.assertDownloadedPayloadMatchesServerResponse();
+});
