@@ -14,3 +14,7 @@ Feature: File Download
   Scenario: File Download - Available link text matches downloaded filename
     Given I open the File Download page
     Then an available file link should download with the same filename
+
+  Scenario: File Download - downloaded payload matches the server response
+    Given I open the File Download page
+    Then an available public download should match its server response
