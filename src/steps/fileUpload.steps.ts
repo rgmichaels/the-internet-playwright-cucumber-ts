@@ -27,6 +27,14 @@ Then(
 );
 
 Then(
+  'I upload the {string} fixture with intact browser file data',
+  async function (this: CustomWorld, fileName: string) {
+    const po = new FileUploadPage(this.page);
+    await po.uploadFixtureWithPayloadIntegrity(fileName);
+  }
+);
+
+Then(
   'I can upload the {string} fixture by drag and drop',
   async function (this: CustomWorld, fileName: string) {
     const po = new FileUploadPage(this.page);
