@@ -15,6 +15,10 @@ Feature: File Upload
     Given I open the File Upload page
     Then I upload the "hello.json" fixture on the File Upload page
 
+  Scenario: File Upload - selects intact fixture bytes for multipart submission
+    Given I open the File Upload page
+    Then I upload the "hello.json" fixture with intact browser file data
+
   Scenario: File Upload - supports drag-and-drop uploads
     Given I open the File Upload page
     Then I can upload the "hello.json" fixture by drag and drop
