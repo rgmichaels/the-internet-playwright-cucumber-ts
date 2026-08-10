@@ -14,6 +14,36 @@ export class JsOnloadErrorPage extends BasePage {
     await expect(this.page.locator('body')).toBeVisible({ timeout: 20_000 });
   }
 
+  async openAndCaptureRuntimeErrors(baseUrl: string): Promise<Error[]> {
+    const runtimeErrors: Error[] = [];
+    const captureError = (error: Error) => runtimeErrors.push(error);
+    const firstError = this.page.waitForEvent('pageerror');
+
+    this.page.on('pageerror', captureError);
+
+    try {
+      const [response] = await Promise.all([
+        this.page.goto(`${baseUrl}/javascript_error`, { waitUntil: 'load' }),
+        firstError,
+      ]);
+
+      expect(response, 'Expected JavaScript error navigation to return an HTTP response').not.toBeNull();
+      expect(response!.status()).toBe(200);
+
+      return runtimeErrors;
+    } finally {
+      this.page.off('pageerror', captureError);
+    }
+  }
+
+  assertDocumentedOnloadError(runtimeErrors: Error[]) {
+    expect(runtimeErrors).toHaveLength(1);
+    expect(runtimeErrors[0].name).toBe('TypeError');
+    expect(runtimeErrors[0].message).toMatch(
+      /Cannot read properties of undefined \(reading ['"]xyz['"]\)/
+    );
+  }
+
   async exercise() {
     const body = this.page.locator('body');
 

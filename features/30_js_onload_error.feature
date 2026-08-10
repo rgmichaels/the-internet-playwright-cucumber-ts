@@ -7,4 +7,8 @@ Feature: JavaScript onload event error
     Then the JavaScript onload event error page should load
     And I exercise the JavaScript onload event error page
 
+  Scenario: JavaScript onload event error emits the documented runtime exception
+    When I open the JavaScript onload event error page while observing runtime errors
+    Then exactly one documented JavaScript onload error should be emitted
+    And the JavaScript onload event error page should load
 
