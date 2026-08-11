@@ -17,3 +17,9 @@ Feature: Digest Authentication
     When I open the Digest Authentication page without credentials
     Then the digest authentication request should be unauthorized
     And the response should include a Digest authentication challenge
+
+  Scenario: Invalid credentials are rejected with a Digest authentication challenge
+    When I open the Digest Authentication page with invalid credentials
+    Then the digest authentication request should be unauthorized
+    And the response should include a Digest authentication challenge
+    And protected digest authentication content should not be displayed
