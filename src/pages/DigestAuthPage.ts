@@ -2,14 +2,16 @@ import { Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
+const CONGRATS_MESSAGE = 'Congratulations! You must have the proper credentials.';
+
 export class DigestAuthPage extends BasePage {
   constructor(page: Page) { super(page); }
 
   async assertLoaded() {
-    await expect(this.page.locator('#content')).toContainText('Congratulations');
+    await expect(this.page.locator('#content')).toContainText(CONGRATS_MESSAGE);
   }
 
-  async openWithoutCredentials(baseUrl: string): Promise<Response | null> {
+  async open(baseUrl: string): Promise<Response | null> {
     return this.page.goto(`${baseUrl}/digest_auth`);
   }
 
@@ -25,6 +27,10 @@ export class DigestAuthPage extends BasePage {
     expect(challenge, 'Expected a WWW-Authenticate challenge').toBeTruthy();
     expect(challenge!).toMatch(/^Digest\s/);
     expect(challenge!).toContain('realm="Protected Area"');
+  }
+
+  async assertProtectedContentNotDisplayed() {
+    await expect(this.page.locator('body')).not.toContainText(CONGRATS_MESSAGE);
   }
 
   async exercise() {
