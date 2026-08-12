@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Page, Request, Route } from 'playwright';
+import { Page, Request, Response, Route } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -134,12 +134,14 @@ export class FileUploadPage extends BasePage {
 
     await this.page.route('**/upload', captureUpload);
 
-    let uploadResponse;
+    let uploadResponse: Response;
     try {
-      [uploadResponse] = await Promise.all([
+      const [, response] = await Promise.all([
+        this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
         this.page.waitForResponse((response) => isUploadRequest(response.request())),
         this.page.click('#file-submit'),
       ]);
+      uploadResponse = response;
     } finally {
       await this.page.unroute('**/upload', captureUpload);
     }
