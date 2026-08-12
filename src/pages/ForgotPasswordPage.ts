@@ -23,45 +23,32 @@ export class ForgotPasswordPage extends BasePage {
     await expect(submit).toBeEnabled();
   }
 
-  async exercise() {
-    const email = this.page.locator('#email');
-    const form = this.page.locator('form#forgot_password');
+  async assertRecoveryRequestContract() {
+    const emailAddress = 'qa-forgot-password@example.com';
+    const email = this.page.getByLabel('E-mail', { exact: true });
+    const submit = this.page.getByRole('button', { name: 'Retrieve password', exact: true });
+    const expectedOrigin = new URL(this.page.url()).origin;
 
-    await expect(email).toBeVisible({ timeout: 20_000 });
-    await email.fill('test@example.com');
+    await email.fill(emailAddress);
 
-    await expect(form).toBeVisible({ timeout: 20_000 });
+    const requestPromise = this.page.waitForRequest((request) => {
+      const requestUrl = new URL(request.url());
+      return request.method() === 'POST' && requestUrl.pathname === '/forgot_password';
+    }, { timeout: 20_000 });
 
-    // Submit reliably (demo-site click can be flaky)
-    await form.evaluate((f) => (f as HTMLFormElement).submit());
+    await submit.click();
+    const request = await requestPromise;
+    const requestUrl = new URL(request.url());
+    const contentType = request.headers()['content-type'];
+    const postData = request.postData();
 
-    // Wait for either: success URL, success-ish content, or known demo server error
-    await expect
-      .poll(async () => {
-        const url = this.page.url();
-        const bodyText = (await this.page.locator('body').innerText().catch(() => '')).trim();
-
-        const urlOk = /\/email_sent$/.test(url);
-        const successTextOk = /e-?mail/i.test(bodyText) || /sent/i.test(bodyText);
-        const serverErrorOk = /internal server error/i.test(bodyText);
-
-        return urlOk || successTextOk || serverErrorOk;
-      }, { timeout: 20_000 })
-      .toBeTruthy();
-
-    const finalUrl = this.page.url();
-    const finalBody = (await this.page.locator('body').innerText().catch(() => '')).trim();
-
-    //console.log('DEBUG: forgot_password final URL:', finalUrl);
-    console.log('DEBUG: forgot_password final body (first 160 chars):', finalBody.slice(0, 160));
-
-    // If the demo server errors, don't fail the suite — just record it.
-    if (/internal server error/i.test(finalBody)) {
-      console.log('WARN: Demo site returned Internal Server Error for forgot_password submission. Treating as non-blocking.');
-      return;
-    }
-
-    // Otherwise, assert a real success signal (loose, punctuation-safe)
-    await expect(this.page.locator('body')).toContainText(/e-?mail/i, { timeout: 5_000 });
+    expect(requestUrl.origin).toBe(expectedOrigin);
+    expect(requestUrl.pathname).toBe('/forgot_password');
+    expect(request.method()).toBe('POST');
+    expect(contentType).toMatch(/^application\/x-www-form-urlencoded(?:;|$)/);
+    expect(postData).not.toBeNull();
+    expect(Array.from(new URLSearchParams(postData ?? '').entries())).toEqual([
+      ['email', emailAddress]
+    ]);
   }
 }

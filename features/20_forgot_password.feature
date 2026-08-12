@@ -7,9 +7,9 @@ Feature: Forgot Password
     When I open the "Forgot Password" example
     Then the Forgot Password page should load
 
-  Scenario: Forgot Password - submits a recovery request
+  Scenario: Forgot Password - submits the exact recovery request
     Given I open the Forgot Password page
-    Then I exercise the Forgot Password page
+    Then the Forgot Password page should send the exact recovery request
 
   Scenario: Forgot Password - Footer shows Elemental Selenium attribution and link
     Given I open the Forgot Password page
