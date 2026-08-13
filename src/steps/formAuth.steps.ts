@@ -39,6 +39,14 @@ Then('an invalid login should show a dismissible error', async function (this: C
 });
 
 Then(
+  'a valid username with an invalid password should show a dismissible password error',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertInvalidPasswordDismissible();
+  }
+);
+
+Then(
   'access should be rejected with an authentication-required error',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);

@@ -73,6 +73,22 @@ export class FormAuthPage extends BasePage {
     await expect(this.flash()).toBeHidden({ timeout: 20_000 });
   }
 
+  async assertInvalidPasswordDismissible() {
+    await this.login('tomsmith', 'incorrect-password');
+
+    await expect(this.page).toHaveURL(/\/login$/, { timeout: 20_000 });
+    await expect(this.heading()).toHaveText('Login Page', { timeout: 20_000 });
+    await expect(this.logoutButton()).toBeHidden({ timeout: 20_000 });
+    await expect(this.flash()).toBeVisible({ timeout: 20_000 });
+    await expect(this.flash()).toContainText('Your password is invalid!', { timeout: 20_000 });
+
+    const close = this.flash().locator('a.close');
+    await expect(close).toBeVisible({ timeout: 20_000 });
+    await close.click();
+
+    await expect(this.flash()).toBeHidden({ timeout: 20_000 });
+  }
+
   async loginSuccessfullyAndLogOut() {
     await this.login('tomsmith', 'SuperSecretPassword!');
     await expect(this.page).toHaveURL(/\/secure$/, { timeout: 20_000 });

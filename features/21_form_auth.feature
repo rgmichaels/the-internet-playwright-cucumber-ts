@@ -11,6 +11,10 @@ Feature: Form Authentication
     Given I open the Form Authentication page
     Then an invalid login should show a dismissible error
 
+  Scenario: Form Authentication - valid username with invalid password is rejected
+    Given I open the Form Authentication page
+    Then a valid username with an invalid password should show a dismissible password error
+
   Scenario: Form Authentication - unauthenticated secure-area access is rejected
     Given I open the secure area without signing in
     Then access should be rejected with an authentication-required error
