@@ -28,6 +28,11 @@ Then('the Inputs page should show a numeric input field', async function () {
   await inputs.typeNumber(123);
 });
 
+Then('the Inputs field should enforce numeric keyboard input', async function () {
+  const inputs = new InputsPage(this.page);
+  await inputs.assertNumericKeyboardInput();
+});
+
 Given('I open the Inputs page', async function () {
   if (!this.page) {
     await this.launch();
