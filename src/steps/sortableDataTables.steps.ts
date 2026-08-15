@@ -25,3 +25,11 @@ Then(
     await po.sortTable1LastNameAscendingThenDescending();
   }
 );
+
+Then(
+  'the Amount Due column in table 1 should sort numerically ascending then descending',
+  async function (this: CustomWorld) {
+    const po = new SortableDataTablesPage(this.page);
+    await po.sortTable1AmountDueAscendingThenDescending();
+  }
+);
