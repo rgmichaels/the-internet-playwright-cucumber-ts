@@ -14,3 +14,7 @@ Feature: Sortable Data Tables
   Scenario: Sortable Data Tables - Last Name column sorts ascending then descending
     Given I open the Sortable Data Tables page
     Then the Last Name column in table 1 should sort ascending then descending
+
+  Scenario: Sortable Data Tables - Amount Due column sorts numerically
+    Given I open the Sortable Data Tables page
+    Then the Amount Due column in table 1 should sort numerically ascending then descending
