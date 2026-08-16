@@ -13,7 +13,10 @@ Then('the Checkboxes page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Checkboxes page', async function (this: CustomWorld) {
-  const po = new CheckboxesPage(this.page);
-  await po.exercise();
-});
+Then(
+  'each checkbox should toggle independently and restore its original state',
+  async function (this: CustomWorld) {
+    const po = new CheckboxesPage(this.page);
+    await po.assertIndependentToggleLifecycle();
+  }
+);
