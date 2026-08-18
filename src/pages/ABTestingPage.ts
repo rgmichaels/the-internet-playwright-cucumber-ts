@@ -1,10 +1,28 @@
-import { Page } from 'playwright';
+import { Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
 export class ABTestingPage extends BasePage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async goto(baseUrl: string) {
+    const response = await this.page.goto(`${baseUrl}/abtest`, {
+      waitUntil: 'domcontentloaded',
+    });
+
+    if (this.isServerError(response)) {
+      const retryResponse = await this.page.reload({ waitUntil: 'domcontentloaded' });
+
+      if (this.isServerError(retryResponse)) {
+        throw new Error(
+          `A/B Testing page returned HTTP ${response.status()} and retry returned HTTP ${retryResponse.status()}`
+        );
+      }
+    }
+
+    await this.assertLoaded();
   }
 
   async assertLoaded() {
@@ -40,5 +58,10 @@ export class ABTestingPage extends BasePage {
       'Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different versions of a page',
       { timeout: 20_000 }
     );
+  }
+
+  private isServerError(response: Response | null): response is Response {
+    const status = response?.status();
+    return status !== undefined && status >= 500 && status < 600;
   }
 }
