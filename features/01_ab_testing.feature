@@ -11,6 +11,12 @@ Feature: A/B Testing
     Given I am on the A/B Testing page
     Then I should see the A/B testing description text
 
+  Scenario: Direct navigation retries one transient server error
+    Given the A/B Testing page initially returns a transient server error
+    When I navigate directly to the A/B Testing page
+    Then the A/B Testing page should load
+    And the transient server error should be retried once
+
   Scenario: Footer shows Elemental Selenium attribution and link
     Given I am on the A/B Testing page
     Then the global footer should be valid
