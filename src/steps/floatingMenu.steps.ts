@@ -22,7 +22,10 @@ Then(
   }
 );
 
-Then('I exercise the Floating Menu page', async function (this: CustomWorld) {
-  const po = new FloatingMenuPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the Floating Menu should remain in the viewport while the content scrolls',
+  async function (this: CustomWorld) {
+    const po = new FloatingMenuPage(this.page);
+    await po.assertMenuRemainsInViewportWhileScrolling();
+  }
+);
