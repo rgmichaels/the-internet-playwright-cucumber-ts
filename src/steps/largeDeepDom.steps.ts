@@ -13,7 +13,10 @@ Then('the Large & Deep DOM page should load', async function (this: CustomWorld)
   await po.assertLoaded();
 });
 
-Then('I exercise the Large & Deep DOM page', async function (this: CustomWorld) {
-  const po = new LargeDeepDomPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the Large & Deep DOM page should expose all nested tiers and grid coordinates',
+  async function (this: CustomWorld) {
+    const po = new LargeDeepDomPage(this.page);
+    await po.assertCompleteDataTopology();
+  }
+);
