@@ -18,6 +18,19 @@ Then('I exercise the Shifting Content page', async function (this: CustomWorld) 
   await po.exercise();
 });
 
+When('I open the Shifting Content menu example', async function (this: CustomWorld) {
+  const po = new ShiftingContentPage(this.page);
+  await po.openMenuExample();
+});
+
+Then(
+  'a {int} pixel menu shift should move only the Gallery item',
+  async function (this: CustomWorld, pixelShift: number) {
+    const po = new ShiftingContentPage(this.page);
+    await po.assertDeterministicMenuShift(pixelShift);
+  }
+);
+
 When('I open the Shifting Content image example', async function (this: CustomWorld) {
   const po = new ShiftingContentPage(this.page);
   await po.openImageExample();

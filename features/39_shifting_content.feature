@@ -15,3 +15,8 @@ Feature: Shifting Content
     Given I open the Shifting Content page
     When I open the Shifting Content image example
     Then the Shifting Content image example should show the image and description
+
+  Scenario: Shifting Content - deterministic menu shift moves only Gallery
+    Given I open the Shifting Content page
+    When I open the Shifting Content menu example
+    Then a 100 pixel menu shift should move only the Gallery item
