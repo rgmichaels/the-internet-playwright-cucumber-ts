@@ -3,8 +3,6 @@ import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
 export class DynamicControlsPage extends BasePage {
-  private healedOnce = false;
-
   constructor(page: Page) {
     super(page);
   }
@@ -17,7 +15,7 @@ export class DynamicControlsPage extends BasePage {
   }
 
   private checkbox() {
-    return this.page.locator('#checkbox input');
+    return this.page.locator('#checkbox-example input[type="checkbox"]');
   }
 
   private checkboxButton() {
@@ -36,18 +34,18 @@ export class DynamicControlsPage extends BasePage {
     return this.page.locator('#input-example button');
   }
 
-  private async waitAllHidden(loadingLocator: ReturnType<Page['locator']>, timeoutMs = 20_000) {
-    const n = await loadingLocator.count();
-    if (n === 0) return;
+  private async clickCheckboxAndWaitFor(messageText: "It's gone!" | "It's back!") {
+    const loaders = this.checkboxLoading();
+    const loaderCountBeforeClick = await loaders.count();
 
-    for (let i = 0; i < n; i++) {
-      await expect(loadingLocator.nth(i)).toBeHidden({ timeout: timeoutMs });
-    }
-  }
+    await this.checkboxButton().click();
+    await expect(loaders).toHaveCount(loaderCountBeforeClick + 1, { timeout: 20_000 });
 
-  private async waitCheckboxCycle() {
-    await this.page.waitForTimeout(150);
-    await this.waitAllHidden(this.checkboxLoading(), 20_000);
+    // The demo inserts each new loader immediately after the button, before prior hidden loaders.
+    const currentLoader = loaders.first();
+    await expect(currentLoader).toBeVisible({ timeout: 20_000 });
+    await expect(currentLoader).toBeHidden({ timeout: 20_000 });
+    await expect(this.page.locator('#message')).toHaveText(messageText, { timeout: 20_000 });
   }
 
   /**
@@ -72,78 +70,23 @@ export class DynamicControlsPage extends BasePage {
     }
   }
 
-  private async clickCheckboxButtonUntilState(target: 'gone' | 'back', attempts = 3): Promise<void> {
-    const message = this.page.locator('#message');
-
-    for (let i = 0; i < attempts; i++) {
-      const before = (await message.count()) === 0 ? '' : ((await message.textContent()) ?? '');
-
-      await this.checkboxButton().click();
-      await this.waitCheckboxCycle();
-
-      await expect(message).toBeVisible({ timeout: 20_000 });
-
-      await expect
-        .poll(async () => {
-          const now = (await message.textContent()) ?? '';
-          return now.trim() === before.trim() ? now.trim() + ' (unchanged)' : now.trim();
-        }, { timeout: 20_000 })
-        .not.toContain('(unchanged)');
-
-      const text = ((await message.textContent()) ?? '').trim();
-
-      if (target === 'gone' && text.includes("It's gone!")) {
-        await expect(this.checkbox()).toHaveCount(0, { timeout: 20_000 });
-        return;
-      }
-
-      if (target === 'back' && text.includes("It's back!")) {
-        await expect
-          .poll(async () => {
-            const count = await this.checkbox().count();
-            const btn = ((await this.checkboxButton().textContent()) ?? '').trim();
-            return count === 1 || btn === 'Remove';
-          }, { timeout: 20_000 })
-          .toBe(true);
-
-        if (await this.checkbox().count()) {
-          await expect(this.checkbox()).toBeVisible({ timeout: 20_000 });
-        }
-        return;
-      }
-    }
-
-    if (!this.healedOnce) {
-      this.healedOnce = true;
-      await this.page.reload({ waitUntil: 'domcontentloaded' });
-      await this.assertLoaded();
-      return this.clickCheckboxButtonUntilState(target, attempts);
-    }
-
-    throw new Error(`Failed to reach checkbox state "${target}" after ${attempts} attempts`);
-  }
-
   async removeAndAddCheckbox() {
-    await this.clickCheckboxButtonUntilState('gone', 3);
-    await this.clickCheckboxButtonUntilState('back', 3);
-  }
+    const checkbox = this.checkbox();
+    const button = this.checkboxButton();
 
-  async enableAndDisableInput() {
-    const input = this.input();
-    const button = this.inputButton();
-    const message = this.page.locator('#message');
+    await expect(checkbox).toHaveCount(1);
+    await expect(checkbox).toBeVisible();
+    await expect(button).toHaveText('Remove');
 
-    await expect(input).toBeVisible({ timeout: 20_000 });
+    await this.clickCheckboxAndWaitFor("It's gone!");
+    await expect(checkbox).toHaveCount(0);
+    await expect(button).toHaveText('Add');
 
-    // Enable
-    await button.click();
-    await this.waitInputCycle("It's enabled!");
-    await expect(message).toContainText("It's enabled!", { timeout: 20_000 });
-
-    // Disable
-    await button.click();
-    await this.waitInputCycle("It's disabled!");
-    await expect(message).toContainText("It's disabled!", { timeout: 20_000 });
+    await this.clickCheckboxAndWaitFor("It's back!");
+    await expect(checkbox).toHaveCount(1);
+    await expect(checkbox).toBeVisible();
+    await expect(checkbox).not.toBeChecked();
+    await expect(button).toHaveText('Remove');
   }
 
   async enableInputAndEnter(value: string) {
@@ -168,10 +111,5 @@ export class DynamicControlsPage extends BasePage {
 
     await expect(input).toBeDisabled({ timeout: 20_000 });
     await expect(input).toHaveValue(value);
-  }
-
-  async exercise() {
-    await this.removeAndAddCheckbox();
-    await this.enableAndDisableInput();
   }
 }
