@@ -1,11 +1,11 @@
 @feature @smoke @regression @feature_dynamic_controls
 Feature: Dynamic Controls
 
-  Scenario: Dynamic Controls - loads, asserts, and exercises behavior
+  Scenario: Dynamic Controls - checkbox completes one remove and restore transition
     Given I am on the home page
     When I open the "Dynamic Controls" example
     Then the Dynamic Controls page should load
-    And I exercise the Dynamic Controls page
+    And removing and restoring the dynamic checkbox should complete once per action
 
   Scenario: Dynamic Controls - entered input value survives the disable transition
     Given I open the Dynamic Controls page

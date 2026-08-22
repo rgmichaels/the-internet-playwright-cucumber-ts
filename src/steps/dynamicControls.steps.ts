@@ -13,10 +13,13 @@ Then('the Dynamic Controls page should load', async function (this: CustomWorld)
   await po.assertLoaded();
 });
 
-Then('I exercise the Dynamic Controls page', async function (this: CustomWorld) {
-  const po = new DynamicControlsPage(this.page);
-  await po.exercise();
-});
+Then(
+  'removing and restoring the dynamic checkbox should complete once per action',
+  async function (this: CustomWorld) {
+    const po = new DynamicControlsPage(this.page);
+    await po.removeAndAddCheckbox();
+  }
+);
 
 When(
   'I enable the dynamic input and enter {string}',
