@@ -5,7 +5,6 @@ module.exports = {
   default: {
     requireModule: ['ts-node/register/transpile-only'],
     require: ['src/support/**/*.ts', 'src/steps/**/*.ts'],
-    paths: ['features/**/*.feature'],
     format: [
       'progress-bar',
       'summary',
