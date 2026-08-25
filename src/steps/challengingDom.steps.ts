@@ -23,8 +23,10 @@ Then(
   }
 );
 
-Then('I exercise the Challenging DOM page', 
+Then(
+  'every Challenging DOM button should reload with fresh IDs while the table contract remains intact',
   async function (this: CustomWorld) {
     const po = new ChallengingDomPage(this.page);
-    await po.exercise();
-});
+    await po.assertVolatileButtonsPreserveTableContract();
+  }
+);
