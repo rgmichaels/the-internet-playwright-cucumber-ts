@@ -11,3 +11,7 @@ Feature: Dynamic Content
     Given I open the Dynamic Content page
     Then the global footer should be valid
 
+  Scenario: Dynamic Content - static mode preserves only the documented rows
+    Given I open the Dynamic Content page
+    When I enable static mode on the Dynamic Content page
+    Then the first two Dynamic Content rows should stay static while the third row changes on refresh
