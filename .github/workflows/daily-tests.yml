@@ -24,11 +24,11 @@ jobs:
 
       - name: Checkout
         if: steps.schedule_gate.outputs.run == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
         if: steps.schedule_gate.outputs.run == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
@@ -53,7 +53,7 @@ jobs:
 
       - name: Upload reports artifact
         if: always() && steps.schedule_gate.outputs.run == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cucumber-reports-daily
           path: |
