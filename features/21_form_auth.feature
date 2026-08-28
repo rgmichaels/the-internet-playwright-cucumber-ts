@@ -25,6 +25,10 @@ Feature: Form Authentication
     And I revisit the secure area after logging out
     Then access should be rejected with an authentication-required error
 
+  Scenario: Form Authentication - logout invalidates authenticated sibling tabs
+    Given I open the Form Authentication page
+    Then logging out should invalidate an authenticated sibling tab
+
   Scenario: Form Authentication - Footer shows Elemental Selenium attribution and link
     Given I open the Form Authentication page
     Then the global footer should be valid

@@ -28,8 +28,12 @@ export class FormAuthPage extends BasePage {
     return this.page.locator('#flash');
   }
 
-  private logoutButton() {
-    return this.page.locator('a.button.secondary.radius');
+  private secureAreaHeading(page: Page = this.page) {
+    return page.locator('#content h2');
+  }
+
+  private logoutButton(page: Page = this.page) {
+    return page.locator('a.button.secondary.radius');
   }
 
   async assertLoaded() {
@@ -89,19 +93,57 @@ export class FormAuthPage extends BasePage {
     await expect(this.flash()).toBeHidden({ timeout: 20_000 });
   }
 
-  async loginSuccessfullyAndLogOut() {
+  private async assertSecureAreaLoaded(page: Page) {
+    await expect(page).toHaveURL(/\/secure$/, { timeout: 20_000 });
+    await expect(this.secureAreaHeading(page)).toContainText('Secure Area', { timeout: 20_000 });
+    await expect(this.logoutButton(page)).toBeVisible({ timeout: 20_000 });
+  }
+
+  private async loginSuccessfully() {
     await this.login('tomsmith', 'SuperSecretPassword!');
-    await expect(this.page).toHaveURL(/\/secure$/, { timeout: 20_000 });
-
-    await expect(this.page.locator('#content h2')).toContainText('Secure Area', { timeout: 20_000 });
+    await this.assertSecureAreaLoaded(this.page);
     await expect(this.flash()).toContainText('You logged into a secure area!', { timeout: 20_000 });
+  }
 
-    await expect(this.logoutButton()).toBeVisible({ timeout: 20_000 });
+  private async logOut() {
     await this.logoutButton().click();
 
     await expect(this.page).toHaveURL(/\/login$/, { timeout: 20_000 });
     await expect(this.flash()).toContainText('You logged out of the secure area!', { timeout: 20_000 });
     await expect(this.heading()).toHaveText('Login Page', { timeout: 20_000 });
+  }
+
+  async loginSuccessfullyAndLogOut() {
+    await this.loginSuccessfully();
+    await this.logOut();
+  }
+
+  async assertLogoutInvalidatesAuthenticatedSiblingTab(baseUrl: string) {
+    await this.loginSuccessfully();
+
+    const siblingPage = await this.page.context().newPage();
+
+    try {
+      await siblingPage.goto(`${baseUrl}/secure`);
+      await this.assertSecureAreaLoaded(siblingPage);
+
+      await this.logOut();
+      await siblingPage.reload({ waitUntil: 'domcontentloaded' });
+
+      await expect(siblingPage).toHaveURL(/\/login$/, { timeout: 20_000 });
+      await expect(siblingPage.locator('#content h2')).toHaveText('Login Page', {
+        timeout: 20_000,
+      });
+      await expect(siblingPage.locator('#flash')).toContainText(
+        'You must login to view the secure area!',
+        { timeout: 20_000 }
+      );
+      await expect(siblingPage.getByRole('heading', { name: 'Secure Area', level: 2 })).toHaveCount(0);
+      await expect(this.logoutButton(siblingPage)).toHaveCount(0);
+      await expect(siblingPage.locator('#content')).not.toContainText('Welcome to the Secure Area.');
+    } finally {
+      await siblingPage.close().catch(() => {});
+    }
   }
 
   async exercise() {
