@@ -1,6 +1,12 @@
 @feature @smoke @regression @feature_home_page
 Feature: Home Page
 
+  Scenario: Home page navigation retries one transient network failure
+    Given the home page initially returns a transient navigation error
+    When I navigate to the home page
+    Then the home page should load
+    And the transient home page navigation error should be retried once
+
   Scenario: Home page source includes a populated title tag
     Given I am on the home page
     Then the home page should have a populated title tag
