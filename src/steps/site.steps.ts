@@ -12,6 +12,31 @@ Given('I am on the home page', async function (this: CustomWorld) {
 });
 
 Given(
+  'the home page initially returns a transient navigation error',
+  async function (this: CustomWorld) {
+    await this.page.route(`${this.baseUrl}/`, async (route) => {
+      this.homeNavigationAttempts += 1;
+
+      if (this.homeNavigationAttempts === 1) {
+        await route.abort('timedout');
+        return;
+      }
+
+      await route.fulfill({
+        status: 200,
+        contentType: 'text/html',
+        body: '<h1>Welcome to the-internet</h1>',
+      });
+    });
+  }
+);
+
+When('I navigate to the home page', async function (this: CustomWorld) {
+  const home = new HomePage(this.page);
+  await home.goto(this.baseUrl);
+});
+
+Given(
   'the {string} example initially returns a transient server error',
   async function (this: CustomWorld, name: string) {
     const link = this.page.getByRole('link', { name, exact: true });
@@ -50,6 +75,15 @@ Then('the global footer should be valid', async function (this: CustomWorld) {
 Then('the home page should have a populated title tag', async function (this: CustomWorld) {
   const home = new HomePage(this.page);
   await home.assertTitleTagHasText();
+});
+
+Then('the home page should load', async function (this: CustomWorld) {
+  const home = new HomePage(this.page);
+  await home.assertLoaded();
+});
+
+Then('the transient home page navigation error should be retried once', function (this: CustomWorld) {
+  expect(this.homeNavigationAttempts).toBe(2);
 });
 
 Then('the transient server error should be retried once', function (this: CustomWorld) {

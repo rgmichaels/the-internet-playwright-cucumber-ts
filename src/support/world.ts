@@ -2,6 +2,7 @@ import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
 import { Browser, BrowserContext, Page, Response, chromium, firefox, webkit } from 'playwright';
 import { browserName, isHeadless } from './env';
 import { TEST_GEOLOCATION } from './geolocation';
+import { enablePageNavigationRetry } from './navigation';
 
 export type WorldParams = { baseUrl: string };
 
@@ -12,6 +13,7 @@ export class CustomWorld extends World {
   lastResponse: Response | null = null;
   lastPageErrors: Error[] = [];
   exampleNavigationAttempts = 0;
+  homeNavigationAttempts = 0;
   baseUrl: string;
 
   constructor(options: IWorldOptions) {
@@ -78,6 +80,7 @@ export class CustomWorld extends World {
     }
 
     this.page = await this.context.newPage();
+    enablePageNavigationRetry(this.page);
   }
 
   async close() {
