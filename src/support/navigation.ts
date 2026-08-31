@@ -2,6 +2,7 @@ import { Page, Response } from 'playwright';
 
 const TRANSIENT_NETWORK_ERROR =
   /net::ERR_(?:TIMED_OUT|CONNECTION_RESET|CONNECTION_CLOSED|EMPTY_RESPONSE)|NS_ERROR_NET_(?:TIMEOUT|RESET)/;
+const FAILED_NAVIGATION_SETTLE_TIMEOUT_MS = 1_000;
 const originalGotoByPage = new WeakMap<Page, Page['goto']>();
 
 export function enablePageNavigationRetry(page: Page) {
@@ -19,6 +20,7 @@ export function enablePageNavigationRetry(page: Page) {
         navigationErrors.push(navigationError);
 
         if (attempt === 1 && isRetryableNavigationError(navigationError)) {
+          await waitForFailedNetworkNavigationToSettle(page, navigationError);
           continue;
         }
 
@@ -48,6 +50,21 @@ export function gotoOnce(
 
 export function isRetryableNavigationError(error: Error) {
   return error.name === 'TimeoutError' || TRANSIENT_NETWORK_ERROR.test(error.message);
+}
+
+async function waitForFailedNetworkNavigationToSettle(page: Page, error: Error) {
+  if (!TRANSIENT_NETWORK_ERROR.test(error.message)) return;
+
+  // Chromium can commit chrome-error:// after goto rejects; let that commit happen
+  // before retrying. Other engines may not emit a follow-up navigation at all.
+  try {
+    await page.waitForEvent('framenavigated', {
+      predicate: (frame) => frame === page.mainFrame(),
+      timeout: FAILED_NAVIGATION_SETTLE_TIMEOUT_MS,
+    });
+  } catch (settleError) {
+    if (asError(settleError).name !== 'TimeoutError') throw settleError;
+  }
 }
 
 function asError(error: unknown) {
