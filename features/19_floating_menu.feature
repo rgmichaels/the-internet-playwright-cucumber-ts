@@ -11,7 +11,7 @@ Feature: Floating Menu
     Given I open the Floating Menu page
     Then the global footer should be valid
 
-  Scenario: Floating Menu - At least one Paragraph of text is present on the page 
+  Scenario: Floating Menu - Lorem Ipsum paragraphs are present on load
     Given I open the Floating Menu page
-    Then at least one Paragraph of text should be present on the page
+    Then at least 3 Lorem Ipsum paragraphs should be visible on the Floating Menu page
     

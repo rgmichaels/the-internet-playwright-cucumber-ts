@@ -21,14 +21,25 @@ export class FloatingMenuPage extends BasePage {
     await this.expectH3ToBe('Floating Menu');
   }
 
-  async assertAtLeastOneParagraphPresent() {
-    const paragraphs = this.page.locator('p');
+  async assertAtLeastLoremIpsumParagraphsVisible(expectedMinimum: number) {
+    const paragraphs = this.page.locator('#content p');
+
     const count = await paragraphs.count();
 
     expect(
       count,
-      'Expected at least one <p> element to be present on the Floating Menu page'
-    ).toBeGreaterThan(0);
+      `Expected at least ${expectedMinimum} Lorem Ipsum paragraphs on the Floating Menu page`
+    ).toBeGreaterThanOrEqual(expectedMinimum);
+
+    for (let index = 0; index < expectedMinimum; index += 1) {
+      const paragraph = paragraphs.nth(index);
+
+      await expect(paragraph, `Expected paragraph ${index + 1} to be visible`).toBeVisible();
+      await expect(
+        paragraph,
+        `Expected paragraph ${index + 1} to contain Lorem Ipsum placeholder text`
+      ).toContainText(/\b(ipsum|dolor)\b/i);
+    }
   }
 
   private async viewportGeometry(): Promise<ViewportGeometry> {
@@ -119,7 +130,7 @@ export class FloatingMenuPage extends BasePage {
 
   async exercise() {
     await this.assertLoaded();
-    await this.assertAtLeastOneParagraphPresent();
+    await this.assertAtLeastLoremIpsumParagraphsVisible(3);
     await this.assertMenuRemainsInViewportWhileScrolling();
   }
 }

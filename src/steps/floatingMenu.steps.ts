@@ -15,10 +15,10 @@ Then('the Floating Menu page should load', async function (this: CustomWorld) {
 });
 
 Then(
-  'at least one Paragraph of text should be present on the page',
+  'at least 3 Lorem Ipsum paragraphs should be visible on the Floating Menu page',
   async function (this: CustomWorld) {
     const po = new FloatingMenuPage(this.page);
-    await po.assertAtLeastOneParagraphPresent();
+    await po.assertAtLeastLoremIpsumParagraphsVisible(3);
   }
 );
 
