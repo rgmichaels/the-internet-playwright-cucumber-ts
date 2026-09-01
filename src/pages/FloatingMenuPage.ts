@@ -21,14 +21,24 @@ export class FloatingMenuPage extends BasePage {
     await this.expectH3ToBe('Floating Menu');
   }
 
-  async assertAtLeastOneParagraphPresent() {
-    const paragraphs = this.page.locator('p');
-    const count = await paragraphs.count();
+  async assertCompleteParagraphContent() {
+    const minimumParagraphCount = 3;
+    const paragraphs = this.page.locator('#content p');
 
-    expect(
-      count,
-      'Expected at least one <p> element to be present on the Floating Menu page'
-    ).toBeGreaterThan(0);
+    await expect
+      .poll(async () => paragraphs.count(), {
+        message: 'Expected the Floating Menu main content to contain at least three paragraphs',
+      })
+      .toBeGreaterThanOrEqual(minimumParagraphCount);
+
+    for (let index = 0; index < minimumParagraphCount; index += 1) {
+      const paragraph = paragraphs.nth(index);
+      await expect(paragraph, `Expected main-content paragraph ${index + 1} to be visible`).toBeVisible();
+      await expect(
+        paragraph,
+        `Expected main-content paragraph ${index + 1} to contain text`
+      ).toHaveText(/\S/);
+    }
   }
 
   private async viewportGeometry(): Promise<ViewportGeometry> {
@@ -119,7 +129,7 @@ export class FloatingMenuPage extends BasePage {
 
   async exercise() {
     await this.assertLoaded();
-    await this.assertAtLeastOneParagraphPresent();
+    await this.assertCompleteParagraphContent();
     await this.assertMenuRemainsInViewportWhileScrolling();
   }
 }
