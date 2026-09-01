@@ -11,7 +11,6 @@ Feature: Floating Menu
     Given I open the Floating Menu page
     Then the global footer should be valid
 
-  Scenario: Floating Menu - At least one Paragraph of text is present on the page 
+  Scenario: Floating Menu - complete paragraph content is visible
     Given I open the Floating Menu page
-    Then at least one Paragraph of text should be present on the page
-    
+    Then at least three visible paragraphs of text should be present in the main content
