@@ -26,6 +26,14 @@ When(
   }
 );
 
+When(
+  'I move the Horizontal Slider past the minimum value',
+  async function (this: CustomWorld) {
+    const po = new HorizontalSliderPage(this.page);
+    await po.movePastMinimum();
+  }
+);
+
 Then(
   'the Horizontal Slider displayed value should be {string}',
   async function (this: CustomWorld, expectedValue: string) {
