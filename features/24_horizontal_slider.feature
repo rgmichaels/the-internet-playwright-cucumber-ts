@@ -15,3 +15,8 @@ Feature: Horizontal Slider
     Given I open the Horizontal Slider page
     When I move the Horizontal Slider to the maximum value
     Then the Horizontal Slider displayed value should be "5"
+
+  Scenario: Horizontal Slider clamps keyboard input at the minimum
+    Given I open the Horizontal Slider page
+    When I move the Horizontal Slider past the minimum value
+    Then the Horizontal Slider displayed value should be "0"
