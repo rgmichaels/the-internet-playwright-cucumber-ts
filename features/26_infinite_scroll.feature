@@ -7,10 +7,9 @@ Feature: Infinite Scroll
     Then the Infinite Scroll page should load
     And I exercise the Infinite Scroll page
 
-  Scenario: Infinite Scroll - adds new content after scrolling
+  Scenario: Infinite Scroll - preserves content while appending complete blocks
     Given I open the Infinite Scroll page
-    When I scroll down on the Infinite Scroll page
-    Then the Infinite Scroll page should append more content blocks
+    Then scrolling should preserve existing Infinite Scroll content and append non-empty blocks
 
   Scenario: Infinite Scroll - Footer shows Elemental Selenium attribution and link
     Given I open the Infinite Scroll page
