@@ -6,8 +6,20 @@ export class InfiniteScrollPage extends BasePage {
   constructor(page: Page) { super(page); }
   async assertLoaded() { await this.expectH3ToBe('Infinite Scroll'); }
 
+  private contentBlocks() {
+    return this.page
+      .locator('#content .jscroll-added')
+      .filter({ hasNot: this.page.locator('.jscroll-loading') });
+  }
+
+  private async contentBlockTexts() {
+    return (await this.contentBlocks().allInnerTexts()).map((text) =>
+      text.replace(/\s+/g, ' ').trim()
+    );
+  }
+
   async scrollDownToLoadMore() {
-    const paragraphs = this.page.locator('#content .jscroll-added');
+    const paragraphs = this.contentBlocks();
     const before = await paragraphs.count();
 
     await expect
@@ -22,6 +34,25 @@ export class InfiniteScrollPage extends BasePage {
         }
       )
       .toBeGreaterThan(before);
+  }
+
+  async assertContentIntegrityAfterAppend() {
+    const before = await this.contentBlockTexts();
+    expect(before.length, 'Infinite Scroll should start with rendered content').toBeGreaterThan(0);
+    for (const text of before) {
+      expect(text, 'Initial Infinite Scroll blocks should contain text').toMatch(/\S/);
+    }
+
+    await this.scrollDownToLoadMore();
+
+    const after = await this.contentBlockTexts();
+    expect(after.length).toBeGreaterThan(before.length);
+    expect(after.slice(0, before.length)).toEqual(before);
+
+    const appended = after.slice(before.length);
+    for (const text of appended) {
+      expect(text, 'Appended Infinite Scroll blocks should contain text').toMatch(/\S/);
+    }
   }
 
   async scrollAndExpectMore() {
