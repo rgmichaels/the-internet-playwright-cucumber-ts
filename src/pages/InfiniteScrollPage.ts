@@ -4,7 +4,16 @@ import { BasePage } from './BasePage';
 
 export class InfiniteScrollPage extends BasePage {
   constructor(page: Page) { super(page); }
-  async assertLoaded() { await this.expectH3ToBe('Infinite Scroll'); }
+  async assertLoaded() {
+    await this.expectH3ToBe('Infinite Scroll');
+
+    const firstCompletedBlock = this.contentBlocks().first();
+    await expect(
+      firstCompletedBlock,
+      'Infinite Scroll should render initial completed content'
+    ).toBeVisible({ timeout: 20_000 });
+    await expect(firstCompletedBlock).toContainText(/\S/);
+  }
 
   private contentBlocks() {
     return this.page
