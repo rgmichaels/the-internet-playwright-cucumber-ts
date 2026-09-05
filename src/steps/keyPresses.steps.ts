@@ -17,3 +17,11 @@ Then('I exercise the Key Presses page', async function (this: CustomWorld) {
   const po = new KeyPressesPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'pressing Tab should report the named key and advance focus',
+  async function (this: CustomWorld) {
+    const po = new KeyPressesPage(this.page);
+    await po.assertTabReportingAndFocusTraversal();
+  }
+);

@@ -11,3 +11,6 @@ Feature: Key Presses
     Given I open the Key Presses page
     Then the global footer should be valid
 
+  Scenario: Key Presses - Tab reports its name and advances focus
+    Given I open the Key Presses page
+    Then pressing Tab should report the named key and advance focus

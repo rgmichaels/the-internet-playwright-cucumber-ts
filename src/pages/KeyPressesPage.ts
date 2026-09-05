@@ -17,4 +17,19 @@ export class KeyPressesPage extends BasePage {
   async exercise() {
     await this.pressKey('A');
   }
+
+  async assertTabReportingAndFocusTraversal() {
+    const input = this.page.locator('#target');
+    const result = this.page.locator('#result');
+    const nextFocusableLink = this.page.locator('#page-footer a');
+
+    await expect(input).toBeVisible();
+    await input.click();
+    await expect(input).toBeFocused();
+
+    await input.press('Tab');
+
+    await expect(result).toHaveText('You entered: TAB');
+    await expect(nextFocusableLink).toBeFocused();
+  }
 }
