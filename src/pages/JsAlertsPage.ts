@@ -85,6 +85,19 @@ export class JsAlertsPage extends BasePage {
     await expect(this.result()).toHaveText(`You entered: ${promptText}`);
   }
 
+  async clickPromptAndAcceptEmpty() {
+    await this.triggerDialog({
+      action: 'accept',
+      button: this.page.locator('button[onclick="jsPrompt()"]'),
+      expectedMessage: 'I am a JS prompt',
+      expectedType: 'prompt',
+      promptText: '',
+    });
+
+    await expect.poll(() => this.result().textContent()).toBe('You entered: ');
+    await expect(this.result()).not.toHaveText('You entered: null');
+  }
+
   async clickPromptAndCancel() {
     await this.triggerDialog({
       action: 'dismiss',

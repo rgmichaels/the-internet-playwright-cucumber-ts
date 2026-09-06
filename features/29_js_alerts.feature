@@ -15,3 +15,8 @@ Feature: JavaScript Alerts
     Given I open the JavaScript Alerts page
     Then the JavaScript Alerts page should load
     And I verify the cancelled JavaScript Alerts dialog contracts
+
+  Scenario: JavaScript Alerts - empty prompt acceptance is distinct from cancellation
+    Given I open the JavaScript Alerts page
+    Then the JavaScript Alerts page should load
+    And accepting an empty JavaScript prompt should return an empty value
