@@ -22,3 +22,11 @@ Then('I verify the cancelled JavaScript Alerts dialog contracts', async function
   const po = new JsAlertsPage(this.page);
   await po.exerciseCancelledDialogContracts();
 });
+
+Then(
+  'accepting an empty JavaScript prompt should return an empty value',
+  async function (this: CustomWorld) {
+    const po = new JsAlertsPage(this.page);
+    await po.clickPromptAndAcceptEmpty();
+  }
+);
