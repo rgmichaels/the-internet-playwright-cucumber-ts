@@ -32,4 +32,22 @@ export class KeyPressesPage extends BasePage {
     await expect(result).toHaveText('You entered: TAB');
     await expect(nextFocusableLink).toBeFocused();
   }
+
+  async assertEscapeReportingAndInputState() {
+    const input = this.page.locator('#target');
+    const result = this.page.locator('#result');
+    const originalValue = 'Keep this value';
+
+    await expect(input).toBeVisible();
+    await input.fill(originalValue);
+    await input.click();
+    await expect(input).toBeFocused();
+
+    await input.press('Escape');
+
+    await expect(result).toHaveText('You entered: ESCAPE');
+    await expect(input).toHaveValue(originalValue);
+    await expect(input).toBeFocused();
+    await expect(this.page).toHaveURL(/\/key_presses$/);
+  }
 }
