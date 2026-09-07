@@ -25,3 +25,11 @@ Then(
     await po.assertTabReportingAndFocusTraversal();
   }
 );
+
+Then(
+  'pressing Escape should report the named key and preserve the input state',
+  async function (this: CustomWorld) {
+    const po = new KeyPressesPage(this.page);
+    await po.assertEscapeReportingAndInputState();
+  }
+);

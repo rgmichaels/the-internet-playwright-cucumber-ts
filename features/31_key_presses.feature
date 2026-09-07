@@ -14,3 +14,7 @@ Feature: Key Presses
   Scenario: Key Presses - Tab reports its name and advances focus
     Given I open the Key Presses page
     Then pressing Tab should report the named key and advance focus
+
+  Scenario: Key Presses - Escape reports its name without disrupting the input
+    Given I open the Key Presses page
+    Then pressing Escape should report the named key and preserve the input state
