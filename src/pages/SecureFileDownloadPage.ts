@@ -123,7 +123,7 @@ export class SecureFileDownloadPage extends BasePage {
     }
   }
 
-  async openWithoutCredentials(baseUrl: string): Promise<Response | null> {
+  async open(baseUrl: string): Promise<Response | null> {
     return this.page.goto(`${baseUrl}/download_secure`);
   }
 
@@ -137,7 +137,22 @@ export class SecureFileDownloadPage extends BasePage {
     expect(response.status()).toBe(401);
   }
 
+  assertBasicAuthenticationChallenge(response: Response | null) {
+    expect(response, 'Expected a response from secure download navigation').not.toBeNull();
+
+    if (!response) {
+      throw new Error('Secure download navigation did not return an HTTP response');
+    }
+
+    expect(response.headers()['www-authenticate']).toBe('Basic realm="Restricted Area"');
+  }
+
   async assertNotAuthorizedMessage() {
     await expect(this.page.locator('body')).toContainText('Not authorized');
+  }
+
+  async assertProtectedContentNotDisplayed() {
+    await expect(this.page.locator('body')).not.toContainText('Secure File Downloader');
+    await expect(this.page.locator('#content a')).toHaveCount(0);
   }
 }
