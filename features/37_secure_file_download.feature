@@ -22,3 +22,9 @@ Feature: Secure File Download
     When I request the Secure File Download page without credentials
     Then Secure File Download access should be denied
     And the Secure File Download page should indicate the user is not authorized
+
+  Scenario: Secure File Download - invalid credentials are rejected
+    When I request the Secure File Download page with invalid credentials
+    Then Secure File Download access should be denied
+    And the response should include the Secure File Download Basic authentication challenge
+    And protected Secure File Download content should not be displayed
