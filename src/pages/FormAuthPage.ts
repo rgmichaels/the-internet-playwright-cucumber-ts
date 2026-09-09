@@ -2,6 +2,9 @@ import { Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
+const SESSION_COOKIE_NAME = 'rack.session';
+const TAMPERED_SESSION_VALUE = 'tampered-session-token';
+
 export class FormAuthPage extends BasePage {
   constructor(page: Page) {
     super(page);
@@ -56,6 +59,24 @@ export class FormAuthPage extends BasePage {
     await this.page.goto(`${baseUrl}/secure`);
   }
 
+  async openSecureAreaWithTamperedSession(baseUrl: string) {
+    await this.page.context().addCookies([
+      {
+        name: SESSION_COOKIE_NAME,
+        value: TAMPERED_SESSION_VALUE,
+        url: baseUrl,
+      },
+    ]);
+
+    const seededSessionCookies = (await this.page.context().cookies(baseUrl)).filter(
+      (cookie) => cookie.name === SESSION_COOKIE_NAME
+    );
+    expect(seededSessionCookies).toHaveLength(1);
+    expect(seededSessionCookies[0].value).toBe(TAMPERED_SESSION_VALUE);
+
+    await this.openSecureAreaDirectly(baseUrl);
+  }
+
   async assertUnauthenticatedAccessRejected() {
     await this.assertLoaded();
     await expect(this.flash()).toBeVisible({ timeout: 20_000 });
@@ -63,6 +84,19 @@ export class FormAuthPage extends BasePage {
       'You must login to view the secure area!',
       { timeout: 20_000 }
     );
+  }
+
+  async assertTamperedSessionAccessRejectedAndReset(baseUrl: string) {
+    await this.assertUnauthenticatedAccessRejected();
+    await expect(this.page.getByRole('heading', { name: 'Secure Area', level: 2 })).toHaveCount(0);
+    await expect(this.logoutButton()).toHaveCount(0);
+    await expect(this.page.locator('#content')).not.toContainText('Welcome to the Secure Area.');
+
+    const currentSessionCookies = (await this.page.context().cookies(baseUrl)).filter(
+      (cookie) => cookie.name === SESSION_COOKIE_NAME
+    );
+    expect(currentSessionCookies).toHaveLength(1);
+    expect(currentSessionCookies[0].value).not.toBe(TAMPERED_SESSION_VALUE);
   }
 
   async assertInvalidLoginDismissible() {
