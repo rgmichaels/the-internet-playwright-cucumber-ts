@@ -13,6 +13,11 @@ Given('I open the secure area without signing in', async function (this: CustomW
   await po.openSecureAreaDirectly(this.baseUrl);
 });
 
+Given('I open the secure area with a tampered session cookie', async function (this: CustomWorld) {
+  const po = new FormAuthPage(this.page);
+  await po.openSecureAreaWithTamperedSession(this.baseUrl);
+});
+
 When('I sign in and log out of the secure area', async function (this: CustomWorld) {
   const po = new FormAuthPage(this.page);
   await po.loginSuccessfullyAndLogOut();
@@ -51,6 +56,14 @@ Then(
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);
     await po.assertUnauthenticatedAccessRejected();
+  }
+);
+
+Then(
+  'tampered session access should be rejected and reset',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertTamperedSessionAccessRejectedAndReset(this.baseUrl);
   }
 );
 

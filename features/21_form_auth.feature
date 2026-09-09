@@ -19,6 +19,10 @@ Feature: Form Authentication
     Given I open the secure area without signing in
     Then access should be rejected with an authentication-required error
 
+  Scenario: Form Authentication - tampered session access is rejected and reset
+    Given I open the secure area with a tampered session cookie
+    Then tampered session access should be rejected and reset
+
   Scenario: Form Authentication - logout invalidates the authenticated session
     Given I open the Form Authentication page
     When I sign in and log out of the secure area
