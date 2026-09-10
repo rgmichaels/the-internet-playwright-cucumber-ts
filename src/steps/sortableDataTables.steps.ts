@@ -33,3 +33,11 @@ Then(
     await po.sortTable1AmountDueAscendingThenDescending();
   }
 );
+
+Then(
+  'sorting table 1 by Amount Due should preserve complete customer records',
+  async function (this: CustomWorld) {
+    const po = new SortableDataTablesPage(this.page);
+    await po.assertAmountDueSortPreservesCustomerRecords();
+  }
+);

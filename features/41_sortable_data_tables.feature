@@ -18,3 +18,7 @@ Feature: Sortable Data Tables
   Scenario: Sortable Data Tables - Amount Due column sorts numerically
     Given I open the Sortable Data Tables page
     Then the Amount Due column in table 1 should sort numerically ascending then descending
+
+  Scenario: Sortable Data Tables - sorting preserves complete customer records
+    Given I open the Sortable Data Tables page
+    Then sorting table 1 by Amount Due should preserve complete customer records
