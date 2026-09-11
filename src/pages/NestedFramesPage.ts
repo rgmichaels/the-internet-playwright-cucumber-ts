@@ -70,25 +70,41 @@ export class NestedFramesPage extends BasePage {
     return frame;
   }
 
-  async exercise() {
-    // Ensure the frameset DOM is ready before we start chasing frames
+  private assertFrameEndpoint(frame: Frame, expectedPath: string) {
+    const parentUrl = new URL(this.page.url());
+    const frameUrl = new URL(frame.url());
+
+    expect(frameUrl.origin).toBe(parentUrl.origin);
+    expect(frameUrl.pathname).toBe(expectedPath);
+    expect(frameUrl.search).toBe('');
+    expect(frameUrl.hash).toBe('');
+  }
+
+  async assertExactTopologyAndContent() {
     await this.page.waitForLoadState('domcontentloaded');
 
-    // The Internet nested frames have stable frame names:
-    // frame-top, frame-left, frame-middle, frame-right, frame-bottom
     const top = await this.waitForFrameByName('frame-top');
     const bottom = await this.waitForFrameByName('frame-bottom');
-
-    // Inside top frame, wait for the three child frames by name (CI-stable)
     const left = await this.waitForChildFrameByName(top, 'frame-left');
     const middle = await this.waitForChildFrameByName(top, 'frame-middle');
     const right = await this.waitForChildFrameByName(top, 'frame-right');
 
-    // Assert expected text inside each frame
-    await expect(left.locator('body')).toContainText('LEFT', { timeout: 20_000 });
-    await expect(middle.locator('body')).toContainText('MIDDLE', { timeout: 20_000 });
-    await expect(right.locator('body')).toContainText('RIGHT', { timeout: 20_000 });
+    await expect
+      .poll(() => this.page.mainFrame().childFrames().map((frame) => frame.name()))
+      .toEqual(['frame-top', 'frame-bottom']);
+    await expect
+      .poll(() => top.childFrames().map((frame) => frame.name()))
+      .toEqual(['frame-left', 'frame-middle', 'frame-right']);
 
-    await expect(bottom.locator('body')).toContainText('BOTTOM', { timeout: 20_000 });
+    this.assertFrameEndpoint(top, '/frame_top');
+    this.assertFrameEndpoint(bottom, '/frame_bottom');
+    this.assertFrameEndpoint(left, '/frame_left');
+    this.assertFrameEndpoint(middle, '/frame_middle');
+    this.assertFrameEndpoint(right, '/frame_right');
+
+    await expect(left.locator('body')).toHaveText('LEFT', { timeout: 20_000 });
+    await expect(middle.locator('body')).toHaveText('MIDDLE', { timeout: 20_000 });
+    await expect(right.locator('body')).toHaveText('RIGHT', { timeout: 20_000 });
+    await expect(bottom.locator('body')).toHaveText('BOTTOM', { timeout: 20_000 });
   }
 }

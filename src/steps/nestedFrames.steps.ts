@@ -13,7 +13,10 @@ Then('the Nested Frames page should load', async function (this: CustomWorld) {
   await po.assertLoaded();
 });
 
-Then('I exercise the Nested Frames page', async function (this: CustomWorld) {
-  const po = new NestedFramesPage(this.page);
-  await po.exercise();
-});
+Then(
+  'the nested frame hierarchy should match the documented regions',
+  async function (this: CustomWorld) {
+    const po = new NestedFramesPage(this.page);
+    await po.assertExactTopologyAndContent();
+  }
+);
