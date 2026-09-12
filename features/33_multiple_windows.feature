@@ -7,6 +7,10 @@ Feature: Multiple Windows
     Then the Multiple Windows page should load
     And the popup should close without replacing the original Multiple Windows page
 
+  Scenario: Multiple Windows - repeated launches create independent popups
+    Given I open the Multiple Windows page
+    Then repeated popup launches should remain independent from the original Multiple Windows page
+
   Scenario: Multiple Windows - Footer shows Elemental Selenium attribution and link
     Given I open the Multiple Windows page
     Then the global footer should be valid

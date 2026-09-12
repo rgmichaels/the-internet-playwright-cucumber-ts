@@ -20,3 +20,11 @@ Then(
     await po.assertPopupLifecycle();
   }
 );
+
+Then(
+  'repeated popup launches should remain independent from the original Multiple Windows page',
+  async function (this: CustomWorld) {
+    const po = new MultipleWindowsPage(this.page);
+    await po.assertRepeatedPopupIndependence();
+  }
+);
