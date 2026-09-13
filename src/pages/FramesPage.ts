@@ -43,6 +43,30 @@ export class FramesPage extends BasePage {
     await expect(body).toContainText(/\S/, { timeout: 20_000 });
   }
 
+  async assertIFrameFocusIsolation() {
+    await this.openIFrameEditor();
+
+    const editorFrame = this.page.locator('#mce_0_ifr');
+    await expect(editorFrame).toHaveCount(1);
+    await expect(editorFrame).toBeVisible({ timeout: 20_000 });
+    await expect(editorFrame).toHaveAttribute('title', 'Rich Text Area');
+
+    const editorBody = this.page.frameLocator('#mce_0_ifr').locator('body#tinymce');
+    await expect(editorBody).toBeVisible({ timeout: 20_000 });
+
+    await editorFrame.focus();
+    await editorBody.focus();
+    await this.page.keyboard.press('ArrowRight');
+
+    await expect
+      .poll(() => editorBody.evaluate((element) => element.ownerDocument.activeElement === element))
+      .toBe(true);
+    await expect
+      .poll(() => editorFrame.evaluate((element) => element.ownerDocument.activeElement === element))
+      .toBe(true);
+    await expect(this.page).toHaveURL(/\/iframe$/);
+  }
+
   async exercise() {
     await this.exerciseIFrameEditor();
   }

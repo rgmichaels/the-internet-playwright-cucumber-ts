@@ -7,7 +7,10 @@ Feature: Frames
     Then the Frames page should load
     And I exercise the Frames page
 
+  Scenario: Frames - iframe editor owns focus across the parent boundary
+    Given I open the Frames page
+    Then focusing the iframe editor should keep focus within its document
+
   Scenario: Frames - Footer shows Elemental Selenium attribution and link
     Given I open the Frames page
     Then the global footer should be valid
-

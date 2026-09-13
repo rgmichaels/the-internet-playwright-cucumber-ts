@@ -17,3 +17,11 @@ Then('I exercise the Frames page', async function (this: CustomWorld) {
   const po = new FramesPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'focusing the iframe editor should keep focus within its document',
+  async function (this: CustomWorld) {
+    const po = new FramesPage(this.page);
+    await po.assertIFrameFocusIsolation();
+  }
+);
