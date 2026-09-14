@@ -14,9 +14,9 @@ Then('the Slow Resources page should load', async function (this: CustomWorld) {
 });
 
 Then(
-  'the Slow Resources page should remain usable while its external request is pending',
+  'the Slow Resources page should remain usable while its external request is pending and finish loading after it completes',
   async function (this: CustomWorld) {
     const po = new SlowResourcesPage(this.page);
-    await po.assertUsableWhileExternalRequestPending();
+    await po.assertUsableDuringAndAfterExternalRequest();
   }
 );
