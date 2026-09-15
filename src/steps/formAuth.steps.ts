@@ -68,6 +68,14 @@ Then(
 );
 
 Then(
+  'a successful login should rotate the pre-authentication session identifier',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertSuccessfulLoginRotatesSession(this.baseUrl);
+  }
+);
+
+Then(
   'logging out should invalidate an authenticated sibling tab',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);
