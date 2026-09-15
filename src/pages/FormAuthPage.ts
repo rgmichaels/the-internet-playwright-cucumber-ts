@@ -99,6 +99,27 @@ export class FormAuthPage extends BasePage {
     expect(currentSessionCookies[0].value).not.toBe(TAMPERED_SESSION_VALUE);
   }
 
+  private async sessionCookieValue(baseUrl: string) {
+    const sessionCookies = (await this.page.context().cookies(baseUrl)).filter(
+      (cookie) => cookie.name === SESSION_COOKIE_NAME
+    );
+
+    expect(
+      sessionCookies,
+      'Browser context should contain exactly one application session'
+    ).toHaveLength(1);
+    return sessionCookies[0].value;
+  }
+
+  async assertSuccessfulLoginRotatesSession(baseUrl: string) {
+    const preAuthenticationSession = await this.sessionCookieValue(baseUrl);
+
+    await this.loginSuccessfully();
+
+    const authenticatedSession = await this.sessionCookieValue(baseUrl);
+    expect(authenticatedSession).not.toBe(preAuthenticationSession);
+  }
+
   async assertInvalidLoginDismissible() {
     await this.login('baduser', 'badpass');
     await expect(this.flash()).toBeVisible({ timeout: 20_000 });

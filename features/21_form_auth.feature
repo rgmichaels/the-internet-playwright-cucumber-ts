@@ -23,6 +23,10 @@ Feature: Form Authentication
     Given I open the secure area with a tampered session cookie
     Then tampered session access should be rejected and reset
 
+  Scenario: Form Authentication - successful login rotates the session identifier
+    Given I open the Form Authentication page
+    Then a successful login should rotate the pre-authentication session identifier
+
   Scenario: Form Authentication - logout invalidates the authenticated session
     Given I open the Form Authentication page
     When I sign in and log out of the secure area
