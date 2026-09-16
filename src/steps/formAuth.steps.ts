@@ -76,6 +76,14 @@ Then(
 );
 
 Then(
+  'valid credentials should be submitted without appearing in navigation URLs',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertCredentialsStayOutOfNavigationUrls();
+  }
+);
+
+Then(
   'logging out should invalidate an authenticated sibling tab',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);
