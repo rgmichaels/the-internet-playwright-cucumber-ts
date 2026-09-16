@@ -21,6 +21,13 @@ export class BasePage {
     await expect(h3).toContainText(expected, { timeout: 15_000 });
   }
 
+  async assertDocumentTitlePopulated(pageName = 'page') {
+    const titleText = await this.page.locator('head > title').textContent();
+
+    expect(titleText, `Expected the ${pageName} source to include a <title> tag`).not.toBeNull();
+    expect(titleText!.trim(), `Expected the ${pageName} <title> tag to contain text`).not.toBe('');
+  }
+
   /**
    * Global footer contract: attribution text and valid Elemental Selenium link.
    * Keep this centralized so every page can reuse it.

@@ -68,9 +68,6 @@ export class HomePage extends BasePage {
   }
 
   async assertTitleTagHasText() {
-    const titleText = await this.page.locator('head > title').textContent();
-
-    expect(titleText, 'Expected the home page source to include a <title> tag').not.toBeNull();
-    expect(titleText!.trim(), 'Expected the home page <title> tag to contain text').not.toBe('');
+    await this.assertDocumentTitlePopulated('home page');
   }
 }
