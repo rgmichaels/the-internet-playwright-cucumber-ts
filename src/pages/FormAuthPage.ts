@@ -4,6 +4,8 @@ import { BasePage } from './BasePage';
 
 const SESSION_COOKIE_NAME = 'rack.session';
 const TAMPERED_SESSION_VALUE = 'tampered-session-token';
+const VALID_USERNAME = 'tomsmith';
+const VALID_PASSWORD = 'SuperSecretPassword!';
 
 export class FormAuthPage extends BasePage {
   constructor(page: Page) {
@@ -120,6 +122,59 @@ export class FormAuthPage extends BasePage {
     expect(authenticatedSession).not.toBe(preAuthenticationSession);
   }
 
+  async assertCredentialsStayOutOfNavigationUrls() {
+    await this.username().fill(VALID_USERNAME);
+    await this.password().fill(VALID_PASSWORD);
+
+    const authenticationRequestPromise = this.page.waitForRequest((request) => {
+      const requestUrl = new URL(request.url());
+      return (
+        request.isNavigationRequest() &&
+        request.frame() === this.page.mainFrame() &&
+        requestUrl.pathname === '/authenticate'
+      );
+    });
+
+    await this.loginButton().click();
+    const authenticationRequest = await authenticationRequestPromise;
+    const authenticationUrl = new URL(authenticationRequest.url());
+
+    expect(authenticationRequest.method()).toBe('POST');
+    expect(authenticationUrl.protocol).toBe('https:');
+    expect(authenticationUrl.pathname).toBe('/authenticate');
+    expect(authenticationUrl.search).toBe('');
+    expect(authenticationUrl.hash).toBe('');
+    expect(authenticationRequest.headers()['content-type']).toContain(
+      'application/x-www-form-urlencoded'
+    );
+
+    const decodedAuthenticationUrl = decodeURIComponent(authenticationRequest.url());
+    expect(decodedAuthenticationUrl).not.toContain(VALID_USERNAME);
+    expect(decodedAuthenticationUrl).not.toContain(VALID_PASSWORD);
+
+    const postData = authenticationRequest.postData();
+    expect(postData, 'Authentication request should have a form-encoded body').not.toBeNull();
+
+    const submittedForm = new URLSearchParams(postData ?? '');
+    expect([...submittedForm.keys()].sort()).toEqual(['password', 'username']);
+    expect(submittedForm.get('username')).toBe(VALID_USERNAME);
+    expect(submittedForm.get('password')).toBe(VALID_PASSWORD);
+
+    await this.assertSecureAreaLoaded(this.page);
+    await expect(this.flash()).toContainText('You logged into a secure area!', { timeout: 20_000 });
+
+    const secureAreaUrl = new URL(this.page.url());
+    expect(secureAreaUrl.protocol).toBe('https:');
+    expect(secureAreaUrl.search).toBe('');
+    expect(secureAreaUrl.hash).toBe('');
+
+    const decodedSecureAreaUrl = decodeURIComponent(this.page.url());
+    expect(decodedSecureAreaUrl).not.toContain(VALID_USERNAME);
+    expect(decodedSecureAreaUrl).not.toContain(VALID_PASSWORD);
+    await expect(this.username()).toHaveCount(0);
+    await expect(this.password()).toHaveCount(0);
+  }
+
   async assertInvalidLoginDismissible() {
     await this.login('baduser', 'badpass');
     await expect(this.flash()).toBeVisible({ timeout: 20_000 });
@@ -155,7 +210,7 @@ export class FormAuthPage extends BasePage {
   }
 
   private async loginSuccessfully() {
-    await this.login('tomsmith', 'SuperSecretPassword!');
+    await this.login(VALID_USERNAME, VALID_PASSWORD);
     await this.assertSecureAreaLoaded(this.page);
     await expect(this.flash()).toContainText('You logged into a secure area!', { timeout: 20_000 });
   }
