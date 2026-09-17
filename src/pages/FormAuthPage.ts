@@ -101,7 +101,7 @@ export class FormAuthPage extends BasePage {
     expect(currentSessionCookies[0].value).not.toBe(TAMPERED_SESSION_VALUE);
   }
 
-  private async sessionCookieValue(baseUrl: string) {
+  private async sessionCookie(baseUrl: string) {
     const sessionCookies = (await this.page.context().cookies(baseUrl)).filter(
       (cookie) => cookie.name === SESSION_COOKIE_NAME
     );
@@ -110,7 +110,11 @@ export class FormAuthPage extends BasePage {
       sessionCookies,
       'Browser context should contain exactly one application session'
     ).toHaveLength(1);
-    return sessionCookies[0].value;
+    return sessionCookies[0];
+  }
+
+  private async sessionCookieValue(baseUrl: string) {
+    return (await this.sessionCookie(baseUrl)).value;
   }
 
   async assertSuccessfulLoginRotatesSession(baseUrl: string) {
@@ -120,6 +124,21 @@ export class FormAuthPage extends BasePage {
 
     const authenticatedSession = await this.sessionCookieValue(baseUrl);
     expect(authenticatedSession).not.toBe(preAuthenticationSession);
+  }
+
+  async assertAuthenticatedSessionIsHttpOnly(baseUrl: string) {
+    await this.loginSuccessfully();
+
+    const authenticatedSession = await this.sessionCookie(baseUrl);
+    expect(authenticatedSession.httpOnly).toBe(true);
+
+    const sessionIsVisibleToPageScript = await this.page.evaluate((cookieName) => {
+      return document.cookie
+        .split(';')
+        .some((cookie) => cookie.trim().startsWith(`${cookieName}=`));
+    }, SESSION_COOKIE_NAME);
+
+    expect(sessionIsVisibleToPageScript).toBe(false);
   }
 
   async assertCredentialsStayOutOfNavigationUrls() {
