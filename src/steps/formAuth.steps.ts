@@ -76,6 +76,14 @@ Then(
 );
 
 Then(
+  'the authenticated session cookie should be hidden from page scripts',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertAuthenticatedSessionIsHttpOnly(this.baseUrl);
+  }
+);
+
+Then(
   'valid credentials should be submitted without appearing in navigation URLs',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);

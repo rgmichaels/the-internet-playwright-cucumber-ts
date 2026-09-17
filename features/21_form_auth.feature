@@ -27,6 +27,10 @@ Feature: Form Authentication
     Given I open the Form Authentication page
     Then a successful login should rotate the pre-authentication session identifier
 
+  Scenario: Form Authentication - authenticated session cookie is hidden from page scripts
+    Given I open the Form Authentication page
+    Then the authenticated session cookie should be hidden from page scripts
+
   Scenario: Form Authentication - successful login keeps credentials out of navigation URLs
     Given I open the Form Authentication page
     Then valid credentials should be submitted without appearing in navigation URLs
