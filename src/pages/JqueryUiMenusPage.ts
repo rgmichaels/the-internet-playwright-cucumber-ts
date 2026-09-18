@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Download, Page } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -19,7 +19,7 @@ export class JqueryUiMenusPage extends BasePage {
     await expect(this.page.locator('#menu')).toBeVisible({ timeout: 20_000 });
   }
 
-  async assertCsvDownloadContract() {
+  private async downloadFromMenu(format: 'CSV' | 'PDF'): Promise<Download> {
     const menu = this.page.locator('#menu');
     await expect(menu).toBeVisible({ timeout: 20_000 });
 
@@ -31,27 +31,50 @@ export class JqueryUiMenusPage extends BasePage {
     await expect(downloads).toBeVisible({ timeout: 20_000 });
     await downloads.hover();
 
-    const csv = menu.getByRole('menuitem', { name: /^CSV$/ });
-    await expect(csv).toBeVisible({ timeout: 20_000 });
+    const artifact = menu.getByRole('menuitem', { name: new RegExp(`^${format}$`) });
+    await expect(artifact).toBeVisible({ timeout: 20_000 });
 
     const [download] = await Promise.all([
       this.page.waitForEvent('download', { timeout: 20_000 }),
-      csv.click(),
+      artifact.click(),
     ]);
 
+    return download;
+  }
+
+  private async readDownload(download: Download): Promise<Buffer> {
     const stream = await download.createReadStream();
     const chunks: Buffer[] = [];
     for await (const chunk of stream) {
       chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
     }
 
+    return Buffer.concat(chunks);
+  }
+
+  async assertCsvDownloadContract() {
+    const download = await this.downloadFromMenu('CSV');
+    const downloadedPayload = await this.readDownload(download);
+
     const failure = await download.failure();
-    const payload = Buffer.concat(chunks).toString('utf8');
+    const payload = downloadedPayload.toString('utf8');
     const rows = payload.trim().split(/\r?\n/);
 
     expect(failure, 'CSV download should complete successfully').toBeNull();
     expect(download.suggestedFilename()).toBe('menu.csv');
     expect(rows[0]).toBe('number of items,subtotal,tax,total');
     expect(rows).toContain('4,4.00,0.13,4.52');
+  }
+
+  async assertPdfDownloadContract() {
+    const download = await this.downloadFromMenu('PDF');
+    const payload = await this.readDownload(download);
+    const failure = await download.failure();
+
+    expect(failure, 'PDF download should complete successfully').toBeNull();
+    expect(download.suggestedFilename()).toBe('menu.pdf');
+    expect(payload.length, 'PDF download should not be empty').toBeGreaterThan(0);
+    expect(payload.subarray(0, 5).toString('ascii')).toBe('%PDF-');
+    expect(payload.toString('latin1').trimEnd().endsWith('%%EOF')).toBe(true);
   }
 }
