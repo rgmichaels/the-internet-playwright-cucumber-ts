@@ -20,3 +20,11 @@ Then(
     await po.assertCsvDownloadContract();
   }
 );
+
+Then(
+  'downloading PDF from the JQuery UI Menus page returns a valid document',
+  async function (this: CustomWorld) {
+    const po = new JqueryUiMenusPage(this.page);
+    await po.assertPdfDownloadContract();
+  }
+);

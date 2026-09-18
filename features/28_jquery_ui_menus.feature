@@ -7,6 +7,10 @@ Feature: JQuery UI Menus
     Then the JQuery UI Menus page should load
     And downloading CSV from the JQuery UI Menus page returns the expected artifact
 
+  Scenario: JQuery UI Menus - PDF download exposes a valid document
+    Given I open the JQuery UI Menus page
+    Then downloading PDF from the JQuery UI Menus page returns a valid document
+
   Scenario: JQuery UI Menus - Footer shows Elemental Selenium attribution and link
     Given I open the JQuery UI Menus page
     Then the global footer should be valid
