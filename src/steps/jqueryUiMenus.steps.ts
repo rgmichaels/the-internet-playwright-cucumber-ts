@@ -28,3 +28,11 @@ Then(
     await po.assertPdfDownloadContract();
   }
 );
+
+Then(
+  'downloading Excel from the JQuery UI Menus page returns a valid workbook',
+  async function (this: CustomWorld) {
+    const po = new JqueryUiMenusPage(this.page);
+    await po.assertExcelDownloadContract();
+  }
+);
