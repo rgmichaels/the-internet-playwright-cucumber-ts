@@ -11,6 +11,10 @@ Feature: JQuery UI Menus
     Given I open the JQuery UI Menus page
     Then downloading PDF from the JQuery UI Menus page returns a valid document
 
+  Scenario: JQuery UI Menus - Excel download exposes a valid workbook
+    Given I open the JQuery UI Menus page
+    Then downloading Excel from the JQuery UI Menus page returns a valid workbook
+
   Scenario: JQuery UI Menus - Footer shows Elemental Selenium attribution and link
     Given I open the JQuery UI Menus page
     Then the global footer should be valid

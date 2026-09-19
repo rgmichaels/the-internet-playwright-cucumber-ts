@@ -19,7 +19,7 @@ export class JqueryUiMenusPage extends BasePage {
     await expect(this.page.locator('#menu')).toBeVisible({ timeout: 20_000 });
   }
 
-  private async downloadFromMenu(format: 'CSV' | 'PDF'): Promise<Download> {
+  private async downloadFromMenu(format: 'CSV' | 'PDF' | 'Excel'): Promise<Download> {
     const menu = this.page.locator('#menu');
     await expect(menu).toBeVisible({ timeout: 20_000 });
 
@@ -76,5 +76,25 @@ export class JqueryUiMenusPage extends BasePage {
     expect(payload.length, 'PDF download should not be empty').toBeGreaterThan(0);
     expect(payload.subarray(0, 5).toString('ascii')).toBe('%PDF-');
     expect(payload.toString('latin1').trimEnd().endsWith('%%EOF')).toBe(true);
+  }
+
+  async assertExcelDownloadContract() {
+    const download = await this.downloadFromMenu('Excel');
+    const payload = await this.readDownload(download);
+    const failure = await download.failure();
+
+    expect(failure, 'Excel download should complete successfully').toBeNull();
+    expect(download.suggestedFilename()).toBe('menu.xls');
+    expect(payload.length, 'Excel download should contain a complete CFB header').toBeGreaterThanOrEqual(512);
+    expect(payload.subarray(0, 8)).toEqual(Buffer.from([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]));
+    expect(payload.readUInt16LE(28), 'Excel CFB byte order should be little-endian').toBe(0xfffe);
+
+    const majorVersion = payload.readUInt16LE(26);
+    const sectorShift = payload.readUInt16LE(30);
+    const expectedSectorShift = majorVersion === 3 ? 9 : majorVersion === 4 ? 12 : undefined;
+
+    expect(expectedSectorShift, 'Excel CFB major version should be 3 or 4').toBeDefined();
+    expect(sectorShift, 'Excel CFB sector size should match its major version').toBe(expectedSectorShift);
+    expect(payload.length % 2 ** sectorShift, 'Excel CFB payload should end on a sector boundary').toBe(0);
   }
 }
