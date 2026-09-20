@@ -17,3 +17,11 @@ Then('I exercise the Exit Intent page', async function (this: CustomWorld) {
   const po = new ExitIntentPage(this.page);
   await po.exercise();
 });
+
+Then(
+  'clicking outside the Exit Intent modal should restore the page',
+  async function (this: CustomWorld) {
+    const po = new ExitIntentPage(this.page);
+    await po.assertUnderlayDismissalRestoresPage();
+  }
+);

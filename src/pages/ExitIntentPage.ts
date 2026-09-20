@@ -15,6 +15,14 @@ export class ExitIntentPage extends BasePage {
     return this.page.locator('.modal');
   }
 
+  private modalOverlay() {
+    return this.page.locator('#ouibounce-modal');
+  }
+
+  private modalUnderlay() {
+    return this.modalOverlay().locator('.underlay');
+  }
+
   private modalTitle() {
     return this.page.getByRole('heading', { name: 'This is a modal window', level: 3 });
   }
@@ -22,6 +30,10 @@ export class ExitIntentPage extends BasePage {
   private modalClose() {
     // close "x" on this demo is a <p> element in footer
     return this.page.locator('.modal .modal-footer p');
+  }
+
+  private pageFooter() {
+    return this.page.locator('#page-footer');
   }
 
   async assertLoaded() {
@@ -40,20 +52,37 @@ export class ExitIntentPage extends BasePage {
   private async closeModalIfPresent() {
     if (await this.modal().isVisible().catch(() => false)) {
       await this.modalClose().click();
-      await expect(this.modal()).toBeHidden({ timeout: 20_000 });
+      await expect(this.modalOverlay()).toBeHidden({ timeout: 20_000 });
     }
   }
 
-  async exercise() {
-    // Ensure we start without an already-open modal
+  private async openModal() {
     await this.closeModalIfPresent();
 
     await this.triggerExitIntent();
 
+    await expect(this.modalOverlay()).toBeVisible({ timeout: 20_000 });
     await expect(this.modal()).toBeVisible({ timeout: 20_000 });
     await expect(this.modalTitle()).toBeVisible({ timeout: 20_000 });
+  }
+
+  async assertUnderlayDismissalRestoresPage() {
+    await expect(this.pageFooter()).toBeVisible();
+    await this.openModal();
+
+    await expect(this.pageFooter()).toBeHidden();
+    await this.modalUnderlay().click({ position: { x: 20, y: 20 } });
+
+    await expect(this.modalOverlay()).toBeHidden({ timeout: 20_000 });
+    await expect(this.pageFooter()).toBeVisible({ timeout: 20_000 });
+    await expect(this.pageTitle()).toBeVisible();
+    await expect(this.page).toHaveURL(/\/exit_intent$/);
+  }
+
+  async exercise() {
+    await this.openModal();
 
     await this.modalClose().click();
-    await expect(this.modal()).toBeHidden({ timeout: 20_000 });
+    await expect(this.modalOverlay()).toBeHidden({ timeout: 20_000 });
   }
 }

@@ -7,7 +7,10 @@ Feature: Exit Intent
     Then the Exit Intent page should load
     And I exercise the Exit Intent page
 
+  Scenario: Exit Intent - clicking outside the modal restores the underlying page
+    Given I open the Exit Intent page
+    Then clicking outside the Exit Intent modal should restore the page
+
   Scenario: Exit Intent - Footer shows Elemental Selenium attribution and link
     Given I open the Exit Intent page
     Then the global footer should be valid
-
