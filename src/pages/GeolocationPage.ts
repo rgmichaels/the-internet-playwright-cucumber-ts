@@ -35,4 +35,32 @@ export class GeolocationPage extends BasePage {
     await expect(this.latValue).toHaveText(String(latitude), { timeout: 20_000 });
     await expect(this.longValue).toHaveText(String(longitude), { timeout: 20_000 });
   }
+
+  async assertCoordinatesProtectedWithoutPermission() {
+    const geolocationError = await this.page.evaluate(
+      () =>
+        new Promise<{ code: number; permissionDeniedCode: number }>((resolve) => {
+          navigator.geolocation.getCurrentPosition(
+            () => resolve({ code: 0, permissionDeniedCode: 1 }),
+            (error) =>
+              resolve({
+                code: error.code,
+                permissionDeniedCode: error.PERMISSION_DENIED,
+              })
+          );
+        })
+    );
+
+    expect(geolocationError.code, 'Expected the browser to deny geolocation access').toBe(
+      geolocationError.permissionDeniedCode
+    );
+    await expect(this.page).toHaveURL(/\/geolocation$/);
+    await expect(this.latValue).toHaveCount(0);
+    await expect(this.longValue).toHaveCount(0);
+    await expect(this.description).toHaveText(
+      'Click the button to get your current latitude and longitude'
+    );
+    await expect(this.whereAmIButton).toBeVisible();
+    await expect(this.whereAmIButton).toBeEnabled();
+  }
 }

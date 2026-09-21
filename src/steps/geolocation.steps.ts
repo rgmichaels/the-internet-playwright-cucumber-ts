@@ -39,3 +39,11 @@ Then(
     await po.assertLoaded();
   }
 );
+
+Then(
+  'the Geolocation page should not expose coordinates without permission',
+  async function (this: CustomWorld) {
+    const po = new GeolocationPage(this.page);
+    await po.assertCoordinatesProtectedWithoutPermission();
+  }
+);
