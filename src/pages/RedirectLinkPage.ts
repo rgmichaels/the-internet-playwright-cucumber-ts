@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Page, Request } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
 
@@ -26,6 +26,35 @@ export class RedirectLinkPage extends BasePage {
 
     await expect(this.page).toHaveURL(/\/status_codes$/);
     await expect(this.page.locator('h3')).toHaveText('Status Codes');
+  }
+
+  async assertBackNavigationRestoresRedirector() {
+    await this.followRedirectAndValidate();
+
+    const replayedRedirectRequests: Request[] = [];
+    const captureRedirectReplay = (request: Request) => {
+      if (
+        request.isNavigationRequest() &&
+        new URL(request.url()).pathname === '/redirect'
+      ) {
+        replayedRedirectRequests.push(request);
+      }
+    };
+
+    this.page.on('request', captureRedirectReplay);
+    try {
+      await this.page.goBack({ waitUntil: 'domcontentloaded' });
+    } finally {
+      this.page.off('request', captureRedirectReplay);
+    }
+
+    expect(replayedRedirectRequests).toHaveLength(0);
+    await expect(this.page).toHaveURL(/\/redirector$/);
+    await this.assertLoaded();
+    await expect(this.page.getByRole('link', { name: 'here' })).toHaveAttribute('href', 'redirect');
+    await expect(this.page.locator('#content')).toContainText(
+      'Click here to trigger a redirect (and be taken to the status codes page).'
+    );
   }
 
   async exercise() {

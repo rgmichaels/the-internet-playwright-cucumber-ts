@@ -11,7 +11,11 @@ Feature: Redirect Link
     Given I open the Redirect Link page
     Then the global footer should be valid
 
-Scenario: Redirect Link - redirector page explains redirect behavior
-  Given I open the Redirect Link page
-  Then the Redirect Link page should load
-  And the redirect explanation text should be displayed
+  Scenario: Redirect Link - redirector page explains redirect behavior
+    Given I open the Redirect Link page
+    Then the Redirect Link page should load
+    And the redirect explanation text should be displayed
+
+  Scenario: Redirect Link - browser Back restores the redirector without replaying the redirect
+    Given I open the Redirect Link page
+    Then browser Back after the redirect should restore the Redirect Link page

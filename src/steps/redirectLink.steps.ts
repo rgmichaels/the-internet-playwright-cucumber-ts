@@ -23,6 +23,14 @@ Then(
 );
 
 Then(
+  'browser Back after the redirect should restore the Redirect Link page',
+  async function (this: CustomWorld) {
+    const po = new RedirectLinkPage(this.page);
+    await po.assertBackNavigationRestoresRedirector();
+  }
+);
+
+Then(
   'the redirect explanation text should be displayed',
   async function () {
     const expectedText =
