@@ -36,3 +36,11 @@ Then(
     await po.disableInputAndAssertValue(value);
   }
 );
+
+Then(
+  'each Dynamic Controls action should lock until its transition completes',
+  async function (this: CustomWorld) {
+    const po = new DynamicControlsPage(this.page);
+    await po.assertActionsLockDuringTransitions();
+  }
+);
