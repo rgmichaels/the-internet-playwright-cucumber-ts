@@ -112,4 +112,41 @@ export class DynamicControlsPage extends BasePage {
     await expect(input).toBeDisabled({ timeout: 20_000 });
     await expect(input).toHaveValue(value);
   }
+
+  async assertActionsLockDuringTransitions() {
+    const checkbox = this.checkbox();
+    const checkboxButton = this.checkboxButton();
+    const checkboxLoading = this.checkboxLoading();
+    const input = this.input();
+    const inputButton = this.inputButton();
+    const inputLoading = this.page.locator('#input-example #loading');
+    const message = this.page.locator('#message');
+
+    await expect(checkbox).toHaveCount(1);
+    await expect(checkboxButton).toBeEnabled();
+    await expect(checkboxButton).toHaveText('Remove');
+
+    await checkboxButton.click();
+    await expect(checkboxLoading).toBeVisible({ timeout: 20_000 });
+    await expect(checkboxButton).toBeDisabled();
+    await expect(checkboxButton).toHaveText('Remove');
+    await expect(checkboxLoading).toBeHidden({ timeout: 20_000 });
+    await expect(message).toHaveText("It's gone!", { timeout: 20_000 });
+    await expect(checkbox).toHaveCount(0);
+    await expect(checkboxButton).toBeEnabled();
+    await expect(checkboxButton).toHaveText('Add');
+
+    await expect(input).toBeDisabled();
+    await expect(inputButton).toBeEnabled();
+    await expect(inputButton).toHaveText('Enable');
+
+    await inputButton.click();
+    await expect(inputLoading).toBeVisible({ timeout: 20_000 });
+    await expect(inputButton).toBeDisabled();
+    await expect(inputButton).toHaveText('Enable');
+    await expect(message).toHaveText("It's enabled!", { timeout: 20_000 });
+    await expect(input).toBeEnabled();
+    await expect(inputButton).toBeEnabled();
+    await expect(inputButton).toHaveText('Disable');
+  }
 }

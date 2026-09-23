@@ -12,6 +12,10 @@ Feature: Dynamic Controls
     When I enable the dynamic input and enter "customer reference 42"
     Then disabling the dynamic input should preserve "customer reference 42"
 
+  Scenario: Dynamic Controls - actions lock during asynchronous transitions
+    Given I open the Dynamic Controls page
+    Then each Dynamic Controls action should lock until its transition completes
+
   Scenario: Dynamic Controls - Footer shows Elemental Selenium attribution and link
     Given I open the Dynamic Controls page
     Then the global footer should be valid
