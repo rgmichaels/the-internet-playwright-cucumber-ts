@@ -16,6 +16,10 @@ export class EntryAdPage extends BasePage {
     await expect(this.restartAdLink()).toBeVisible({ timeout: 20_000 });
   }
 
+  async assertTitleTagHasText() {
+    await this.assertDocumentTitlePopulated('entry ad page');
+  }
+
   private modal() {
     return this.page.locator('.modal'); // exists even when hidden
   }
@@ -106,10 +110,7 @@ export class EntryAdPage extends BasePage {
   }
 
   async exercise() {
-    await this.ensureModalVisible();
-
-    // Modal is visible here — fully exercise it.
-    await expect(this.modalTitle()).toContainText('This is a modal window', { timeout: 20_000 });
+    await this.assertModalAppears();
 
     await this.modalClose().click();
     await expect(this.modal()).toBeHidden({ timeout: 20_000 });
@@ -131,5 +132,11 @@ export class EntryAdPage extends BasePage {
 
     await this.modalClose().click();
     await expect(this.modal()).toBeHidden({ timeout: 20_000 });
+  }
+
+  async assertModalAppears() {
+    await this.ensureModalVisible();
+    await expect(this.modal()).toBeVisible({ timeout: 20_000 });
+    await expect(this.modalTitle()).toContainText('This is a modal window', { timeout: 20_000 });
   }
 }
