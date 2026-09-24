@@ -141,6 +141,13 @@ export class FormAuthPage extends BasePage {
     expect(sessionIsVisibleToPageScript).toBe(false);
   }
 
+  async assertAuthenticatedSessionUsesSameSiteLax(baseUrl: string) {
+    await this.loginSuccessfully();
+
+    const authenticatedSession = await this.sessionCookie(baseUrl);
+    expect(authenticatedSession.sameSite).toBe('Lax');
+  }
+
   async assertCredentialsStayOutOfNavigationUrls() {
     await this.username().fill(VALID_USERNAME);
     await this.password().fill(VALID_PASSWORD);
