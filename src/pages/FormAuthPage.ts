@@ -148,6 +148,13 @@ export class FormAuthPage extends BasePage {
     expect(authenticatedSession.sameSite).toBe('Lax');
   }
 
+  async assertAuthenticatedSessionIsBrowserScoped(baseUrl: string) {
+    await this.loginSuccessfully();
+
+    const authenticatedSession = await this.sessionCookie(baseUrl);
+    expect(authenticatedSession.expires).toBe(-1);
+  }
+
   async assertCredentialsStayOutOfNavigationUrls() {
     await this.username().fill(VALID_USERNAME);
     await this.password().fill(VALID_PASSWORD);
