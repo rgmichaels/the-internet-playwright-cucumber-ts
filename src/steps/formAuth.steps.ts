@@ -92,6 +92,14 @@ Then(
 );
 
 Then(
+  'the authenticated session cookie should expire with the browser session',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertAuthenticatedSessionIsBrowserScoped(this.baseUrl);
+  }
+);
+
+Then(
   'valid credentials should be submitted without appearing in navigation URLs',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);

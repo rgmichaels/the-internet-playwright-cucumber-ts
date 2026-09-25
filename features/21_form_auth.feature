@@ -35,6 +35,10 @@ Feature: Form Authentication
     Given I open the Form Authentication page
     Then the authenticated session cookie should use SameSite Lax
 
+  Scenario: Form Authentication - authenticated session cookie expires with the browser session
+    Given I open the Form Authentication page
+    Then the authenticated session cookie should expire with the browser session
+
   Scenario: Form Authentication - successful login keeps credentials out of navigation URLs
     Given I open the Form Authentication page
     Then valid credentials should be submitted without appearing in navigation URLs
