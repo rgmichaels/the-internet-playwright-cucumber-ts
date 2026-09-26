@@ -19,34 +19,41 @@ Before(async function (this: CustomWorld, scenario) {
 After(async function (this: CustomWorld, scenario) {
   const failed = scenario.result?.status === Status.FAILED;
 
-  // Always stop tracing (if it was started). Only write a trace file when failed.
-  if ((process.env.TRACE ?? '1') !== '0') {
-    try {
-      fs.mkdirSync(resultsDir, { recursive: true });
-      const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
-      const tracePath = path.join(resultsDir, `${safeName}-trace.zip`);
+  try {
+    // A timed-out Before hook can leave the world only partially initialized.
+    // Keep diagnostic collection best-effort so it never masks the primary failure.
+    if (this.context && (process.env.TRACE ?? '1') !== '0') {
+      try {
+        fs.mkdirSync(resultsDir, { recursive: true });
+        const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
+        const tracePath = path.join(resultsDir, `${safeName}-trace.zip`);
 
-      if (failed) {
-        await this.context.tracing.stop({ path: tracePath });
-        const traceData = fs.readFileSync(tracePath);
-        await this.attach(traceData, 'application/zip');
-      } else {
-        await this.context.tracing.stop();
+        if (failed) {
+          await this.context.tracing.stop({ path: tracePath });
+          const traceData = fs.readFileSync(tracePath);
+          await this.attach(traceData, 'application/zip');
+        } else {
+          await this.context.tracing.stop();
+        }
+      } catch (err) {
+        console.warn('WARN: Failed to stop/attach trace:', err);
       }
-    } catch (err) {
-      // Tracing should never make a scenario fail.
-      console.warn('WARN: Failed to stop/attach trace:', err);
     }
-  }
 
-  if (failed) {
-    fs.mkdirSync(resultsDir, { recursive: true });
-    const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
-    const screenshotPath = path.join(resultsDir, `${safeName}.png`);
-    await this.page.screenshot({ path: screenshotPath, fullPage: true });
-    const data = fs.readFileSync(screenshotPath);
-    await this.attach(data, 'image/png');
+    if (failed && this.page) {
+      try {
+        fs.mkdirSync(resultsDir, { recursive: true });
+        const safeName = scenario.pickle.name.replace(/[^a-zA-Z0-9-_]+/g, '_');
+        const screenshotPath = path.join(resultsDir, `${safeName}.png`);
+        await this.page.screenshot({ path: screenshotPath, fullPage: true });
+        const data = fs.readFileSync(screenshotPath);
+        await this.attach(data, 'image/png');
+      } catch (err) {
+        console.warn('WARN: Failed to capture/attach screenshot:', err);
+      }
+    }
+  } finally {
+    // Cleanup must run even when diagnostic collection is unavailable or fails.
+    await this.close();
   }
-
-  await this.close();
 });
