@@ -19,7 +19,7 @@
     "playwright": "^1.49.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^12.9.0",
+    "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.57.0",
     "@types/node": "^22.10.10",
     "ts-node": "^10.9.2",
