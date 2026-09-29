@@ -92,6 +92,14 @@ Then(
 );
 
 Then(
+  'the authenticated session cookie should be scoped to the application host',
+  async function (this: CustomWorld) {
+    const po = new FormAuthPage(this.page);
+    await po.assertAuthenticatedSessionIsHostScoped(this.baseUrl);
+  }
+);
+
+Then(
   'the authenticated session cookie should expire with the browser session',
   async function (this: CustomWorld) {
     const po = new FormAuthPage(this.page);

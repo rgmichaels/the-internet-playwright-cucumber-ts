@@ -148,6 +148,40 @@ export class FormAuthPage extends BasePage {
     expect(authenticatedSession.sameSite).toBe('Lax');
   }
 
+  async assertAuthenticatedSessionIsHostScoped(baseUrl: string) {
+    const authenticationResponsePromise = this.page.waitForResponse(
+      (response) => {
+        const request = response.request();
+        return request.method() === 'POST' && new URL(response.url()).pathname === '/authenticate';
+      },
+      { timeout: 20_000 }
+    );
+
+    await this.loginSuccessfully();
+    const authenticationResponse = await authenticationResponsePromise;
+    const sessionSetCookieHeaders = (
+      await authenticationResponse.headerValues('set-cookie')
+    ).filter((header) => header.startsWith(`${SESSION_COOKIE_NAME}=`));
+
+    expect(
+      sessionSetCookieHeaders.length,
+      'Authentication response should set exactly one application session cookie'
+    ).toBe(1);
+
+    const sessionCookieAttributes = sessionSetCookieHeaders[0]
+      .split(';')
+      .slice(1)
+      .map((attribute) => attribute.trim());
+    const hasDomainAttribute = sessionCookieAttributes.some((attribute) =>
+      /^domain=/i.test(attribute)
+    );
+    expect(hasDomainAttribute, 'Application session cookie should not set Domain').toBe(false);
+
+    const authenticatedSession = await this.sessionCookie(baseUrl);
+    expect(authenticatedSession.domain).toBe(new URL(baseUrl).hostname);
+    expect(authenticatedSession.path).toBe('/');
+  }
+
   async assertAuthenticatedSessionIsBrowserScoped(baseUrl: string) {
     await this.loginSuccessfully();
 
