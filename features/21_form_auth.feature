@@ -35,6 +35,10 @@ Feature: Form Authentication
     Given I open the Form Authentication page
     Then the authenticated session cookie should use SameSite Lax
 
+  Scenario: Form Authentication - authenticated session cookie stays on the application host
+    Given I open the Form Authentication page
+    Then the authenticated session cookie should be scoped to the application host
+
   Scenario: Form Authentication - authenticated session cookie expires with the browser session
     Given I open the Form Authentication page
     Then the authenticated session cookie should expire with the browser session
