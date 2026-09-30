@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { Locator, Page, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
+import { downloadWithObservedResponse } from './downloadResponse';
 
 type DownloadableLink = {
   fileName: string;
@@ -87,40 +88,31 @@ export class SecureFileDownloadPage extends BasePage {
 
   async assertDownloadedPayloadMatchesAuthenticatedResponse() {
     const { fileName, locator, url } = await this.findDownloadableLink();
-    const expectedResponse = await this.page.context().request.get(url, {
-      failOnStatusCode: false,
-    });
+    const { download, downloadResponse, responseBody } = await downloadWithObservedResponse(
+      this.page,
+      locator,
+      url
+    );
 
-    try {
-      expect(expectedResponse.ok(), `Expected authenticated GET ${url} to succeed`).toBe(true);
-      expect(expectedResponse.headers()['content-disposition'] ?? '').toMatch(/\battachment\b/i);
+    expect(downloadResponse.ok(), `Expected authenticated browser GET ${url} to succeed`).toBe(true);
+    expect(downloadResponse.headers()['content-disposition'] ?? '').toMatch(/\battachment\b/i);
+    expect(responseBody.length, 'Protected download response should not be empty').toBeGreaterThan(0);
 
-      const expectedPayload = await expectedResponse.body();
-      expect(expectedPayload.length, 'Protected download response should not be empty').toBeGreaterThan(0);
-
-      const [download] = await Promise.all([
-        this.page.waitForEvent('download', { timeout: 20_000 }),
-        locator.click(),
-      ]);
-
-      const stream = await download.createReadStream();
-      const chunks: Buffer[] = [];
-      for await (const chunk of stream) {
-        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-      }
-      const downloadedPayload = Buffer.concat(chunks);
-      const failure = await download.failure();
-
-      expect(failure, 'Browser download should complete successfully').toBeNull();
-      expect(download.suggestedFilename().trim()).toBe(fileName);
-      expect(downloadedPayload.length, 'Browser download should not be empty').toBeGreaterThan(0);
-      expect(downloadedPayload.length).toBe(expectedPayload.length);
-
-      const sha256 = (payload: Buffer) => createHash('sha256').update(payload).digest('hex');
-      expect(sha256(downloadedPayload)).toBe(sha256(expectedPayload));
-    } finally {
-      await expectedResponse.dispose();
+    const stream = await download.createReadStream();
+    const chunks: Buffer[] = [];
+    for await (const chunk of stream) {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
     }
+    const downloadedPayload = Buffer.concat(chunks);
+    const failure = await download.failure();
+
+    expect(failure, 'Browser download should complete successfully').toBeNull();
+    expect(download.suggestedFilename().trim()).toBe(fileName);
+    expect(downloadedPayload.length, 'Browser download should not be empty').toBeGreaterThan(0);
+    expect(downloadedPayload.length).toBe(responseBody.length);
+
+    const sha256 = (payload: Buffer) => createHash('sha256').update(payload).digest('hex');
+    expect(sha256(downloadedPayload)).toBe(sha256(responseBody));
   }
 
   async open(baseUrl: string): Promise<Response | null> {
