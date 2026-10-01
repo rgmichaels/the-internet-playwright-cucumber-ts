@@ -77,6 +77,14 @@ Then(
 );
 
 Then(
+  'the response should require Digest request integrity protection',
+  function (this: CustomWorld) {
+    const po = new DigestAuthPage(this.page);
+    po.assertDigestRequestIntegrity(this.lastResponse);
+  }
+);
+
+Then(
   'protected digest authentication content should not be displayed',
   async function (this: CustomWorld) {
     const po = new DigestAuthPage(this.page);
