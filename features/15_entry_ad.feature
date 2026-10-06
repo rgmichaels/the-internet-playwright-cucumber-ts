@@ -1,6 +1,10 @@
 @feature @regression @feature_entry_ad
 Feature: Entry Ad
 
+  Scenario: Entry Ad - modal window appears
+    Given I open the Entry Ad page
+    Then an Entry Ad modal window should appear
+
   Scenario: Entry Ad - loads, asserts, and exercises behavior
     Given I am on the home page
     When I open the "Entry Ad" example
@@ -11,3 +15,7 @@ Feature: Entry Ad
     Given I open the Entry Ad page
     Then the global footer should be valid
 
+  @metadata
+  Scenario: Entry Ad - exposes a populated title
+    Given I am on the entry ad page
+    Then the page title should be populated
