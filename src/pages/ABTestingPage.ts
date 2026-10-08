@@ -10,10 +10,11 @@ export class ABTestingPage extends BasePage {
   async goto(baseUrl: string) {
     const response = await this.page.goto(`${baseUrl}/abtest`, {
       waitUntil: 'domcontentloaded',
+      timeout: 15_000,
     });
 
     if (this.isServerError(response)) {
-      const retryResponse = await this.page.reload({ waitUntil: 'domcontentloaded' });
+      const retryResponse = await this.page.reload({ waitUntil: 'domcontentloaded', timeout: 15_000 });
 
       if (this.isServerError(retryResponse)) {
         throw new Error(

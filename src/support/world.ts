@@ -46,10 +46,17 @@ export class CustomWorld extends World {
         : name === 'webkit'
         ? webkit
         : chromium;
+    // The canonical Heroku AUT can leave Chromium's HTTP/2 navigation stalled
+    // before response headers arrive; HTTP/1.1 preserves real browser coverage.
+    const chromiumArgs =
+      name === 'chromium' && new URL(this.baseUrl).hostname === 'the-internet.herokuapp.com'
+        ? ['--disable-http2']
+        : undefined;
 
     this.browser = await launcher.launch({
       headless,
       slowMo: headed ? slowMo : 0,
+      args: chromiumArgs,
     });
 
     const contextOptions: any = {
