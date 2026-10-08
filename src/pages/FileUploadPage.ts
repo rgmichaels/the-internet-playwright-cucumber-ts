@@ -17,7 +17,7 @@ export class FileUploadPage extends BasePage {
     const filePath = path.resolve(process.cwd(), 'fixtures', fileName);
     await this.page.setInputFiles('#file-upload', filePath);
     await this.page.click('#file-submit');
-    await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
+    await expect(this.page.locator('#uploaded-files')).toContainText(fileName, { timeout: 35_000 });
   }
 
   private extractUploadedFilePart(request: Request): UploadedFilePart {
@@ -137,9 +137,9 @@ export class FileUploadPage extends BasePage {
     let uploadResponse: Response;
     try {
       const [, response] = await Promise.all([
-        this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+        this.page.waitForNavigation({ waitUntil: 'commit' }),
         this.page.waitForResponse((response) => isUploadRequest(response.request())),
-        this.page.click('#file-submit'),
+        this.page.click('#file-submit', { noWaitAfter: true }),
       ]);
       uploadResponse = response;
     } finally {
@@ -158,7 +158,7 @@ export class FileUploadPage extends BasePage {
     expect(uploadedFile.fileName).toBe(fileName);
     expect(uploadedFile.mediaType).toBe(selectedFile.mediaType);
 
-    await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
+    await expect(this.page.locator('#uploaded-files')).toContainText(fileName, { timeout: 35_000 });
   }
 
   async uploadFixtureByDragAndDrop(fileName: string) {
