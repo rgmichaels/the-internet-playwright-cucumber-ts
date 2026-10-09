@@ -11,7 +11,7 @@
     "test:headed": "HEADLESS=false cucumber-js --config cucumber.js",
     "report": "node scripts/generate-report.js",
     "test:ci": "node scripts/run-ci.js",
-    "test:ci:inner": "npm run typecheck && cucumber-js --config cucumber.js && node scripts/generate-report.js"
+    "test:ci:inner": "node scripts/run-ci-inner.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
