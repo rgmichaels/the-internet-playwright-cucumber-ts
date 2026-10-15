@@ -46,10 +46,20 @@ export class CustomWorld extends World {
         : name === 'webkit'
         ? webkit
         : chromium;
+    // Linux CI can leave Chromium's HTTP/2 navigation to the canonical Heroku
+    // AUT stalled before response headers arrive. Keep local browser transport
+    // unchanged because forced HTTP/1.1 is unstable on macOS Chromium.
+    const chromiumArgs =
+      name === 'chromium' &&
+      process.platform === 'linux' &&
+      new URL(this.baseUrl).hostname === 'the-internet.herokuapp.com'
+        ? ['--disable-http2']
+        : undefined;
 
     this.browser = await launcher.launch({
       headless,
       slowMo: headed ? slowMo : 0,
+      args: chromiumArgs,
     });
 
     const contextOptions: any = {
