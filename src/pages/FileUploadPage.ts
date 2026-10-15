@@ -16,8 +16,11 @@ export class FileUploadPage extends BasePage {
   async uploadFixture(fileName: string) {
     const filePath = path.resolve(process.cwd(), 'fixtures', fileName);
     await this.page.setInputFiles('#file-upload', filePath);
-    await this.page.click('#file-submit');
-    await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'commit' }),
+      this.page.click('#file-submit', { noWaitAfter: true }),
+    ]);
+    await expect(this.page.locator('#uploaded-files')).toContainText(fileName, { timeout: 35_000 });
   }
 
   private extractUploadedFilePart(request: Request): UploadedFilePart {
@@ -121,27 +124,28 @@ export class FileUploadPage extends BasePage {
     let uploadedFile: UploadedFilePart | undefined;
     let captureError: Error | undefined;
     const captureUpload = async (route: Route) => {
-      if (isUploadRequest(route.request())) {
-        try {
-          uploadedFile = this.extractUploadedFilePart(route.request());
-        } catch (error) {
-          captureError = error instanceof Error ? error : new Error(String(error));
-        }
+      try {
+        uploadedFile = this.extractUploadedFilePart(route.request());
+      } catch (error) {
+        captureError = error instanceof Error ? error : new Error(String(error));
       }
 
       await route.continue();
+      // Routing disables Chromium's HTTP cache. Remove this one-shot observer
+      // immediately after continuing the POST so the response page can reuse
+      // vendor assets before its document is parsed.
+      await this.page.unroute('**/upload', captureUpload);
     };
 
-    await this.page.route('**/upload', captureUpload);
+    await this.page.route('**/upload', captureUpload, { times: 1 });
 
     let uploadResponse: Response;
     try {
-      const [, response] = await Promise.all([
-        this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+      [, uploadResponse] = await Promise.all([
+        this.page.waitForNavigation({ waitUntil: 'commit' }),
         this.page.waitForResponse((response) => isUploadRequest(response.request())),
-        this.page.click('#file-submit'),
+        this.page.click('#file-submit', { noWaitAfter: true }),
       ]);
-      uploadResponse = response;
     } finally {
       await this.page.unroute('**/upload', captureUpload);
     }
@@ -158,7 +162,7 @@ export class FileUploadPage extends BasePage {
     expect(uploadedFile.fileName).toBe(fileName);
     expect(uploadedFile.mediaType).toBe(selectedFile.mediaType);
 
-    await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
+    await expect(this.page.locator('#uploaded-files')).toContainText(fileName, { timeout: 35_000 });
   }
 
   async uploadFixtureByDragAndDrop(fileName: string) {

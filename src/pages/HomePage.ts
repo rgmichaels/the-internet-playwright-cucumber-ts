@@ -9,7 +9,7 @@ export class HomePage extends BasePage {
   }
 
   async goto(baseUrl: string) {
-    await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 15_000 });
     await this.assertLoaded();
   }
 
@@ -28,7 +28,7 @@ export class HomePage extends BasePage {
 
     try {
       [response] = await Promise.all([
-        this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+        this.page.waitForNavigation({ waitUntil: 'commit' }),
         link.click({ noWaitAfter: true }),
       ]);
     } catch (error) {
@@ -39,7 +39,7 @@ export class HomePage extends BasePage {
       }
 
       try {
-        response = await gotoOnce(this.page, targetUrl, { waitUntil: 'domcontentloaded' });
+        response = await gotoOnce(this.page, targetUrl, { waitUntil: 'commit' });
       } catch (retryError) {
         throw new Error(
           `Example "${name}" navigation failed twice. First attempt: ${navigationError.message}. ` +

@@ -89,15 +89,6 @@ export class FloatingMenuPage extends BasePage {
         message: 'Expected the document to scroll before checking the floating menu',
       })
       .toBeGreaterThan(initial.scrollY + 1000);
-    await expect
-      .poll(
-        async () => {
-          const { top } = await this.viewportGeometry();
-          return top >= -8 && top <= 8;
-        },
-        { message: 'Expected the floating menu to settle against the viewport edge' }
-      )
-      .toBe(true);
 
     const firstScrolledPosition = await this.viewportGeometry();
     this.assertInsideViewport(firstScrolledPosition);

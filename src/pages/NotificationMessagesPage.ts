@@ -15,14 +15,14 @@ export class NotificationMessagesPage extends BasePage {
   }
 
   async clickAndAssertMessage() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
+    await this.clickForNextMessage();
     const flash = this.flash();
     await expect(flash).toBeVisible();
     await expect(flash).toContainText('Action');
   }
 
   async assertFlashMessageIsExpected() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
+    await this.clickForNextMessage();
     const flash = this.flash();
     await expect(flash).toBeVisible();
 
@@ -39,7 +39,7 @@ export class NotificationMessagesPage extends BasePage {
   async dismissFlashMessage() {
     const flash = this.flash();
     if (!(await flash.isVisible())) {
-      await this.page.getByRole('link', { name: 'Click here' }).click();
+      await this.clickForNextMessage();
       await expect(flash).toBeVisible();
     }
 
@@ -49,5 +49,12 @@ export class NotificationMessagesPage extends BasePage {
 
   async exercise() {
     await this.clickAndAssertMessage();
+  }
+
+  private async clickForNextMessage() {
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'commit' }),
+      this.page.getByRole('link', { name: 'Click here' }).click({ noWaitAfter: true }),
+    ]);
   }
 }
