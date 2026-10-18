@@ -1,7 +1,9 @@
 import { Page, Response } from 'playwright';
 
 const TRANSIENT_NETWORK_ERROR =
-  /net::ERR_(?:TIMED_OUT|CONNECTION_RESET|CONNECTION_CLOSED|EMPTY_RESPONSE)|NS_ERROR_NET_(?:TIMEOUT|RESET)/;
+  /net::ERR_(?:TIMED_OUT|CONNECTION_RESET|CONNECTION_CLOSED|EMPTY_RESPONSE|INTERNET_DISCONNECTED|NETWORK_CHANGED|NAME_NOT_RESOLVED)|NS_ERROR_NET_(?:TIMEOUT|RESET)/;
+const NAVIGATION_ATTEMPTS = 3;
+const DEFAULT_NAVIGATION_TIMEOUT_MS = 15_000;
 const FAILED_NAVIGATION_SETTLE_TIMEOUT_MS = 1_000;
 const originalGotoByPage = new WeakMap<Page, Page['goto']>();
 
@@ -12,22 +14,31 @@ export function enablePageNavigationRetry(page: Page) {
   page.goto = async (url, options): Promise<Response | null> => {
     const navigationErrors: Error[] = [];
 
-    for (let attempt = 1; attempt <= 2; attempt += 1) {
+    for (let attempt = 1; attempt <= NAVIGATION_ATTEMPTS; attempt += 1) {
       try {
-        return await goto(url, options);
+        return await goto(url, {
+          // A committed document is sufficient here; page objects wait for
+          // their own observable UI and should not be held hostage by slow
+          // third-party styles, fonts, or scripts.
+          waitUntil: 'commit',
+          timeout: DEFAULT_NAVIGATION_TIMEOUT_MS,
+          ...options,
+        });
       } catch (error) {
         const navigationError = asError(error);
         navigationErrors.push(navigationError);
 
-        if (attempt === 1 && isRetryableNavigationError(navigationError)) {
+        if (attempt < NAVIGATION_ATTEMPTS && isRetryableNavigationError(navigationError)) {
           await waitForFailedNetworkNavigationToSettle(page, navigationError);
           continue;
         }
 
-        if (navigationErrors.length === 2) {
+        if (navigationErrors.length === NAVIGATION_ATTEMPTS) {
           throw new Error(
-            `Navigation to "${url}" failed twice. First attempt: ${navigationErrors[0].message}. ` +
-              `Second attempt: ${navigationErrors[1].message}`
+            `Navigation to "${url}" failed ${NAVIGATION_ATTEMPTS} times. ` +
+              navigationErrors
+                .map((attemptError, index) => `Attempt ${index + 1}: ${attemptError.message}`)
+                .join('. ')
           );
         }
 

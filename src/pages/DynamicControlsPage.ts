@@ -36,15 +36,14 @@ export class DynamicControlsPage extends BasePage {
 
   private async clickCheckboxAndWaitFor(messageText: "It's gone!" | "It's back!") {
     const loaders = this.checkboxLoading();
-    const loaderCountBeforeClick = await loaders.count();
 
     await this.checkboxButton().click();
-    await expect(loaders).toHaveCount(loaderCountBeforeClick + 1, { timeout: 20_000 });
+    await expect(loaders).toHaveCount(1, { timeout: 20_000 });
 
-    // The demo inserts each new loader immediately after the button, before prior hidden loaders.
-    const currentLoader = loaders.first();
-    await expect(currentLoader).toBeVisible({ timeout: 20_000 });
-    await expect(currentLoader).toBeHidden({ timeout: 20_000 });
+    // The demo maintains one loading bar per form and reuses that observable
+    // transition boundary for both the remove and restore actions.
+    await expect(loaders).toBeVisible({ timeout: 20_000 });
+    await expect(loaders).toBeHidden({ timeout: 20_000 });
     await expect(this.page.locator('#message')).toHaveText(messageText, { timeout: 20_000 });
   }
 

@@ -15,7 +15,11 @@ export class DigestAuthPage extends BasePage {
   constructor(page: Page) { super(page); }
 
   async assertLoaded() {
-    await expect(this.page.locator('#content')).toContainText(CONGRATS_MESSAGE);
+    // Digest authentication can commit the initial challenge before Chromium
+    // finishes the credential retry and renders the protected document.
+    await expect(this.page.locator('#content')).toContainText(CONGRATS_MESSAGE, {
+      timeout: 20_000,
+    });
   }
 
   async open(baseUrl: string): Promise<Response | null> {

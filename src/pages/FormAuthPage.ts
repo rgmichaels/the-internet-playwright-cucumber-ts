@@ -54,7 +54,10 @@ export class FormAuthPage extends BasePage {
   private async login(user: string, pass: string) {
     await this.username().fill(user);
     await this.password().fill(pass);
-    await this.loginButton().click();
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'commit', timeout: 30_000 }),
+      this.loginButton().click({ noWaitAfter: true }),
+    ]);
   }
 
   async openSecureAreaDirectly(baseUrl: string) {
