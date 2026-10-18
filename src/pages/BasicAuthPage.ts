@@ -8,7 +8,11 @@ export class BasicAuthPage extends BasePage {
   constructor(page: Page) { super(page); }
 
   async assertLoaded() {
-    await expect(this.page.locator('#content')).toContainText(CONGRATS_MESSAGE);
+    // Basic authentication can commit the challenge before Chromium completes
+    // the credential retry and renders the protected document.
+    await expect(this.page.locator('#content')).toContainText(CONGRATS_MESSAGE, {
+      timeout: 20_000,
+    });
   }
 
   async open(baseUrl: string): Promise<Response | null> {

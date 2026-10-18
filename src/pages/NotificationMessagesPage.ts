@@ -15,16 +15,16 @@ export class NotificationMessagesPage extends BasePage {
   }
 
   async clickAndAssertMessage() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
+    await this.clickForNextMessage();
     const flash = this.flash();
-    await expect(flash).toBeVisible();
-    await expect(flash).toContainText('Action');
+    await expect(flash).toBeVisible({ timeout: 20_000 });
+    await expect(flash).toContainText('Action', { timeout: 20_000 });
   }
 
   async assertFlashMessageIsExpected() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
+    await this.clickForNextMessage();
     const flash = this.flash();
-    await expect(flash).toBeVisible();
+    await expect(flash).toBeVisible({ timeout: 20_000 });
 
     const text = ((await flash.textContent()) ?? '').replace('×', '').trim();
     const expectedMessages = [
@@ -39,8 +39,8 @@ export class NotificationMessagesPage extends BasePage {
   async dismissFlashMessage() {
     const flash = this.flash();
     if (!(await flash.isVisible())) {
-      await this.page.getByRole('link', { name: 'Click here' }).click();
-      await expect(flash).toBeVisible();
+      await this.clickForNextMessage();
+      await expect(flash).toBeVisible({ timeout: 20_000 });
     }
 
     await this.flashCloseButton().click();
@@ -49,5 +49,12 @@ export class NotificationMessagesPage extends BasePage {
 
   async exercise() {
     await this.clickAndAssertMessage();
+  }
+
+  private async clickForNextMessage() {
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'commit' }),
+      this.page.getByRole('link', { name: 'Click here' }).click({ noWaitAfter: true }),
+    ]);
   }
 }
