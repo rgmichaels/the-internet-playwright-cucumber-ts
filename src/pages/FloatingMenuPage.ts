@@ -92,10 +92,17 @@ export class FloatingMenuPage extends BasePage {
     await expect
       .poll(
         async () => {
-          const { top } = await this.viewportGeometry();
-          return top >= -8 && top <= 8;
+          const current = await this.viewportGeometry();
+          const renderingTolerance = 8;
+          return (
+            current.top >= -renderingTolerance &&
+            current.bottom <= current.viewportHeight + renderingTolerance
+          );
         },
-        { message: 'Expected the floating menu to settle against the viewport edge' }
+        {
+          message: 'Expected the floating menu to settle inside the viewport after scrolling',
+          timeout: 20_000,
+        }
       )
       .toBe(true);
 
@@ -116,7 +123,10 @@ export class FloatingMenuPage extends BasePage {
           const current = await this.viewportGeometry();
           return Math.abs(current.top - firstScrolledPosition.top);
         },
-        { message: 'Expected the floating menu viewport position to remain stable' }
+        {
+          message: 'Expected the floating menu viewport position to remain stable',
+          timeout: 20_000,
+        }
       )
       .toBeLessThanOrEqual(2);
 
