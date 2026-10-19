@@ -21,7 +21,7 @@ export class KeyPressesPage extends BasePage {
   async assertTabReportingAndFocusTraversal() {
     const input = this.page.locator('#target');
     const result = this.page.locator('#result');
-    const nextFocusableLink = this.page.locator('#page-footer a');
+    const nextFocusableLink = this.page.locator('#page-footer a').first();
 
     await expect(input).toBeVisible();
     await input.click();
