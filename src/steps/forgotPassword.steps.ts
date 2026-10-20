@@ -13,7 +13,10 @@ Then('the Forgot Password page should load', async function (this: CustomWorld) 
   await po.assertLoaded();
 });
 
-Then('I exercise the Forgot Password page', async function (this: CustomWorld) {
-  const po = new ForgotPasswordPage(this.page);
-  await po.exercise();
-});
+Then(
+  'submitting a Forgot Password recovery request should confirm delivery',
+  async function (this: CustomWorld) {
+    const po = new ForgotPasswordPage(this.page);
+    await po.submitRecoveryRequestAndAssertDelivery();
+  }
+);
