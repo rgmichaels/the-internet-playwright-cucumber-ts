@@ -23,45 +23,49 @@ export class ForgotPasswordPage extends BasePage {
     await expect(submit).toBeEnabled();
   }
 
-  async exercise() {
-    const email = this.page.locator('#email');
-    const form = this.page.locator('form#forgot_password');
+  async submitRecoveryRequestAndAssertDelivery() {
+    const emailAddress = 'test@example.com';
+    const email = this.page.getByLabel('E-mail', { exact: true });
+    const submit = this.page.getByRole('button', {
+      name: 'Retrieve password',
+      exact: true,
+    });
+    const originalOrigin = new URL(this.page.url()).origin;
 
-    await expect(email).toBeVisible({ timeout: 20_000 });
-    await email.fill('test@example.com');
+    await email.fill(emailAddress);
 
-    await expect(form).toBeVisible({ timeout: 20_000 });
+    const [submissionResponse] = await Promise.all([
+      this.page.waitForResponse((response) => {
+        const request = response.request();
+        const requestUrl = new URL(request.url());
+        return (
+          request.method() === 'POST' &&
+          requestUrl.origin === originalOrigin &&
+          requestUrl.pathname === '/forgot_password'
+        );
+      }),
+      submit.click(),
+    ]);
 
-    // Submit reliably (demo-site click can be flaky)
-    await form.evaluate((f) => (f as HTMLFormElement).submit());
+    const submissionRequest = submissionResponse.request();
+    expect(submissionResponse.status()).toBe(303);
+    expect(submissionRequest.headers()['content-type']).toMatch(
+      /^application\/x-www-form-urlencoded\b/i
+    );
+    expect(submissionRequest.postDataJSON()).toEqual({ email: emailAddress });
 
-    // Wait for either: success URL, success-ish content, or known demo server error
-    await expect
-      .poll(async () => {
-        const url = this.page.url();
-        const bodyText = (await this.page.locator('body').innerText().catch(() => '')).trim();
+    const redirectLocation = submissionResponse.headers()['location'];
+    expect(
+      redirectLocation,
+      'Recovery response should redirect to the confirmation page'
+    ).toBeTruthy();
+    expect(new URL(redirectLocation!, originalOrigin).toString()).toBe(
+      new URL('/email_sent', originalOrigin).toString()
+    );
 
-        const urlOk = /\/email_sent$/.test(url);
-        const successTextOk = /e-?mail/i.test(bodyText) || /sent/i.test(bodyText);
-        const serverErrorOk = /internal server error/i.test(bodyText);
-
-        return urlOk || successTextOk || serverErrorOk;
-      }, { timeout: 20_000 })
-      .toBeTruthy();
-
-    const finalUrl = this.page.url();
-    const finalBody = (await this.page.locator('body').innerText().catch(() => '')).trim();
-
-    //console.log('DEBUG: forgot_password final URL:', finalUrl);
-    console.log('DEBUG: forgot_password final body (first 160 chars):', finalBody.slice(0, 160));
-
-    // If the demo server errors, don't fail the suite — just record it.
-    if (/internal server error/i.test(finalBody)) {
-      console.log('WARN: Demo site returned Internal Server Error for forgot_password submission. Treating as non-blocking.');
-      return;
-    }
-
-    // Otherwise, assert a real success signal (loose, punctuation-safe)
-    await expect(this.page.locator('body')).toContainText(/e-?mail/i, { timeout: 5_000 });
+    await expect(this.page).toHaveURL(/\/email_sent$/, { timeout: 20_000 });
+    await expect(this.page.locator('#content')).toHaveText("Your e-mail's been sent!", {
+      timeout: 20_000,
+    });
   }
 }
