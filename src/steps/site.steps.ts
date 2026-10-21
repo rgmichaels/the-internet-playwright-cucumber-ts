@@ -12,13 +12,13 @@ Given('I am on the home page', async function (this: CustomWorld) {
 });
 
 Given(
-  'the home page initially returns a transient navigation error',
+  'the home page initially reports a transient browser disconnect',
   async function (this: CustomWorld) {
     await this.page.route(`${this.baseUrl}/`, async (route) => {
       this.homeNavigationAttempts += 1;
 
       if (this.homeNavigationAttempts === 1) {
-        await route.abort('timedout');
+        await route.abort('internetdisconnected');
         return;
       }
 
@@ -82,7 +82,7 @@ Then('the home page should load', async function (this: CustomWorld) {
   await home.assertLoaded();
 });
 
-Then('the transient home page navigation error should be retried once', function (this: CustomWorld) {
+Then('the transient browser disconnect should be retried once', function (this: CustomWorld) {
   expect(this.homeNavigationAttempts).toBe(2);
 });
 
