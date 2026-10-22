@@ -31,10 +31,37 @@ Given(
   }
 );
 
+Given(
+  'the home page load event is stalled after its DOM is ready',
+  async function (this: CustomWorld) {
+    const stalledResourceUrl = `${this.baseUrl}/stalled-navigation-resource.png`;
+
+    await this.page.route(stalledResourceUrl, async () => {
+      await new Promise<void>((resolve) => this.page.once('close', () => resolve()));
+    });
+    await this.page.route(`${this.baseUrl}/`, async (route) => {
+      this.committedHomeNavigationAttempts += 1;
+      await route.fulfill({
+        status: 200,
+        contentType: 'text/html',
+        body: `<h1>Welcome to the-internet</h1><img src="${stalledResourceUrl}" alt="">`,
+      });
+    });
+    this.page.setDefaultNavigationTimeout(500);
+  }
+);
+
 When('I navigate to the home page', async function (this: CustomWorld) {
   const home = new HomePage(this.page);
   await home.goto(this.baseUrl);
 });
+
+When(
+  'I navigate to the home page using the full load lifecycle',
+  async function (this: CustomWorld) {
+    await this.page.goto(this.baseUrl);
+  }
+);
 
 Given(
   'the {string} example initially returns a transient server error',
@@ -84,6 +111,10 @@ Then('the home page should load', async function (this: CustomWorld) {
 
 Then('the transient browser disconnect should be retried once', function (this: CustomWorld) {
   expect(this.homeNavigationAttempts).toBe(2);
+});
+
+Then('the committed home page should not be requested twice', function (this: CustomWorld) {
+  expect(this.committedHomeNavigationAttempts).toBe(1);
 });
 
 Then('the transient server error should be retried once', function (this: CustomWorld) {

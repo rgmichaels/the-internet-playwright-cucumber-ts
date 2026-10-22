@@ -1,4 +1,4 @@
-import { Page, Response } from 'playwright';
+import { Frame, Page, Response } from 'playwright';
 
 const TRANSIENT_NETWORK_ERROR =
   /net::ERR_(?:TIMED_OUT|CONNECTION_RESET|CONNECTION_CLOSED|EMPTY_RESPONSE|INTERNET_DISCONNECTED)|NS_ERROR_NET_(?:TIMEOUT|RESET)/;
@@ -13,11 +13,35 @@ export function enablePageNavigationRetry(page: Page) {
     const navigationErrors: Error[] = [];
 
     for (let attempt = 1; attempt <= 2; attempt += 1) {
+      let requestedDocumentCommitted = false;
+      let committedResponse: Response | null = null;
+      const recordMainFrameCommit = (frame: Frame) => {
+        if (frame === page.mainFrame()) requestedDocumentCommitted = true;
+      };
+      const recordNavigationResponse = (response: Response) => {
+        const request = response.request();
+
+        if (request.isNavigationRequest() && request.frame() === page.mainFrame()) {
+          committedResponse = response;
+        }
+      };
+
+      page.on('framenavigated', recordMainFrameCommit);
+      page.on('response', recordNavigationResponse);
+
       try {
         return await goto(url, options);
       } catch (error) {
         const navigationError = asError(error);
         navigationErrors.push(navigationError);
+
+        if (
+          requestedDocumentCommitted &&
+          navigationError.name === 'TimeoutError' &&
+          (await isRequestedDocumentReady(page, url))
+        ) {
+          return committedResponse;
+        }
 
         if (attempt === 1 && isRetryableNavigationError(navigationError)) {
           await waitForFailedNetworkNavigationToSettle(page, navigationError);
@@ -32,6 +56,9 @@ export function enablePageNavigationRetry(page: Page) {
         }
 
         throw navigationError;
+      } finally {
+        page.off('framenavigated', recordMainFrameCommit);
+        page.off('response', recordNavigationResponse);
       }
     }
 
@@ -69,4 +96,27 @@ async function waitForFailedNetworkNavigationToSettle(page: Page, error: Error) 
 
 function asError(error: unknown) {
   return error instanceof Error ? error : new Error(String(error));
+}
+
+async function isRequestedDocumentReady(page: Page, requestedUrl: string) {
+  if (!isSameDocumentUrl(page.url(), requestedUrl)) return false;
+
+  try {
+    const readyState = await page.evaluate(() => document.readyState);
+    return readyState === 'interactive' || readyState === 'complete';
+  } catch {
+    return false;
+  }
+}
+
+function isSameDocumentUrl(actualUrl: string, requestedUrl: string) {
+  try {
+    const actual = new URL(actualUrl);
+    const requested = new URL(requestedUrl);
+    actual.hash = '';
+    requested.hash = '';
+    return actual.href === requested.href;
+  } catch {
+    return false;
+  }
 }
