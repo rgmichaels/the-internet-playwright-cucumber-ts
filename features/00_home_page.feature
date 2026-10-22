@@ -7,6 +7,12 @@ Feature: Home Page
     Then the home page should load
     And the transient browser disconnect should be retried once
 
+  Scenario: Committed navigation tolerates a stalled non-critical resource
+    Given the home page load event is stalled after its DOM is ready
+    When I navigate to the home page using the full load lifecycle
+    Then the home page should load
+    And the committed home page should not be requested twice
+
   Scenario: Home page source includes a populated title tag
     Given I am on the home page
     Then the home page should have a populated title tag

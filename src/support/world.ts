@@ -14,6 +14,7 @@ export class CustomWorld extends World {
   lastPageErrors: Error[] = [];
   exampleNavigationAttempts = 0;
   homeNavigationAttempts = 0;
+  committedHomeNavigationAttempts = 0;
   baseUrl: string;
 
   constructor(options: IWorldOptions) {
