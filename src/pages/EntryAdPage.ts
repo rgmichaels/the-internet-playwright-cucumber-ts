@@ -39,6 +39,13 @@ export class EntryAdPage extends BasePage {
       .catch(() => false);
   }
 
+  async dismissModalIfVisible(): Promise<void> {
+    if (!(await this.waitForModalVisible(3_000))) return;
+
+    await this.modalClose().click();
+    await expect(this.modal()).toBeHidden({ timeout: 20_000 });
+  }
+
   /**
    * "Hard refresh" equivalent for automation:
    * - clears cookies (context-wide)

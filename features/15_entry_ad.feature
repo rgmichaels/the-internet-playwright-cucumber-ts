@@ -9,5 +9,5 @@ Feature: Entry Ad
 
   Scenario: Entry Ad - Footer shows Elemental Selenium attribution and link
     Given I open the Entry Ad page
+    When I dismiss the Entry Ad modal if it appears
     Then the global footer should be valid
-
