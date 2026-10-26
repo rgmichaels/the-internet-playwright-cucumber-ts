@@ -14,20 +14,14 @@ Given('I am on the home page', async function (this: CustomWorld) {
 Given(
   'the home page initially reports a transient browser disconnect',
   async function (this: CustomWorld) {
-    await this.page.route(`${this.baseUrl}/`, async (route) => {
-      this.homeNavigationAttempts += 1;
+    await routeFirstHomeNavigationFailure(this, 'internetdisconnected');
+  }
+);
 
-      if (this.homeNavigationAttempts === 1) {
-        await route.abort('internetdisconnected');
-        return;
-      }
-
-      await route.fulfill({
-        status: 200,
-        contentType: 'text/html',
-        body: '<h1>Welcome to the-internet</h1>',
-      });
-    });
+Given(
+  'the home page initially reports a transient DNS resolution failure',
+  async function (this: CustomWorld) {
+    await routeFirstHomeNavigationFailure(this, 'namenotresolved');
   }
 );
 
@@ -113,6 +107,10 @@ Then('the transient browser disconnect should be retried once', function (this: 
   expect(this.homeNavigationAttempts).toBe(2);
 });
 
+Then('the transient DNS resolution failure should be retried once', function (this: CustomWorld) {
+  expect(this.homeNavigationAttempts).toBe(2);
+});
+
 Then('the committed home page should not be requested twice', function (this: CustomWorld) {
   expect(this.committedHomeNavigationAttempts).toBe(1);
 });
@@ -120,3 +118,23 @@ Then('the committed home page should not be requested twice', function (this: Cu
 Then('the transient server error should be retried once', function (this: CustomWorld) {
   expect(this.exampleNavigationAttempts).toBe(2);
 });
+
+async function routeFirstHomeNavigationFailure(
+  world: CustomWorld,
+  errorCode: 'internetdisconnected' | 'namenotresolved'
+) {
+  await world.page.route(`${world.baseUrl}/`, async (route) => {
+    world.homeNavigationAttempts += 1;
+
+    if (world.homeNavigationAttempts === 1) {
+      await route.abort(errorCode);
+      return;
+    }
+
+    await route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: '<h1>Welcome to the-internet</h1>',
+    });
+  });
+}

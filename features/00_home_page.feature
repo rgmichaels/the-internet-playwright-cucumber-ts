@@ -7,6 +7,12 @@ Feature: Home Page
     Then the home page should load
     And the transient browser disconnect should be retried once
 
+  Scenario: Home page navigation retries one transient DNS resolution failure
+    Given the home page initially reports a transient DNS resolution failure
+    When I navigate to the home page
+    Then the home page should load
+    And the transient DNS resolution failure should be retried once
+
   Scenario: Committed navigation tolerates a stalled non-critical resource
     Given the home page load event is stalled after its DOM is ready
     When I navigate to the home page using the full load lifecycle
