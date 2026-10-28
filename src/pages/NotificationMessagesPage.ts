@@ -14,17 +14,20 @@ export class NotificationMessagesPage extends BasePage {
     return this.page.locator('#flash a.close');
   }
 
-  async clickAndAssertMessage() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
+  private async flashWithBoundedRecovery() {
     const flash = this.flash();
+
+    for (let recoveryAttempt = 0; recoveryAttempt < 2; recoveryAttempt += 1) {
+      if (await flash.isVisible()) return flash;
+      await this.page.getByRole('link', { name: 'Click here' }).click();
+    }
+
     await expect(flash).toBeVisible();
-    await expect(flash).toContainText('Action');
+    return flash;
   }
 
   async assertFlashMessageIsExpected() {
-    await this.page.getByRole('link', { name: 'Click here' }).click();
-    const flash = this.flash();
-    await expect(flash).toBeVisible();
+    const flash = await this.flashWithBoundedRecovery();
 
     const text = ((await flash.textContent()) ?? '').replace('×', '').trim();
     const expectedMessages = [
@@ -38,16 +41,12 @@ export class NotificationMessagesPage extends BasePage {
 
   async dismissFlashMessage() {
     const flash = this.flash();
-    if (!(await flash.isVisible())) {
-      await this.page.getByRole('link', { name: 'Click here' }).click();
-      await expect(flash).toBeVisible();
-    }
-
+    await expect(flash).toBeVisible();
     await this.flashCloseButton().click();
     await expect(flash).toBeHidden();
   }
 
   async exercise() {
-    await this.clickAndAssertMessage();
+    await this.assertFlashMessageIsExpected();
   }
 }
