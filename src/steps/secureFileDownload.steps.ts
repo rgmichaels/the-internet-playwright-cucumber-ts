@@ -3,20 +3,21 @@ import type { BrowserContextOptions } from 'playwright';
 import { CustomWorld } from '../support/world';
 import { SecureFileDownloadPage } from '../pages/SecureFileDownloadPage';
 
-async function replaceContextWithInvalidCredentials(world: CustomWorld) {
+async function replaceContext(
+  world: CustomWorld,
+  httpCredentials?: BrowserContextOptions['httpCredentials']
+) {
   await world.context.close().catch(() => {});
 
-  const username = process.env.BASIC_AUTH_USER || 'admin';
-  const password = process.env.BASIC_AUTH_PASS || 'admin';
   const contextOptions: BrowserContextOptions = {
     baseURL: world.baseUrl,
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
-    httpCredentials: {
-      username,
-      password: `${password}__invalid__`,
-    },
   };
+
+  if (httpCredentials) {
+    contextOptions.httpCredentials = httpCredentials;
+  }
 
   world.context = await world.browser.newContext(contextOptions);
 
@@ -25,6 +26,15 @@ async function replaceContextWithInvalidCredentials(world: CustomWorld) {
   }
 
   world.page = await world.context.newPage();
+}
+
+async function replaceContextWithInvalidCredentials(world: CustomWorld) {
+  const username = process.env.BASIC_AUTH_USER || 'admin';
+  const password = process.env.BASIC_AUTH_PASS || 'admin';
+  await replaceContext(world, {
+    username,
+    password: `${password}__invalid__`,
+  });
 }
 
 Given('I open the Secure File Download page', async function (this: CustomWorld) {
@@ -48,6 +58,18 @@ Then(
   async function (this: CustomWorld) {
     const po = new SecureFileDownloadPage(this.page);
     await po.assertDownloadedPayloadMatchesAuthenticatedResponse();
+  }
+);
+
+When(
+  'I request an available secure file directly without credentials',
+  async function (this: CustomWorld) {
+    const authenticatedPage = new SecureFileDownloadPage(this.page);
+    const secureFileUrl = await authenticatedPage.getAvailableSecureFileUrl();
+
+    await replaceContext(this);
+    const unauthenticatedPage = new SecureFileDownloadPage(this.page);
+    this.lastResponse = await unauthenticatedPage.openUrl(secureFileUrl);
   }
 );
 

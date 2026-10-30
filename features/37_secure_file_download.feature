@@ -18,6 +18,14 @@ Feature: Secure File Download
     Given I open the Secure File Download page
     Then an available secure download should match its authenticated response
 
+  @auth_admin
+  Scenario: Secure File Download - direct file requests require authentication
+    Given I open the Secure File Download page
+    When I request an available secure file directly without credentials
+    Then Secure File Download access should be denied
+    And the response should include the Secure File Download Basic authentication challenge
+    And protected Secure File Download content should not be displayed
+
   Scenario: Secure File Download - unauthenticated access is denied
     When I request the Secure File Download page without credentials
     Then Secure File Download access should be denied

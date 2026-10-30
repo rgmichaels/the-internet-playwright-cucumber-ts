@@ -115,6 +115,15 @@ export class SecureFileDownloadPage extends BasePage {
     expect(sha256(downloadedPayload)).toBe(sha256(responseBody));
   }
 
+  async getAvailableSecureFileUrl() {
+    const { url } = await this.findDownloadableLink();
+    return url;
+  }
+
+  openUrl(url: string): Promise<Response | null> {
+    return this.page.goto(url);
+  }
+
   async open(baseUrl: string): Promise<Response | null> {
     return this.page.goto(`${baseUrl}/download_secure`);
   }
