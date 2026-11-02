@@ -27,10 +27,10 @@ Then(
 );
 
 Then(
-  'I upload the {string} fixture with intact browser file data',
+  'I upload the {string} fixture with exact multipart bytes',
   async function (this: CustomWorld, fileName: string) {
     const po = new FileUploadPage(this.page);
-    await po.uploadFixtureWithPayloadIntegrity(fileName);
+    await po.uploadFixtureWithMultipartPayloadIntegrity(fileName);
   }
 );
 
