@@ -20,7 +20,7 @@ export class ContextMenuPage extends BasePage {
     );
   }
 
-  async triggerContextMenuAlert() {
+  private async triggerContextMenuAlert(action: 'accept' | 'dismiss') {
     const box = this.page.locator('#hot-spot');
     await expect(box).toBeVisible();
 
@@ -32,14 +32,25 @@ export class ContextMenuPage extends BasePage {
       expect(dialog.type()).toBe('alert');
       expect(dialog.message()).toBe('You selected a context menu');
     } finally {
-      await dialog.accept();
+      if (action === 'accept') {
+        await dialog.accept();
+      } else {
+        await dialog.dismiss();
+      }
       await clickPromise;
     }
 
     await expect(box).toBeVisible();
   }
 
+  async assertDismissalPreservesDialogLifecycle() {
+    await this.triggerContextMenuAlert('dismiss');
+    await expect(this.page.getByRole('heading', { name: 'Context Menu', level: 3 })).toBeVisible();
+
+    await this.triggerContextMenuAlert('accept');
+  }
+
   async exercise() {
-    await this.triggerContextMenuAlert();
+    await this.triggerContextMenuAlert('accept');
   }
 }

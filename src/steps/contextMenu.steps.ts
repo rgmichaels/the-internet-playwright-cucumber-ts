@@ -18,6 +18,14 @@ Then('I exercise the Context Menu page', async function (this: CustomWorld) {
   await po.exercise();
 });
 
+Then(
+  'dismissing the Context Menu alert should preserve the dialog lifecycle',
+  async function (this: CustomWorld) {
+    const po = new ContextMenuPage(this.page);
+    await po.assertDismissalPreservesDialogLifecycle();
+  }
+);
+
 Then('the page should display header and content', async function (this: CustomWorld) {
   const po = new ContextMenuPage(this.page);
   await po.assertLoaded();
