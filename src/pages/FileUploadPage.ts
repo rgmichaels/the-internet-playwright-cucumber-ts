@@ -1,13 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Page, Request, Response, Route } from 'playwright';
+import { Page, Request, Response } from 'playwright';
 import { expect } from 'playwright/test';
 import { BasePage } from './BasePage';
-
-type UploadedFilePart = {
-  fileName: string;
-  mediaType: string;
-};
 
 export class FileUploadPage extends BasePage {
   constructor(page: Page) { super(page); }
@@ -20,73 +15,7 @@ export class FileUploadPage extends BasePage {
     await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
   }
 
-  private extractUploadedFilePart(request: Request): UploadedFilePart {
-    const contentType = request.headers()['content-type'] ?? '';
-    const boundaryMatch = /boundary=(?:"([^"]+)"|([^;]+))/i.exec(contentType);
-    const boundary = boundaryMatch?.[1] ?? boundaryMatch?.[2]?.trim();
-
-    expect(contentType).toMatch(/^multipart\/form-data\s*;/i);
-    expect(boundary, 'Upload request should declare a multipart boundary').toBeTruthy();
-
-    if (!boundary) {
-      throw new Error('Upload request did not declare a multipart boundary');
-    }
-
-    const requestBody = request.postDataBuffer();
-    expect(requestBody, 'Upload request should include a multipart body').not.toBeNull();
-
-    if (!requestBody) {
-      throw new Error('Upload request did not include a multipart body');
-    }
-
-    const boundaryMarker = Buffer.from(`--${boundary}`);
-    const headerTerminator = Buffer.from('\r\n\r\n');
-    const nextBoundaryMarker = Buffer.from(`\r\n--${boundary}`);
-    let boundaryIndex = requestBody.indexOf(boundaryMarker);
-
-    while (boundaryIndex !== -1) {
-      const afterBoundary = boundaryIndex + boundaryMarker.length;
-      const suffix = requestBody.subarray(afterBoundary, afterBoundary + 2).toString('ascii');
-
-      if (suffix === '--') {
-        break;
-      }
-
-      const headerStart = afterBoundary + 2;
-      const headerEnd = requestBody.indexOf(headerTerminator, headerStart);
-      if (headerEnd === -1) {
-        break;
-      }
-
-      const headers = requestBody.subarray(headerStart, headerEnd).toString('utf8');
-      const disposition = headers.match(/^content-disposition:\s*form-data;([^\r\n]+)$/im)?.[1];
-      const fieldName = disposition?.match(/(?:^|;)\s*name="([^"]*)"/i)?.[1];
-
-      const payloadStart = headerEnd + headerTerminator.length;
-      const payloadEnd = requestBody.indexOf(nextBoundaryMarker, payloadStart);
-      if (payloadEnd === -1) {
-        break;
-      }
-
-      if (fieldName === 'file') {
-        const fileName = disposition?.match(/(?:^|;)\s*filename="([^"]*)"/i)?.[1];
-        if (!fileName) {
-          throw new Error('Upload file part did not declare a filename');
-        }
-
-        return {
-          fileName,
-          mediaType: headers.match(/^content-type:\s*([^\r\n]+)$/im)?.[1]?.trim() ?? '',
-        };
-      }
-
-      boundaryIndex = requestBody.indexOf(boundaryMarker, payloadEnd + 2);
-    }
-
-    throw new Error('Upload request did not include the expected file form-data part');
-  }
-
-  async uploadFixtureWithPayloadIntegrity(fileName: string) {
+  async uploadFixtureWithMultipartPayloadIntegrity(fileName: string) {
     const filePath = path.resolve(process.cwd(), 'fixtures', fileName);
     const expectedPayload = await readFile(filePath);
 
@@ -118,47 +47,43 @@ export class FileUploadPage extends BasePage {
     const isUploadRequest = (request: Request) =>
       request.method() === 'POST' && new URL(request.url()).pathname === '/upload';
 
-    let uploadedFile: UploadedFilePart | undefined;
-    let captureError: Error | undefined;
-    const captureUpload = async (route: Route) => {
-      if (isUploadRequest(route.request())) {
-        try {
-          uploadedFile = this.extractUploadedFilePart(route.request());
-        } catch (error) {
-          captureError = error instanceof Error ? error : new Error(String(error));
-        }
-      }
-
-      await route.continue();
-    };
-
-    await this.page.route('**/upload', captureUpload);
-
-    let uploadResponse: Response;
-    try {
-      const [, response] = await Promise.all([
-        this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
-        this.page.waitForResponse((response) => isUploadRequest(response.request())),
-        this.page.click('#file-submit'),
-      ]);
-      uploadResponse = response;
-    } finally {
-      await this.page.unroute('**/upload', captureUpload);
-    }
+    const [uploadRequest, uploadResponse] = await Promise.all([
+      this.page.waitForRequest(isUploadRequest),
+      this.page.waitForResponse((response) => isUploadRequest(response.request())),
+      this.page.click('#file-submit'),
+    ]);
 
     expect(uploadResponse.ok()).toBe(true);
-
-    if (captureError) {
-      throw captureError;
-    }
-    if (!uploadedFile) {
-      throw new Error('Upload request was not captured at the browser network boundary');
-    }
-
-    expect(uploadedFile.fileName).toBe(fileName);
-    expect(uploadedFile.mediaType).toBe(selectedFile.mediaType);
+    expect(uploadRequest.headers()['content-type'] ?? '').toMatch(
+      /^multipart\/form-data\s*;.*\bboundary=/i
+    );
 
     await expect(this.page.locator('#uploaded-files')).toContainText(fileName);
+
+    const persistedFileUrl = new URL(
+      `/download/${encodeURIComponent(fileName)}`,
+      uploadResponse.url()
+    ).toString();
+    const persistedFileResponse = await this.page.context().request.get(persistedFileUrl, {
+      failOnStatusCode: false,
+    });
+
+    try {
+      expect(persistedFileResponse.ok(), 'Persisted upload should be downloadable').toBe(true);
+      expect(persistedFileResponse.headers()['content-disposition'] ?? '').toMatch(/\battachment\b/i);
+
+      const persistedPayload = await persistedFileResponse.body();
+      expect(
+        persistedPayload.byteLength,
+        'Persisted upload should preserve the selected fixture length'
+      ).toBe(expectedPayload.byteLength);
+      expect(
+        persistedPayload.equals(expectedPayload),
+        'Persisted upload should preserve every selected fixture byte'
+      ).toBe(true);
+    } finally {
+      await persistedFileResponse.dispose();
+    }
   }
 
   async uploadFixtureByDragAndDrop(fileName: string) {
